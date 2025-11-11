@@ -20,7 +20,7 @@ const GlassFooter = () => {
         className="pointer-events-auto w-full max-w-5xl"
       >
         <div className="flex flex-col gap-4 px-6 py-3 text-white/80 md:flex-row md:items-center md:justify-between">
-          <div className="hidden sm:block">
+          <div className="hidden md:block">
             <p className="text-base font-semibold text-white">
               © {new Date().getFullYear()} Anthony Lu — Photo Projects
             </p>

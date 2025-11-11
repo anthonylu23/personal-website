@@ -47,13 +47,6 @@ html {
     overscroll-behavior-y: none;
   }
 
-  body.photography-body {
-    background: linear-gradient(180deg, #2b1055 0%, #ff5f6d 50%, #ffc371 100%);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
   ::selection {
     @apply bg-accent/70 text-textInverse;
   }
@@ -64,7 +57,4 @@ html {
     text-wrap: balance;
   }
 
-  .photography-bg {
-    background: linear-gradient(180deg, #2b1055 0%, #ff5f6d 50%, #ffc371 100%);
-  }
 }

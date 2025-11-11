@@ -89,9 +89,7 @@ const Home = () => {
       </section>
 
       <section id="about" className="scroll-mt-24">
-        <h2 className="mb-10 text-3xl font-semibold text-textPrimary text-balance lg:text-4xl">
-          About Me
-        </h2>
+        <SectionHeading eyebrow="About" title="Skills & Background" />
         <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="space-y-6 h-full">
             <div className="rounded-3xl border border-border bg-surface p-6 h-full">
