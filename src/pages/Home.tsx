@@ -8,17 +8,10 @@ const Home = () => {
     {
       label: "Primary Base",
       value: "Austin, TX",
-      detail: "Home studio & year-round base",
     },
     {
       label: "Campus",
       value: "New York City, NY",
-      detail: "On-site during NYU semesters",
-    },
-    {
-      label: "Remote",
-      value: "Worldwide",
-      detail: "Async-first, travel friendly",
     },
   ];
 
@@ -100,8 +93,8 @@ const Home = () => {
           About Me
         </h2>
         <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="space-y-6">
-            <div className="rounded-3xl border border-border bg-surface p-6">
+          <div className="space-y-6 h-full">
+            <div className="rounded-3xl border border-border bg-surface p-6 h-full">
               <div className="flex items-start gap-4">
                 <div className="rounded-2xl border border-border bg-elevated p-3">
                   <GraduationCap className="h-6 w-6 text-accent" />
@@ -132,8 +125,8 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="space-y-4">
-            <div className="rounded-3xl border border-border bg-surface p-6 space-y-5">
+          <div className="space-y-4 h-full">
+            <div className="rounded-3xl border border-border bg-surface p-6 space-y-5 h-full">
               <div className="flex items-start gap-4">
                 <div className="rounded-2xl border border-border bg-elevated p-3">
                   <MapPin className="h-6 w-6 text-accent" />
@@ -163,7 +156,6 @@ const Home = () => {
                     <p className="mt-1 text-lg font-semibold text-textPrimary">
                       {entry.value}
                     </p>
-                    <p className="text-sm text-textSecondary">{entry.detail}</p>
                   </div>
                 ))}
               </div>
