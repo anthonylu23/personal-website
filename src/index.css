@@ -48,7 +48,7 @@ html {
   }
 
   body.photography-body {
-    background: linear-gradient(180deg, #dbe4eb 0%, #f7d4a8 55%, #f2a452 100%);
+    background: linear-gradient(180deg, #2b1055 0%, #ff5f6d 50%, #ffc371 100%);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -65,6 +65,6 @@ html {
   }
 
   .photography-bg {
-    background: linear-gradient(180deg, #dbe4eb 0%, #f7d4a8 55%, #f2a452 100%);
+    background: linear-gradient(180deg, #2b1055 0%, #ff5f6d 50%, #ffc371 100%);
   }
 }

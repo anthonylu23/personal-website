@@ -179,9 +179,8 @@ const GlassSurface = ({
   useEffect(() => {
     if (typeof window === "undefined") return
     const evaluate = () => {
-      const dpr = window.devicePixelRatio || 1
       const cores = navigator.hardwareConcurrency || 4
-      setAutoLow(dpr > 2.2 || cores <= 4)
+      setAutoLow(cores <= 2)
     }
     evaluate()
     window.addEventListener("resize", evaluate)

@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { BookOpen, Brain, Code2, Database, Github, Layers, Linkedin, Mail, Phone, Server } from 'lucide-react'
+import { BookOpen, Brain, Code2, Database, Github, Instagram, Layers, Linkedin, Mail, Phone, Server, Twitter } from 'lucide-react'
 
 export type Project = {
   title: string
@@ -179,5 +179,17 @@ export const contactMethods: ContactMethod[] = [
     detail: '+1 737-484-6609',
     href: 'tel:+17374846609',
     icon: Phone,
+  },
+  {
+    label: 'Instagram',
+    detail: '@anthonyyy_lu',
+    href: 'https://www.instagram.com/anthonyyy_lu/',
+    icon: Instagram,
+  },
+  {
+    label: 'X',
+    detail: '@anth0nyyy1_',
+    href: 'https://x.com/anth0nyyy1_',
+    icon: Twitter,
   },
 ]
