@@ -49,7 +49,7 @@ export default {
         ring: 'hsl(var(--ring))',
       },
       fontFamily: {
-        sans: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+        sans: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       boxShadow: {
         glow: '0 20px 45px rgba(0, 183, 168, 0.35)',
