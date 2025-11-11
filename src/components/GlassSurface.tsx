@@ -2,6 +2,7 @@ import {
   useCallback,
   useEffect,
   useId,
+  useMemo,
   useRef,
   useState,
 } from "react"
@@ -35,6 +36,30 @@ type GlassSurfaceProps = {
 }
 
 const displacementCache = new Map<string, string>()
+let svgFilterSupport: boolean | null = null
+
+const detectSVGFilterSupport = () => {
+  if (svgFilterSupport !== null) {
+    return svgFilterSupport
+  }
+
+  if (typeof window === "undefined" || typeof document === "undefined") {
+    return false
+  }
+
+  const ua = navigator.userAgent
+  const isWebkit = /Safari/.test(ua) && !/Chrome/.test(ua)
+  const isFirefox = /Firefox/.test(ua)
+  if (isWebkit || isFirefox) {
+    svgFilterSupport = false
+    return svgFilterSupport
+  }
+
+  const div = document.createElement("div")
+  div.style.backdropFilter = "url(#test)"
+  svgFilterSupport = div.style.backdropFilter !== ""
+  return svgFilterSupport
+}
 
 function usePrefersReducedMotion() {
   const [prefers, setPrefers] = useState(false)
@@ -148,11 +173,41 @@ const GlassSurface = ({
     feImageRef.current.setAttribute("href", generateDisplacementMap())
   }, [generateDisplacementMap])
 
-  useEffect(() => {
-    updateDisplacementMap()
-  }, [updateDisplacementMap, width, height])
+  const reducedMotion = usePrefersReducedMotion()
+  const [autoLow, setAutoLow] = useState(false)
 
   useEffect(() => {
+    if (typeof window === "undefined") return
+    const evaluate = () => {
+      const dpr = window.devicePixelRatio || 1
+      const cores = navigator.hardwareConcurrency || 4
+      setAutoLow(dpr > 2.2 || cores <= 4)
+    }
+    evaluate()
+    window.addEventListener("resize", evaluate)
+    return () => window.removeEventListener("resize", evaluate)
+  }, [])
+
+  type GlassStyle = CSSProperties & {
+    '--glass-frost'?: number
+    '--glass-saturation'?: number
+    '--filter-id'?: string
+  }
+
+  const finalQuality = quality === "auto" ? (autoLow ? "low" : "high") : quality
+
+  const svgFiltersSupported = useMemo(() => detectSVGFilterSupport(), [])
+  const useSVGFilter =
+    svgFiltersSupported && !reducedMotion && finalQuality === "high"
+
+  useEffect(() => {
+    if (!useSVGFilter) return
+    updateDisplacementMap()
+  }, [updateDisplacementMap, width, height, useSVGFilter])
+
+  useEffect(() => {
+    if (!useSVGFilter) return
+
     const observers = [redChannelRef, greenChannelRef, blueChannelRef]
     const offsets = [redOffset, greenOffset, blueOffset]
 
@@ -172,11 +227,13 @@ const GlassSurface = ({
     displace,
     greenOffset,
     redOffset,
+    useSVGFilter,
     xChannel,
     yChannel,
   ])
 
   useEffect(() => {
+    if (!useSVGFilter) return
     if (typeof ResizeObserver === "undefined" || !containerRef.current) return
 
     let pendingFrame: number | null = null
@@ -195,41 +252,7 @@ const GlassSurface = ({
         cancelAnimationFrame(pendingFrame)
       }
     }
-  }, [updateDisplacementMap])
-
-  const reducedMotion = usePrefersReducedMotion()
-  const [autoLow, setAutoLow] = useState(false)
-
-  useEffect(() => {
-    if (typeof window === "undefined") return
-    const evaluate = () => {
-      const width = window.innerWidth
-      const dpr = window.devicePixelRatio || 1
-      const cores = navigator.hardwareConcurrency || 4
-      setAutoLow(width < 1024 || dpr > 2.2 || cores <= 4)
-    }
-    evaluate()
-    window.addEventListener("resize", evaluate)
-    return () => window.removeEventListener("resize", evaluate)
-  }, [])
-
-  const supportsSVGFilters = () => {
-    if (typeof window === "undefined") return false
-    const ua = navigator.userAgent
-    const isWebkit = /Safari/.test(ua) && !/Chrome/.test(ua)
-    const isFirefox = /Firefox/.test(ua)
-    if (isWebkit || isFirefox) return false
-
-    const div = document.createElement("div")
-    div.style.backdropFilter = `url(#${filterId})`
-    return div.style.backdropFilter !== ""
-  }
-
-  type GlassStyle = CSSProperties & {
-    '--glass-frost'?: number
-    '--glass-saturation'?: number
-    '--filter-id'?: string
-  }
+  }, [updateDisplacementMap, useSVGFilter])
 
   const inlineStyle: GlassStyle = {
     ...style,
@@ -238,57 +261,56 @@ const GlassSurface = ({
     borderRadius: `${borderRadius}px`,
     '--glass-frost': backgroundOpacity,
     '--glass-saturation': saturation,
-    '--filter-id': `url(#${filterId})`,
+    '--filter-id': useSVGFilter ? `url(#${filterId})` : undefined,
   }
 
-  const finalQuality = quality === "auto" ? (autoLow ? "low" : "high") : quality
-
-  const useSVGFilter =
-    !reducedMotion && finalQuality === "high" && supportsSVGFilters()
+  const variantClass = useSVGFilter
+    ? "glass-surface--svg"
+    : "glass-surface--fallback glass-surface--static"
 
   return (
     <div
       ref={containerRef}
-      className={`glass-surface ${
-        useSVGFilter ? 'glass-surface--svg' : 'glass-surface--fallback'
-      } ${!useSVGFilter ? 'glass-surface--static' : ''} ${className}`.trim()}
+      className={`glass-surface ${variantClass} ${className}`.trim()}
       style={inlineStyle}
     >
-      <svg className="glass-surface__filter" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id={filterId} colorInterpolationFilters="sRGB" x="0%" y="0%" width="100%" height="100%">
-            <feImage ref={feImageRef} x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map" />
+      {useSVGFilter && (
+        <svg className="glass-surface__filter" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id={filterId} colorInterpolationFilters="sRGB" x="0%" y="0%" width="100%" height="100%">
+              <feImage ref={feImageRef} x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map" />
 
-            <feDisplacementMap ref={redChannelRef} in="SourceGraphic" in2="map" result="dispRed" />
-            <feColorMatrix
-              in="dispRed"
-              type="matrix"
-              values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"
-              result="red"
-            />
+              <feDisplacementMap ref={redChannelRef} in="SourceGraphic" in2="map" result="dispRed" />
+              <feColorMatrix
+                in="dispRed"
+                type="matrix"
+                values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"
+                result="red"
+              />
 
-            <feDisplacementMap ref={greenChannelRef} in="SourceGraphic" in2="map" result="dispGreen" />
-            <feColorMatrix
-              in="dispGreen"
-              type="matrix"
-              values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"
-              result="green"
-            />
+              <feDisplacementMap ref={greenChannelRef} in="SourceGraphic" in2="map" result="dispGreen" />
+              <feColorMatrix
+                in="dispGreen"
+                type="matrix"
+                values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"
+                result="green"
+              />
 
-            <feDisplacementMap ref={blueChannelRef} in="SourceGraphic" in2="map" result="dispBlue" />
-            <feColorMatrix
-              in="dispBlue"
-              type="matrix"
-              values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"
-              result="blue"
-            />
+              <feDisplacementMap ref={blueChannelRef} in="SourceGraphic" in2="map" result="dispBlue" />
+              <feColorMatrix
+                in="dispBlue"
+                type="matrix"
+                values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"
+                result="blue"
+              />
 
-            <feBlend in="red" in2="green" mode="screen" result="rg" />
-            <feBlend in="rg" in2="blue" mode="screen" result="output" />
-            <feGaussianBlur ref={gaussianBlurRef} in="output" stdDeviation="0.7" />
-          </filter>
-        </defs>
-      </svg>
+              <feBlend in="red" in2="green" mode="screen" result="rg" />
+              <feBlend in="rg" in2="blue" mode="screen" result="output" />
+              <feGaussianBlur ref={gaussianBlurRef} in="output" stdDeviation="0.7" />
+            </filter>
+          </defs>
+        </svg>
+      )}
 
       <div className="glass-surface__content">{children}</div>
     </div>

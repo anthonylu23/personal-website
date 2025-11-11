@@ -100,7 +100,7 @@ const Home = () => {
           About Me
         </h2>
         <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="space-y-6 order-1">
+          <div className="space-y-6">
             <div className="rounded-3xl border border-border bg-surface p-6">
               <div className="flex items-start gap-4">
                 <div className="rounded-2xl border border-border bg-elevated p-3">
@@ -132,7 +132,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="space-y-4 order-3 lg:order-2">
+          <div className="space-y-4">
             <div className="rounded-3xl border border-border bg-surface p-6 space-y-5">
               <div className="flex items-start gap-4">
                 <div className="rounded-2xl border border-border bg-elevated p-3">
@@ -169,7 +169,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="order-2 lg:order-3 lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-4">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {primarySkillGroups.map((group) => renderSkillCard(group))}
             </div>
@@ -180,8 +180,8 @@ const Home = () => {
                   group.label === "AI"
                     ? "lg:max-w-sm"
                     : group.label === "Systems & Infra"
-                      ? "lg:max-w-sm"
-                      : "lg:w-full"
+                    ? "lg:max-w-sm"
+                    : "lg:w-full"
                 )
               )}
             </div>

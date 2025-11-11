@@ -10,6 +10,7 @@
 
 html {
   scroll-behavior: smooth;
+  overscroll-behavior-y: none;
 }
 
 @layer base {
@@ -43,6 +44,14 @@ html {
   body {
     @apply min-h-screen bg-base text-textPrimary font-sans antialiased;
     background-image: none;
+    overscroll-behavior-y: none;
+  }
+
+  body.photography-body {
+    background: linear-gradient(180deg, #dbe4eb 0%, #f7d4a8 55%, #f2a452 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   ::selection {

@@ -1,8 +1,8 @@
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import GlassSurface from "./GlassSurface";
-import { navItems } from "./Navbar";
+import { Menu, X } from "lucide-react"
+import { useState } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import GlassSurface from "./GlassSurface"
+import { navItems } from "./Navbar"
 
 const GlassNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +36,7 @@ const GlassNavbar = () => {
         <Link
           key={item.label}
           to={item.to}
-          className="text-sm font-medium text-textInverse/80 transition hover:text-textInverse"
+          className="text-sm font-medium text-white/80 transition hover:text-accent"
           onClick={closeMenu}
         >
           {item.label}
@@ -49,7 +49,7 @@ const GlassNavbar = () => {
         key={item.label}
         type="button"
         onClick={() => handleHashNav(item.hash)}
-        className="text-sm font-medium text-textInverse/80 transition hover:text-textInverse"
+        className="text-sm font-medium text-white/80 transition hover:text-accent"
       >
         {item.label}
       </button>
@@ -57,56 +57,70 @@ const GlassNavbar = () => {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
-      <GlassSurface
-        width="100%"
-        height="auto"
-        borderRadius={60}
-        backgroundOpacity={0.15}
-        opacity={0.55}
-        blur={16}
-        className="w-full max-w-5xl"
-      >
-        <div className="flex w-full items-center justify-between px-6 py-3">
-          <Link
-            to="/"
-            className="text-base font-semibold tracking-tight"
-            onClick={closeMenu}
-          >
-            Anthony Lu
-          </Link>
-          <nav className="hidden items-center gap-6 md:flex">
-            {navItems.map(renderItem)}
-          </nav>
-          <button
-            type="button"
-            className="inline-flex items-center justify-center rounded-full border border-white/50 p-2 text-textInverse md:hidden"
-            onClick={toggleMenu}
-            aria-label="Toggle navigation"
-          >
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-      </GlassSurface>
-      {isOpen && (
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+      <div className="relative mx-auto w-full max-w-5xl">
         <GlassSurface
           width="100%"
           height="auto"
-          borderRadius={32}
-          backgroundOpacity={0.2}
-          opacity={0.6}
-          blur={18}
-          className="absolute left-1/2 top-full mt-3 w-full max-w-xs -translate-x-1/2 px-5 py-4 md:hidden"
+          borderRadius={60}
+          backgroundOpacity={0.15}
+          opacity={0.55}
+          blur={16}
+          className="w-full"
         >
-          <nav className="flex flex-col gap-3">
-            {navItems.map((item) => (
-              <div key={item.label} className="border-b border-white/10 pb-2 last:border-b-0 last:pb-0">
-                {renderItem(item)}
-              </div>
-            ))}
-          </nav>
+          <div className="flex w-full items-center justify-between px-6 py-3">
+            <Link
+              to="/"
+              className="text-base truncate font-semibold tracking-tight text-white hover:text-accent transition"
+              onClick={closeMenu}
+            >
+              Anthony Lu
+            </Link>
+            <nav className="hidden items-center gap-6 md:flex">
+              {navItems.map(renderItem)}
+            </nav>
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-full border border-white/50 bg-transparent p-2 text-white transition hover:text-accent hover:border-accent md:hidden"
+              onClick={toggleMenu}
+              aria-label="Toggle navigation"
+            >
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </GlassSurface>
-      )}
+        {isOpen && (
+          <GlassSurface
+            width="100%"
+            height="auto"
+            borderRadius={40}
+            backgroundOpacity={0.2}
+            opacity={0.65}
+            blur={18}
+            className="absolute right-6 top-[calc(100%+12px)] w-[min(80vw,260px)] px-4 py-4 md:hidden"
+          >
+            <nav className="flex flex-col gap-3">
+              {navItems.map((item) => (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => {
+                    if (item.type === "route") {
+                      navigate(item.to)
+                      closeMenu()
+                      return
+                    }
+                    handleHashNav(item.hash)
+                  }}
+                  className="rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-left text-base font-medium text-white transition hover:text-accent hover:bg-white/20"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+          </GlassSurface>
+        )}
+      </div>
     </header>
   );
 };

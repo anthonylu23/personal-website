@@ -17,6 +17,14 @@ const Layout = () => {
 
   const isPhotographyPage = location.pathname.startsWith('/photography')
 
+  useEffect(() => {
+    if (typeof document === 'undefined') return
+    document.body.classList.toggle('photography-body', isPhotographyPage)
+    return () => {
+      document.body.classList.remove('photography-body')
+    }
+  }, [isPhotographyPage])
+
   return (
     <div className={`min-h-screen ${isPhotographyPage ? 'photography-bg' : 'bg-base'}`}>
       {isPhotographyPage ? <GlassNavbar /> : <Navbar />}

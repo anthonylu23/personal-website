@@ -41,11 +41,11 @@ const Navbar = () => {
   };
 
   const renderNavItem = (item: NavItem, variant: "desktop" | "mobile") => {
-    const commonClasses =
-      "text-textSecondary transition hover:text-accent" +
-      (variant === "mobile"
-        ? " block rounded-xl border border-border bg-surface px-4 py-3"
-        : "");
+    const base = "text-textSecondary transition hover:text-accent"
+    const mobileClasses =
+      "block rounded-2xl border border-border/40 bg-surface/80 px-4 py-3 text-left"
+    const desktopClasses = ""
+    const commonClasses = `${base} ${variant === "mobile" ? mobileClasses : desktopClasses}`.trim()
 
     if (item.type === "route") {
       return (
@@ -73,7 +73,7 @@ const Navbar = () => {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-base/90 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 lg:px-0">
+      <div className="relative mx-auto flex max-w-6xl items-center justify-between px-4 py-4 lg:px-0">
         <Link
           to="/"
           className="text-lg font-semibold tracking-tight text-textPrimary transition hover:text-accent"
@@ -94,15 +94,14 @@ const Navbar = () => {
         >
           {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
+        {isOpen && (
+          <div className="absolute right-0 top-[calc(100%+12px)] z-10 w-[min(80vw,260px)] rounded-3xl border border-border bg-base/95 p-4 shadow-xl shadow-black/40 md:hidden">
+            <nav className="flex flex-col space-y-3 text-base">
+              {navItems.map((item) => renderNavItem(item, "mobile"))}
+            </nav>
+          </div>
+        )}
       </div>
-
-      {isOpen && (
-        <div className="border-t border-border bg-base/95 px-4 py-4 md:hidden">
-          <nav className="flex flex-col space-y-3 text-base">
-            {navItems.map((item) => renderNavItem(item, "mobile"))}
-          </nav>
-        </div>
-      )}
     </header>
   );
 };
