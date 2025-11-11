@@ -4,6 +4,24 @@ import SectionHeading from "../components/SectionHeading";
 import { contactMethods, skills } from "../data/content";
 
 const Home = () => {
+  const locationHighlights = [
+    {
+      label: "Primary Base",
+      value: "Austin, TX",
+      detail: "Home studio & year-round base",
+    },
+    {
+      label: "Campus",
+      value: "New York City, NY",
+      detail: "On-site during NYU semesters",
+    },
+    // {
+    //   label: "Remote",
+    //   value: "Worldwide",
+    //   detail: "Async-first, travel friendly",
+    // },
+  ];
+
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-28 px-4 pb-24 pt-32 lg:px-0">
       <section id="home" className="scroll-mt-24 space-y-8">
@@ -72,8 +90,8 @@ const Home = () => {
             </div>
           </div>
           <div className="space-y-4 order-3 lg:order-2">
-            <div className="rounded-3xl border border-white/5 bg-white/5 p-6 h-full">
-              <div className="flex items-start gap-4 h-full">
+            <div className="rounded-3xl border border-white/5 bg-white/5 p-6 space-y-5">
+              <div className="flex items-start gap-4">
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
                   <MapPin className="h-6 w-6 text-accent" />
                 </div>
@@ -82,14 +100,26 @@ const Home = () => {
                     Location
                   </p>
                   <h3 className="mt-2 text-xl font-semibold text-white">
-                    Austin, Texas
+                    Austin / NYC
                   </h3>
-                  <div className="mt-4 border-t border-white/10 pt-4">
-                    <h3 className="text-xl font-semibold text-white">
-                      New York City, New York
-                    </h3>
-                  </div>
+                  <p className="text-sm text-slate-400"></p>
                 </div>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {locationHighlights.map((entry) => (
+                  <div
+                    key={entry.label}
+                    className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                  >
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+                      {entry.label}
+                    </p>
+                    <p className="mt-1 text-lg font-semibold text-white">
+                      {entry.value}
+                    </p>
+                    <p className="text-sm text-slate-400">{entry.detail}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
