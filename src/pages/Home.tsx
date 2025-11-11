@@ -1,9 +1,40 @@
 import { ArrowDownRight, GraduationCap, MapPin } from "lucide-react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import type { FormEvent } from "react";
 import SectionHeading from "../components/SectionHeading";
 import { contactMethods, skills } from "../data/content";
 
 const Home = () => {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const primaryEmail = useMemo(() => {
+    const emailMethod = contactMethods.find(
+      (method) => method.label === "Email"
+    );
+    return emailMethod?.detail ?? "luanthony523@gmail.com";
+  }, []);
+
+  const handleEmailSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const params = new URLSearchParams();
+    if (email) {
+      params.append("subject", `Portfolio inquiry from ${email}`);
+    }
+    if (message.trim()) {
+      const bodyLines = [message.trim()];
+      if (email) bodyLines.push("", `Reply to: ${email}`);
+      params.append("body", bodyLines.join("\n"));
+    }
+    const query = params.toString();
+    const mailtoLink = `mailto:${primaryEmail}${query ? `?${query}` : ""}`;
+    if (typeof window !== "undefined") {
+      window.location.href = mailtoLink;
+    }
+    setEmail("");
+    setMessage("");
+  };
   const locationHighlights = [
     {
       label: "Primary Base",
@@ -11,7 +42,7 @@ const Home = () => {
     },
     {
       label: "Campus",
-      value: "New York City, NY",
+      value: "NYC",
     },
   ];
 
@@ -185,31 +216,68 @@ const Home = () => {
           title="Let's build something"
           description="I'm always open for collaboration, internships, full-time opportunities, or just a chat!"
         />
-        <div className="grid gap-6 md:grid-cols-2">
-          {contactMethods.map((method) => (
-            <a
-              key={method.label}
-              href={method.href}
-              target={method.href.startsWith("http") ? "_blank" : undefined}
-              rel={method.href.startsWith("http") ? "noreferrer" : undefined}
-              className="group flex items-center justify-between rounded-3xl border border-border bg-surface p-5 transition hover:border-accent/40"
-            >
-              <div className="flex items-center gap-4">
-                <div className="rounded-2xl border border-border bg-elevated p-3 text-accent">
-                  <method.icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="text-sm uppercase tracking-[0.2em] text-textSecondary">
-                    {method.label}
-                  </p>
-                  <p className="text-lg font-semibold text-textPrimary">
-                    {method.detail}
-                  </p>
-                </div>
+        <div className="grid gap-6">
+          <form
+            onSubmit={handleEmailSubmit}
+            className="rounded-3xl border border-border bg-surface/90 p-6"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <p className="text-sm uppercase tracking-[0.2em] text-textSecondary">
+                  Send an email
+                </p>
+                <h3 className="text-2xl font-semibold text-textPrimary">
+                  Reach me directly!
+                </h3>
               </div>
-              <ArrowDownRight className="h-5 w-5 text-accent transition group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </a>
-          ))}
+              <ArrowDownRight className="h-10 w-10 text-accent" />
+            </div>
+            <p className="mt-3 text-sm text-textSecondary">
+              Drop your email and a quick message. I&apos;ll respond as soon as
+              possible.
+            </p>
+            <div className="mt-6 space-y-4">
+              <label className="block text-xs uppercase tracking-[0.3em] text-textSecondary">
+                Your Email
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="you@email.com"
+                  className="mt-2 w-full rounded-2xl border border-border bg-elevated px-4 py-3 text-sm text-textPrimary placeholder:text-textSecondary/60 focus:border-accent focus:outline-none"
+                />
+              </label>
+              <label className="block text-xs uppercase tracking-[0.3em] text-textSecondary">
+                Message
+                <textarea
+                  value={message}
+                  onChange={(event) => setMessage(event.target.value)}
+                  placeholder="What would you like to build together?"
+                  rows={4}
+                  className="mt-2 w-full rounded-2xl border border-border bg-elevated px-4 py-3 text-sm text-textPrimary placeholder:text-textSecondary/60 focus:border-accent focus:outline-none"
+                />
+              </label>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <button
+                type="submit"
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-textInverse transition hover:bg-accentHover"
+              >
+                Send email
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail("");
+                  setMessage("");
+                }}
+                className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-textPrimary transition hover:border-accent/50"
+              >
+                Clear
+              </button>
+            </div>
+          </form>
         </div>
       </section>
     </main>

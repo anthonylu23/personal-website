@@ -1,7 +1,13 @@
 import { contactMethods } from "../data/content";
 import GlassSurface from "./GlassSurface";
 
-const footerContactLabels = new Set(["Email", "GitHub", "LinkedIn", "Instagram", "X"]);
+const footerContactLabels = new Set([
+  "Email",
+  "GitHub",
+  "LinkedIn",
+  "Instagram",
+  "Phone",
+]);
 
 const socialLinks = contactMethods.filter(({ label }) =>
   footerContactLabels.has(label)
@@ -22,7 +28,7 @@ const GlassFooter = () => {
         <div className="flex flex-col gap-4 px-6 py-3 text-white/80 md:flex-row md:items-center md:justify-between">
           <div className="hidden md:block">
             <p className="text-base font-semibold text-white">
-              © {new Date().getFullYear()} Anthony Lu — Photo Projects
+              © {new Date().getFullYear()} Anthony Lu
             </p>
           </div>
           <div className="flex items-center gap-3">

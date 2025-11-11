@@ -1,9 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom'
-import Footer from './components/Footer'
 import GlassFooter from './components/GlassFooter'
 import GlassNavbar from './components/GlassNavbar'
-import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Photography from './pages/Photography'
 import Projects from './pages/Projects'
@@ -15,13 +13,11 @@ const Layout = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [location.pathname])
 
-  const isPhotographyPage = location.pathname.startsWith('/photography')
-
   return (
     <div className="min-h-screen bg-base">
-      {isPhotographyPage ? <GlassNavbar /> : <Navbar />}
+      <GlassNavbar />
       <Outlet />
-      {isPhotographyPage ? <GlassFooter /> : <Footer />}
+      <GlassFooter />
     </div>
   )
 }
