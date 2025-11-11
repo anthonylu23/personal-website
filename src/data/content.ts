@@ -57,6 +57,13 @@ export const projects: Project[] = [
     stack: ['Machine Learning', 'Python', 'XGBoost', 'NumPy/Pandas', 'Streamlit', 'AWS', 'Docker'],
     link: 'https://github.com/anthonylu23/f1_prediction_dashboard',
   },
+  {
+    title: 'Personal Website',
+    description:
+      'This site! Built with Vite + React, glass ui (React Bits), Three.js flourishes, and performant content sections optimized for photography showcases.',
+    stack: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'Three.js'],
+    link: 'https://github.com/anthonylu23/personal-website',
+  },
 ]
 
 export const gallery: GalleryItem[] = [
