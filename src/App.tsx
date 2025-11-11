@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import Footer from './components/Footer'
+import GlassFooter from './components/GlassFooter'
+import GlassNavbar from './components/GlassNavbar'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Photography from './pages/Photography'
@@ -13,15 +15,13 @@ const Layout = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [location.pathname])
 
+  const isPhotographyPage = location.pathname.startsWith('/photography')
+
   return (
-    <div className="min-h-screen bg-background">
-      <div className="pointer-events-none fixed inset-0 -z-10 opacity-60">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.2),transparent_45%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(99,102,241,0.25),transparent_35%)]" />
-      </div>
-      <Navbar />
+    <div className={`min-h-screen ${isPhotographyPage ? 'photography-bg' : 'bg-base'}`}>
+      {isPhotographyPage ? <GlassNavbar /> : <Navbar />}
       <Outlet />
-      <Footer />
+      {isPhotographyPage ? <GlassFooter /> : <Footer />}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -13,21 +13,49 @@ html {
 }
 
 @layer base {
+  :root {
+    --background: 218 16% 18%;
+    --foreground: 210 25% 92%;
+    --card: 217 14% 20%;
+    --card-foreground: 210 25% 92%;
+    --popover: 217 15% 22%;
+    --popover-foreground: 210 25% 92%;
+    --primary: 176 100% 36%;
+    --primary-foreground: 171 10% 8%;
+    --secondary: 217 12% 28%;
+    --secondary-foreground: 210 20% 88%;
+    --muted: 215 10% 28%;
+    --muted-foreground: 210 12% 70%;
+    --accent: 176 100% 36%;
+    --accent-foreground: 171 10% 8%;
+    --destructive: 3 73% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 12% 32%;
+    --input: 220 12% 32%;
+    --ring: 176 100% 36%;
+    --radius: 1.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
   body {
-    @apply bg-background text-slate-100 font-sans antialiased min-h-screen;
-    background-image: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.15), transparent 45%),
-      radial-gradient(circle at 80% 0%, rgba(99, 102, 241, 0.2), transparent 35%),
-      radial-gradient(circle at 0% 80%, rgba(236, 72, 153, 0.25), transparent 40%);
-    background-attachment: fixed;
+    @apply min-h-screen bg-base text-textPrimary font-sans antialiased;
+    background-image: none;
   }
 
   ::selection {
-    @apply bg-accent/40 text-white;
+    @apply bg-accent/70 text-textInverse;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .photography-bg {
+    background: linear-gradient(180deg, #dbe4eb 0%, #f7d4a8 55%, #f2a452 100%);
   }
 }
