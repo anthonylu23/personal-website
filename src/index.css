@@ -43,6 +43,7 @@ html {
   body {
     @apply min-h-screen bg-base text-textPrimary font-sans antialiased;
     background-image: none;
+    min-height: 100vh;
   }
 
   ::selection {
@@ -55,4 +56,18 @@ html {
     text-wrap: balance;
   }
 
+}
+
+@supports (min-height: 100svh) {
+  body,
+  .min-h-screen {
+    min-height: 100svh;
+  }
+}
+
+@supports (min-height: 100dvh) {
+  body,
+  .min-h-screen {
+    min-height: 100dvh;
+  }
 }
