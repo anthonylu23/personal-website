@@ -170,7 +170,7 @@ export const skills: SkillGroup[] = [
       'Algorithms',
       'Machine Learning',
       'Artificial Intelligence',
-      'Introduction to Deep Learning & LLMs',
+      'Intro to Deep Learning & LLMs',
       'Principles of Data Science',
       'Neural Data Science',
       'Computer Systems & Organization',
