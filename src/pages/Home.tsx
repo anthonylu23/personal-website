@@ -91,7 +91,7 @@ const Home = () => {
   );
 
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-28 px-4 pb-24 pt-32 lg:px-0">
+    <main className="mx-auto flex max-w-6xl flex-col gap-28 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
       <section id="home" className="scroll-mt-24 space-y-8">
         <div className="space-y-6">
           <h1 className="text-4xl font-semibold text-textPrimary text-balance md:text-5xl">

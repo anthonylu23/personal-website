@@ -2,7 +2,7 @@ import { ArrowDownRight, Cpu } from "lucide-react";
 import { projects } from "../data/content";
 
 const Projects = () => (
-  <main className="mx-auto flex max-w-6xl flex-col gap-16 px-4 pb-24 pt-32 lg:px-0">
+  <main className="mx-auto flex max-w-6xl flex-col gap-16 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
     <div>
       <p className="text-xs font-semibold uppercase tracking-[0.35em] text-accent">
         Selected Work

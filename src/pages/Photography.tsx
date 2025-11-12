@@ -62,7 +62,7 @@ const Photography = () => {
   }, [activePhoto, closeModal, showNext, showPrev])
 
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-12 px-4 pb-24 pt-24 text-textInverse lg:px-0">
+    <main className="mx-auto flex max-w-6xl flex-col gap-12 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(6rem+var(--safe-area-top,0px))] text-textInverse lg:px-0">
       <section className="flex flex-col gap-8">
         {gallery.map((photo, index) => (
           <GlassSurface

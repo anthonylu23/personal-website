@@ -29,6 +29,136 @@ export type ContactMethod = {
   icon: LucideIcon
 }
 
+const photoImports = import.meta.glob('./photos/**/*.{png,jpg,jpeg,JPG,JPEG,PNG}', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>
+
+type PhotoProjectMetadata = {
+  id: string
+  title: string
+  location: string
+  tags: string[]
+  cover?: string
+}
+
+const galleryProjects: PhotoProjectMetadata[] = [
+  {
+    id: 'austin',
+    title: 'Austin Nights',
+    location: 'Austin, TX',
+    tags: ['City', 'Night', '35mm'],
+  },
+  {
+    id: 'big_bend',
+    title: 'Big Bend Trails',
+    location: 'Big Bend National Park, TX',
+    tags: ['Desert', 'Landscape', 'Roadtrip'],
+  },
+  {
+    id: 'colorado_sun',
+    title: 'Colorado Sun',
+    location: 'Colorado, USA',
+    tags: ['Film', 'Mountain Light'],
+  },
+  {
+    id: 'hangzhou',
+    title: 'Hangzhou Reflections',
+    location: 'Hangzhou, China',
+    tags: ['Travel', 'Water', 'City'],
+  },
+  {
+    id: 'hawaii',
+    title: 'Hawaiian Coastlines',
+    location: 'Oahu, HI',
+    tags: ['Ocean', 'Tropical'],
+  },
+  {
+    id: 'kyoto',
+    title: 'Kyoto Streets',
+    location: 'Kyoto, Japan',
+    tags: ['Film', 'Street', 'Japan'],
+  },
+  {
+    id: 'london_summer',
+    title: 'London Summer',
+    location: 'London, UK',
+    tags: ['Film', 'Street'],
+  },
+  {
+    id: 'los_angeles',
+    title: 'Los Angeles Glow',
+    location: 'Los Angeles, CA',
+    tags: ['City', 'Night'],
+  },
+  {
+    id: 'nyc',
+    title: 'Scenes from NYC',
+    location: 'New York, NY',
+    tags: ['Street', 'City'],
+  },
+  {
+    id: 'pacific_coast',
+    title: 'Pacific Coast Highway',
+    location: 'California Coast, USA',
+    tags: ['Roadtrip', 'Coastline'],
+  },
+  {
+    id: 'pi',
+    title: 'PI Film Notes',
+    location: 'Studio + Bay Area',
+    tags: ['35mm', 'Experiments'],
+  },
+  {
+    id: 'switzerland',
+    title: 'Swiss Peaks',
+    location: 'Switzerland',
+    tags: ['Alpine', 'Landscape'],
+  },
+  {
+    id: 'tokyo',
+    title: 'Tokyo Nights',
+    location: 'Tokyo, Japan',
+    tags: ['Neon', 'City'],
+  },
+  {
+    id: 'views_from_the_bay',
+    title: 'Views from the Bay',
+    location: 'San Francisco Bay Area, CA',
+    tags: ['Bay Area', 'Film'],
+  },
+  {
+    id: 'yosemite',
+    title: 'Yosemite Valley',
+    location: 'Yosemite National Park, CA',
+    tags: ['National Park', 'Landscape'],
+  },
+]
+
+const buildGalleryItem = (project: PhotoProjectMetadata): GalleryItem | null => {
+  const entries = Object.entries(photoImports)
+    .filter(([path]) => path.startsWith(`./photos/${project.id}/`))
+    .sort(([pathA], [pathB]) => pathA.localeCompare(pathB, undefined, { numeric: true }))
+
+  if (entries.length === 0) {
+    return null
+  }
+
+  const galleryImages = entries.map(([, src]) => src)
+  const coverEntry = project.cover
+    ? entries.find(([path]) => path.endsWith(project.cover!))
+    : undefined
+  const coverImage = (coverEntry ?? entries[0])[1]
+
+  return {
+    title: project.title,
+    location: project.location,
+    image: coverImage,
+    galleryImages,
+    tags: project.tags,
+  }
+}
+
 export const projects: Project[] = [
   {
     title: 'Openbook-CLI',
@@ -67,74 +197,9 @@ export const projects: Project[] = [
   },
 ]
 
-export const gallery: GalleryItem[] = [
-  {
-    title: 'Glacial Light',
-    location: 'Vík, Iceland',
-    image: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80',
-    ],
-    tags: ['Landscape', 'Long Exposure'],
-  },
-  {
-    title: 'Neon Metropolis',
-    location: 'Tokyo, Japan',
-    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1600&q=80',
-    ],
-    tags: ['City', 'Night'],
-  },
-  {
-    title: 'Sunrise Hues',
-    location: 'Cappadocia, Türkiye',
-    image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1470770903676-69b98201ea1c?auto=format&fit=crop&w=1600&q=80',
-    ],
-    tags: ['Travel', 'Color'],
-  },
-  {
-    title: 'Alpine Stillness',
-    location: 'Zermatt, Switzerland',
-    image: 'https://images.unsplash.com/photo-1500534319217-1e19b174c57c?auto=format&fit=crop&w=1200&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1500534319217-1e19b174c57c?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1482192597420-4817fdd7e8b0?auto=format&fit=crop&w=1600&q=80',
-    ],
-    tags: ['Minimal', 'Moody'],
-  },
-  {
-    title: 'Golden Hour Lines',
-    location: 'San Francisco, USA',
-    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1482192597420-4817fdd7e8b0?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80',
-    ],
-    tags: ['Architecture', 'Street'],
-  },
-  {
-    title: 'Desert Bloom',
-    location: 'Abu Dhabi, UAE',
-    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80',
-      'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1600&q=80',
-    ],
-    tags: ['Portrait', 'Editorial'],
-  },
-]
+export const gallery: GalleryItem[] = galleryProjects
+  .map((project) => buildGalleryItem(project))
+  .filter((item): item is GalleryItem => Boolean(item))
 
 export const skills: SkillGroup[] = [
   {
