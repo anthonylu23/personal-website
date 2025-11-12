@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import type { FormEvent } from "react";
 import SectionHeading from "../components/SectionHeading";
 import { contactMethods, skills } from "../data/content";
+import resumePdf from "../data/Resume-AnthonyLu-NYC.pdf";
 
 const Home = () => {
   const [email, setEmail] = useState("");
@@ -103,9 +104,18 @@ const Home = () => {
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
+          <a
+            href={resumePdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-base font-semibold text-textInverse shadow-glow transition hover:bg-accentHover"
+          >
+            Resume
+            <ArrowDownRight className="h-4 w-4" />
+          </a>
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-base font-semibold text-textInverse shadow-glow transition hover:bg-accentHover"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-3 text-base font-semibold text-textPrimary transition hover:border-accent/60 hover:text-accent"
           >
             View projects
             <ArrowDownRight className="h-4 w-4" />
