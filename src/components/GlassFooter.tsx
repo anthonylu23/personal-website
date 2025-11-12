@@ -15,7 +15,14 @@ const socialLinks = contactMethods.filter(({ label }) =>
 
 const GlassFooter = () => {
   return (
-    <footer className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-4 pb-4">
+    <footer
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-4 pb-4"
+      style={{
+        paddingBottom: "calc(1rem + env(safe-area-inset-bottom, 0px))",
+        paddingLeft: "calc(1rem + env(safe-area-inset-left, 0px))",
+        paddingRight: "calc(1rem + env(safe-area-inset-right, 0px))",
+      }}
+    >
       <GlassSurface
         width="100%"
         height="auto"

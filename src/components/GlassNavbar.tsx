@@ -57,7 +57,14 @@ const GlassNavbar = () => {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+    <header
+      className="fixed inset-x-0 top-0 z-50 px-4 pt-4"
+      style={{
+        paddingTop: "calc(1rem + env(safe-area-inset-top, 0px))",
+        paddingLeft: "calc(1rem + env(safe-area-inset-left, 0px))",
+        paddingRight: "calc(1rem + env(safe-area-inset-right, 0px))",
+      }}
+    >
       <div className="relative mx-auto w-full max-w-6xl">
         <GlassSurface
           width="100%"
