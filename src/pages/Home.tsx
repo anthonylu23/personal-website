@@ -147,7 +147,7 @@ const Home = () => {
                     </h3>
                     <p className="text-textSecondary">High School Diploma</p>
                     <p className="mt-1 text-sm text-textSecondary/80">
-                      Aug 2020 - May 2024
+                      Aug 2020 - May 2023
                     </p>
                   </div>
                 </div>
