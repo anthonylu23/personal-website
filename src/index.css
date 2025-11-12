@@ -10,7 +10,6 @@
 
 html {
   scroll-behavior: smooth;
-  overscroll-behavior-y: none;
 }
 
 @layer base {
@@ -44,7 +43,6 @@ html {
   body {
     @apply min-h-screen bg-base text-textPrimary font-sans antialiased;
     background-image: none;
-    overscroll-behavior-y: none;
   }
 
   ::selection {
