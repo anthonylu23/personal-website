@@ -58,7 +58,7 @@ const GlassNavbar = () => {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
-      <div className="relative mx-auto w-full max-w-5xl">
+      <div className="relative mx-auto w-full max-w-6xl">
         <GlassSurface
           width="100%"
           height="auto"

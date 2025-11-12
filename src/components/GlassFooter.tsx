@@ -23,7 +23,7 @@ const GlassFooter = () => {
         backgroundOpacity={0.15}
         opacity={0.55}
         blur={16}
-        className="pointer-events-auto w-full max-w-5xl"
+        className="pointer-events-auto w-full max-w-6xl"
       >
         <div className="flex flex-col gap-4 px-6 py-3 text-white/80 md:flex-row md:items-center md:justify-between">
           <div className="hidden md:block">
