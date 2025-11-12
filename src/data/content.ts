@@ -1,5 +1,22 @@
 import type { LucideIcon } from 'lucide-react'
 import { BookOpen, Brain, Code2, Database, Github, Instagram, Layers, Linkedin, Mail, Phone, Server, Twitter } from 'lucide-react'
+import {
+  austinCover,
+  bigBendCover,
+  coloradoSunCover,
+  hangzhouCover,
+  hawaiiCover,
+  kyotoCover,
+  londonSummerCover,
+  losAngelesCover,
+  nycCover,
+  pacificCoastCover,
+  piCover,
+  switzerlandCover,
+  tokyoCover,
+  viewsFromTheBayCover,
+  yosemiteCover,
+} from './photos/covers'
 
 export type Project = {
   title: string
@@ -13,7 +30,6 @@ export type GalleryItem = {
   location: string
   image: string
   galleryImages: string[]
-  tags: string[]
 }
 
 export type SkillGroup = {
@@ -38,100 +54,99 @@ type PhotoProjectMetadata = {
   id: string
   title: string
   location: string
-  tags: string[]
   cover?: string
 }
 
 const galleryProjects: PhotoProjectMetadata[] = [
   {
     id: 'austin',
-    title: 'Austin Nights',
+    title: 'Austin',
     location: 'Austin, TX',
-    tags: ['City', 'Night', '35mm'],
+    cover: austinCover,
   },
   {
     id: 'big_bend',
-    title: 'Big Bend Trails',
+    title: 'Big Bend',
     location: 'Big Bend National Park, TX',
-    tags: ['Desert', 'Landscape', 'Roadtrip'],
+    cover: bigBendCover,
   },
   {
     id: 'colorado_sun',
     title: 'Colorado Sun',
     location: 'Colorado, USA',
-    tags: ['Film', 'Mountain Light'],
+    cover: coloradoSunCover,
   },
   {
     id: 'hangzhou',
     title: 'Hangzhou Reflections',
     location: 'Hangzhou, China',
-    tags: ['Travel', 'Water', 'City'],
+    cover: hangzhouCover,
   },
   {
     id: 'hawaii',
-    title: 'Hawaiian Coastlines',
-    location: 'Oahu, HI',
-    tags: ['Ocean', 'Tropical'],
+    title: 'Hawaii',
+    location: 'Hawaii, USA',
+    cover: hawaiiCover,
   },
   {
     id: 'kyoto',
-    title: 'Kyoto Streets',
+    title: 'Kyoto',
     location: 'Kyoto, Japan',
-    tags: ['Film', 'Street', 'Japan'],
+    cover: kyotoCover,
   },
   {
     id: 'london_summer',
     title: 'London Summer',
     location: 'London, UK',
-    tags: ['Film', 'Street'],
+    cover: londonSummerCover,
   },
   {
     id: 'los_angeles',
-    title: 'Los Angeles Glow',
+    title: 'Los Angeles',
     location: 'Los Angeles, CA',
-    tags: ['City', 'Night'],
+    cover: losAngelesCover,
   },
   {
     id: 'nyc',
     title: 'Scenes from NYC',
     location: 'New York, NY',
-    tags: ['Street', 'City'],
+    cover: nycCover,
   },
   {
     id: 'pacific_coast',
     title: 'Pacific Coast Highway',
     location: 'California Coast, USA',
-    tags: ['Roadtrip', 'Coastline'],
+    cover: pacificCoastCover,
   },
   {
     id: 'pi',
-    title: 'PI Film Notes',
-    location: 'Studio + Bay Area',
-    tags: ['35mm', 'Experiments'],
+    title: 'Pi',
+    location: 'Austin, TX',
+    cover: piCover,
   },
   {
     id: 'switzerland',
     title: 'Swiss Peaks',
     location: 'Switzerland',
-    tags: ['Alpine', 'Landscape'],
+    cover: switzerlandCover,
   },
   {
     id: 'tokyo',
-    title: 'Tokyo Nights',
+    title: 'Tokyo',
     location: 'Tokyo, Japan',
-    tags: ['Neon', 'City'],
+    cover: tokyoCover,
   },
   {
     id: 'views_from_the_bay',
     title: 'Views from the Bay',
     location: 'San Francisco Bay Area, CA',
-    tags: ['Bay Area', 'Film'],
+    cover: viewsFromTheBayCover,
   },
   {
     id: 'yosemite',
     title: 'Yosemite Valley',
     location: 'Yosemite National Park, CA',
-    tags: ['National Park', 'Landscape'],
+    cover: yosemiteCover,
   },
 ]
 
@@ -155,7 +170,6 @@ const buildGalleryItem = (project: PhotoProjectMetadata): GalleryItem | null => 
     location: project.location,
     image: coverImage,
     galleryImages,
-    tags: project.tags,
   }
 }
 
