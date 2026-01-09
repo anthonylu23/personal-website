@@ -91,7 +91,7 @@ const GlassNavbar = () => {
           borderRadius={60}
           backgroundOpacity={0.15}
           opacity={0.55}
-          blur={16}
+          blur={10}
           className={`glass-navbar relative w-full overflow-visible ${
             isScrolled || isForcedGlass
               ? "glass-navbar--scrolled"

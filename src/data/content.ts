@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { BookOpen, Brain, Code2, Database, Github, Instagram, Layers, Linkedin, Mail, Phone, Server, Twitter } from 'lucide-react'
+import { BookOpen, Brain, Code2, Database, Github, Instagram, Layers, Linkedin, Mail, Phone, Server } from 'lucide-react'
 import {
   austinCover,
   bigBendCover,
@@ -34,6 +34,7 @@ export type GalleryItem = {
   title: string
   location: string
   image: string
+  imageWebp?: string
   galleryImages: string[]
 }
 
@@ -50,7 +51,7 @@ export type ContactMethod = {
   icon: LucideIcon
 }
 
-const photoImports = import.meta.glob('./photos/**/*.{png,jpg,jpeg,JPG,JPEG,PNG}', {
+const photoImports = import.meta.glob('./photos/**/*.{png,jpg,jpeg,webp,JPG,JPEG,PNG,WEBP}', {
   eager: true,
   import: 'default',
 }) as Record<string, string>
@@ -186,24 +187,37 @@ const buildGalleryItem = (project: PhotoProjectMetadata): GalleryItem | null => 
       path.toLowerCase().includes(`/photos/${projectFolder}/`)
     )
     .sort(([pathA], [pathB]) => pathA.localeCompare(pathB, undefined, { numeric: true }))
+  const imageEntries = entries.filter(
+    ([path]) => !path.toLowerCase().endsWith('.webp')
+  )
 
-  if (entries.length === 0) {
+  if (imageEntries.length === 0) {
     return null
   }
 
-  const galleryImages = entries.map(([, src]) => src)
+  const galleryImages = imageEntries.map(([, src]) => src)
+  const coverStem = project.cover
+    ? project.cover.replace(/\.[^/.]+$/, '')
+    : undefined
   const coverEntry = project.cover
-    ? entries.find(([path]) =>
+    ? imageEntries.find(([path]) =>
         path.toLowerCase().endsWith(project.cover!.toLowerCase())
       )
     : undefined
-  const coverImage = (coverEntry ?? entries[0])[1]
+  const coverWebpEntry = coverStem
+    ? entries.find(([path]) =>
+        path.toLowerCase().endsWith(`${coverStem.toLowerCase()}.webp`)
+      )
+    : undefined
+  const coverImage = (coverEntry ?? imageEntries[0])[1]
+  const coverWebp = coverWebpEntry ? coverWebpEntry[1] : undefined
 
   return {
     id: project.id,
     title: project.title,
     location: project.location,
     image: coverImage,
+    imageWebp: coverWebp,
     galleryImages,
   }
 }

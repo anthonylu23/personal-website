@@ -2,7 +2,7 @@
 
 import type React from "react";
 import { useRef, useMemo, useCallback, useState, useEffect } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -68,7 +68,7 @@ const DEFAULT_DEPTH_RANGE = 50;
 const MAX_HORIZONTAL_OFFSET = 8;
 const MAX_VERTICAL_OFFSET = 8;
 
-// Custom shader material for blur, opacity, and cloth folding effects
+// Custom shader material for blur, opacity, and subtle curvature
 const createClothMaterial = () => {
   return new THREE.ShaderMaterial({
     transparent: true,
@@ -98,13 +98,8 @@ const createClothMaterial = () => {
         float distanceFromCenter = length(pos.xy);
         float curve = distanceFromCenter * distanceFromCenter * curveIntensity;
         
-        // Add gentle cloth-like ripples
-        float ripple1 = sin(pos.x * 2.0 + scrollForce * 3.0) * 0.02;
-        float ripple2 = sin(pos.y * 2.5 + scrollForce * 2.0) * 0.015;
-        float clothEffect = (ripple1 + ripple2) * abs(curveIntensity) * 2.0;
-        
-        // Apply Z displacement for curving effect (inverted) with cloth ripples
-        pos.z -= (curve + clothEffect);
+        // Apply Z displacement for curving effect (inverted)
+        pos.z -= curve;
         
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
       }
@@ -176,7 +171,7 @@ function ImagePlane({
 function GalleryScene({
   images,
   speed = 1,
-  visibleCount = 8,
+  visibleCount = 5,
   fadeSettings = {
     fadeIn: { start: 0.05, end: 0.15 },
     fadeOut: { start: 0.85, end: 0.95 },
@@ -215,6 +210,43 @@ function GalleryScene({
 
   // Load textures
   const textures = useTexture(normalizedImages.map((img) => img.src));
+  const resizedTextures = useRef(new WeakSet<THREE.Texture>());
+
+  useEffect(() => {
+    const maxDimension = 1600;
+    textures.forEach((texture) => {
+      if (!texture || resizedTextures.current.has(texture)) {
+        return;
+      }
+      const image = texture.image as { width: number; height: number } | undefined;
+      if (!image) {
+        return;
+      }
+      const largest = Math.max(image.width, image.height);
+      if (largest <= maxDimension) {
+        resizedTextures.current.add(texture);
+        return;
+      }
+
+      const scale = maxDimension / largest;
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(image.width * scale);
+      canvas.height = Math.round(image.height * scale);
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        resizedTextures.current.add(texture);
+        return;
+      }
+
+      ctx.drawImage(image as CanvasImageSource, 0, 0, canvas.width, canvas.height);
+      texture.image = canvas;
+      texture.minFilter = THREE.LinearFilter;
+      texture.magFilter = THREE.LinearFilter;
+      texture.generateMipmaps = false;
+      texture.needsUpdate = true;
+      resizedTextures.current.add(texture);
+    });
+  }, [textures]);
 
   // Create materials pool
   const materials = useMemo(
@@ -360,7 +392,6 @@ function GalleryScene({
     // Update plane positions
     const imageAdvance = totalImages > 0 ? 1 : 0;
     const totalRange = depthRange;
-    const halfRange = totalRange / 2;
 
     planesData.current.forEach((plane, i) => {
       let newZ = plane.z + scrollVelocity * delta * 10;
@@ -388,8 +419,6 @@ function GalleryScene({
       plane.z = ((newZ % totalRange) + totalRange) % totalRange;
       plane.x = spatialPositions[i]?.x ?? 0;
       plane.y = spatialPositions[i]?.y ?? 0;
-
-      const worldZ = plane.z - halfRange;
 
       // Calculate opacity based on fade settings
       const normalizedPosition = plane.z / totalRange; // 0 to 1
@@ -475,17 +504,17 @@ function GalleryScene({
 
         if (!texture || !material) return null;
 
-        const worldZ = plane.z - depthRange / 2;
-
         // Calculate scale to maintain aspect ratio
-        const aspect = texture.image
-          ? texture.image.width / texture.image.height
-          : 1;
+        const image = texture.image as
+          | { width: number; height: number }
+          | undefined;
+        const aspect = image ? image.width / image.height : 1;
         const scaleFactor = 2.35;
         const scale: [number, number, number] =
           aspect > 1
             ? [scaleFactor * aspect, scaleFactor, 1]
             : [scaleFactor, scaleFactor / aspect, 1];
+        const worldZ = plane.z - depthRange / 2;
 
         return (
           <ImagePlane

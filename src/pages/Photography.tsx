@@ -4,7 +4,10 @@ import InfiniteGallery from "../components/InfiniteGallery";
 import { gallery } from "../data/content";
 
 const Photography = () => {
-  const images = gallery.map((item) => ({ src: item.image, alt: item.title }));
+  const images = gallery.map((item) => ({
+    src: item.imageWebp ?? item.image,
+    alt: item.title,
+  }));
   const [navOffset, setNavOffset] = useState(0);
   const [overlayOpacity, setOverlayOpacity] = useState(1);
   const coversRef = useRef<HTMLElement | null>(null);
