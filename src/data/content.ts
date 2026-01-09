@@ -3,15 +3,19 @@ import { BookOpen, Brain, Code2, Database, Github, Instagram, Layers, Linkedin, 
 import {
   austinCover,
   bigBendCover,
+  barcelonaCover,
   coloradoSunCover,
+  granadaCover,
   hangzhouCover,
   hawaiiCover,
   kyotoCover,
+  lisbonCover,
   londonSummerCover,
   losAngelesCover,
   nycCover,
   pacificCoastCover,
   piCover,
+  sevilleCover,
   switzerlandCover,
   tokyoCover,
   viewsFromTheBayCover,
@@ -26,6 +30,7 @@ export type Project = {
 }
 
 export type GalleryItem = {
+  id: string
   title: string
   location: string
   image: string
@@ -72,13 +77,13 @@ const galleryProjects: PhotoProjectMetadata[] = [
   },
   {
     id: 'colorado_sun',
-    title: 'Colorado Sun',
+    title: 'Colorado',
     location: 'Colorado, USA',
     cover: coloradoSunCover,
   },
   {
     id: 'hangzhou',
-    title: 'Hangzhou Reflections',
+    title: 'Hangzhou',
     location: 'Hangzhou, China',
     cover: hangzhouCover,
   },
@@ -96,7 +101,7 @@ const galleryProjects: PhotoProjectMetadata[] = [
   },
   {
     id: 'london_summer',
-    title: 'London Summer',
+    title: 'London',
     location: 'London, UK',
     cover: londonSummerCover,
   },
@@ -107,8 +112,32 @@ const galleryProjects: PhotoProjectMetadata[] = [
     cover: losAngelesCover,
   },
   {
+    id: 'barcelona',
+    title: 'Barcelona',
+    location: 'Barcelona, Spain',
+    cover: barcelonaCover,
+  },
+  {
+    id: 'seville',
+    title: 'Seville',
+    location: 'Seville, Spain',
+    cover: sevilleCover,
+  },
+  {
+    id: 'granada',
+    title: 'Granada',
+    location: 'Granada, Spain',
+    cover: granadaCover,
+  },
+  {
+    id: 'lisbon',
+    title: 'Lisbon',
+    location: 'Lisbon, Portugal',
+    cover: lisbonCover,
+  },
+  {
     id: 'nyc',
-    title: 'Scenes from NYC',
+    title: 'NYC',
     location: 'New York, NY',
     cover: nycCover,
   },
@@ -120,13 +149,13 @@ const galleryProjects: PhotoProjectMetadata[] = [
   },
   {
     id: 'pi',
-    title: 'Pi',
+    title: 'π',
     location: 'Austin, TX',
     cover: piCover,
   },
   {
     id: 'switzerland',
-    title: 'Swiss Peaks',
+    title: 'Switzerland',
     location: 'Switzerland',
     cover: switzerlandCover,
   },
@@ -138,7 +167,7 @@ const galleryProjects: PhotoProjectMetadata[] = [
   },
   {
     id: 'views_from_the_bay',
-    title: 'Views from the Bay',
+    title: 'The Bay',
     location: 'San Francisco Bay Area, CA',
     cover: viewsFromTheBayCover,
   },
@@ -151,8 +180,11 @@ const galleryProjects: PhotoProjectMetadata[] = [
 ]
 
 const buildGalleryItem = (project: PhotoProjectMetadata): GalleryItem | null => {
+  const projectFolder = project.id.toLowerCase()
   const entries = Object.entries(photoImports)
-    .filter(([path]) => path.startsWith(`./photos/${project.id}/`))
+    .filter(([path]) =>
+      path.toLowerCase().includes(`/photos/${projectFolder}/`)
+    )
     .sort(([pathA], [pathB]) => pathA.localeCompare(pathB, undefined, { numeric: true }))
 
   if (entries.length === 0) {
@@ -161,11 +193,14 @@ const buildGalleryItem = (project: PhotoProjectMetadata): GalleryItem | null => 
 
   const galleryImages = entries.map(([, src]) => src)
   const coverEntry = project.cover
-    ? entries.find(([path]) => path.endsWith(project.cover!))
+    ? entries.find(([path]) =>
+        path.toLowerCase().endsWith(project.cover!.toLowerCase())
+      )
     : undefined
   const coverImage = (coverEntry ?? entries[0])[1]
 
   return {
+    id: project.id,
     title: project.title,
     location: project.location,
     image: coverImage,
