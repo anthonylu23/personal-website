@@ -1,10 +1,8 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom'
-import GlassFooter from './components/GlassFooter'
 import GlassNavbar from './components/GlassNavbar'
 import Home from './pages/Home'
 import Photography from './pages/Photography'
-import Projects from './pages/Projects'
 
 const Layout = () => {
   const location = useLocation()
@@ -17,7 +15,6 @@ const Layout = () => {
     <div className="min-h-screen bg-base">
       <GlassNavbar />
       <Outlet />
-      <GlassFooter />
     </div>
   )
 }
@@ -28,7 +25,6 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
           <Route path="/photography" element={<Photography />} />
         </Route>
       </Routes>

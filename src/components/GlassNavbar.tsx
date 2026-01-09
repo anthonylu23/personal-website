@@ -1,16 +1,35 @@
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import GlassSurface from "./GlassSurface";
 import { navItems } from "./Navbar";
 
 const GlassNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isForcedGlass, setIsForcedGlass] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleNavGlass = (event: Event) => {
+      const detail = (event as CustomEvent<{ active?: boolean }>).detail;
+      setIsForcedGlass(Boolean(detail?.active));
+    };
+    window.addEventListener("nav-glass", handleNavGlass as EventListener);
+    return () =>
+      window.removeEventListener("nav-glass", handleNavGlass as EventListener);
+  }, []);
 
   const handleHashNav = (hash: string) => {
     const scrollToHash = () => {
@@ -36,7 +55,7 @@ const GlassNavbar = () => {
         <Link
           key={item.label}
           to={item.to}
-          className="text-sm font-medium text-white/80 transition hover:text-accent"
+          className="nav-underline text-sm font-medium text-white/80"
           onClick={closeMenu}
         >
           {item.label}
@@ -49,7 +68,7 @@ const GlassNavbar = () => {
         key={item.label}
         type="button"
         onClick={() => handleHashNav(item.hash)}
-        className="text-sm font-medium text-white/80 transition hover:text-accent"
+        className="nav-underline text-sm font-medium text-white/80"
       >
         {item.label}
       </button>
@@ -73,13 +92,24 @@ const GlassNavbar = () => {
           backgroundOpacity={0.15}
           opacity={0.55}
           blur={16}
-          className="relative w-full overflow-visible"
+          className={`glass-navbar relative w-full overflow-visible ${
+            isScrolled || isForcedGlass
+              ? "glass-navbar--scrolled"
+              : "glass-navbar--transparent"
+          }`}
         >
-          <div className="flex w-full items-center justify-between px-6 py-3">
+          <div
+            className={`flex w-full items-center justify-between py-3 transition-[padding] duration-300 ${
+              isScrolled || isForcedGlass ? "px-6" : "px-0"
+            }`}
+          >
             <Link
               to="/"
-              className="text-base truncate font-semibold tracking-tight text-white hover:text-accent transition"
-              onClick={closeMenu}
+              className="nav-underline text-base truncate font-semibold tracking-tight text-white"
+              onClick={(event) => {
+                event.preventDefault();
+                handleHashNav("#home");
+              }}
             >
               luanthony.xyz
             </Link>
@@ -125,9 +155,9 @@ const GlassNavbar = () => {
                     }
                     handleHashNav(item.hash);
                   }}
-                  className="rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-left text-base font-medium text-white transition hover:text-accent hover:bg-white/20"
+                  className="nav-underline-trigger rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-left text-base font-medium text-white transition hover:bg-white/20"
                 >
-                  {item.label}
+                  <span className="nav-underline">{item.label}</span>
                 </button>
               ))}
             </nav>

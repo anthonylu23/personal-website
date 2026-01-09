@@ -1,58 +1,52 @@
-import { ArrowDownRight, Cpu } from "lucide-react";
+import SectionHeading from "../components/SectionHeading";
 import { projects } from "../data/content";
 
 const Projects = () => (
-  <main className="mx-auto flex max-w-6xl flex-col gap-16 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
-    <div>
-      <p className="text-xs font-semibold uppercase tracking-[0.35em] text-accent">
-        Selected Work
-      </p>
-      <h1 className="mt-3 text-4xl font-semibold text-textPrimary text-balance">
-        Technical Projects
-      </h1>
-      <p className="mt-4 text-lg text-textSecondary">
-        Personal projects spanning AI-native and dev tools, and realtime data
-        applications.
-      </p>
-    </div>
-    <div className="grid gap-6 md:grid-cols-2">
-      {projects.map((project) => (
-        <article
-          key={project.title}
-          className="group flex h-full flex-col rounded-3xl border border-border bg-surface p-6 transition hover:border-accent/40"
-        >
-          <div className="flex items-center gap-3">
-            <div className="rounded-2xl border border-border bg-elevated p-3 text-accent">
-              <Cpu className="h-5 w-5" />
+  <main className="mx-auto flex max-w-6xl flex-col gap-12 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
+    <SectionHeading
+      title="Projects"
+      description="Personal projects spanning AI-native and dev tools, and realtime data applications."
+    />
+    <div className="border-t border-border/40">
+      <div className="flex items-center gap-3 py-4 text-xs font-semibold uppercase tracking-[0.35em] text-textSecondary/70">
+        <span className="h-px w-8 bg-border/60" />
+        <span>Selected Work</span>
+        <span className="ml-auto h-1 w-1 rounded-full bg-border/60" />
+        <span className="h-px w-8 bg-border/60" />
+      </div>
+      <div className="divide-y divide-border/30">
+        {projects.map((project) => {
+          const href = project.link;
+          const isExternal = Boolean(href && href.startsWith("http"));
+          return (
+            <div
+              key={project.title}
+              className="flex flex-col gap-2 py-4 md:flex-row md:items-baseline md:justify-between"
+            >
+              {href ? (
+                <a
+                  href={href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noreferrer" : undefined}
+                  className="text-base font-medium text-textPrimary/90 transition hover:text-accent"
+                >
+                  {project.title}
+                </a>
+              ) : (
+                <span className="text-base font-medium text-textPrimary/90">
+                  {project.title}
+                </span>
+              )}
+              <div className="text-sm leading-relaxed text-textSecondary md:flex md:max-w-[60%] md:flex-col md:items-end md:text-right">
+                <p>{project.description}</p>
+                <p className="mt-2 text-xs text-textSecondary/70">
+                  {project.stack.join(" · ")}
+                </p>
+              </div>
             </div>
-            <h2 className="text-xl font-semibold text-textPrimary">
-              {project.title}
-            </h2>
-          </div>
-          <p className="mt-4 flex-1 text-base text-textSecondary">
-            {project.description}
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {project.stack.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-full border border-border bg-elevated px-3 py-1 text-xs font-medium text-textSecondary"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent transition hover:text-accentHover"
-          >
-            Explore build
-            <ArrowDownRight className="h-4 w-4 transition group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </a>
-        </article>
-      ))}
+          );
+        })}
+      </div>
     </div>
   </main>
 );

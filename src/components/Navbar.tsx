@@ -7,10 +7,10 @@ type NavItem =
   | { label: string; hash: string; type: "hash" };
 
 export const navItems: NavItem[] = [
-  { label: "Home", to: "/", type: "route" },
+  { label: "Home", hash: "#home", type: "hash" },
   { label: "About", hash: "#about", type: "hash" },
+  { label: "Projects", hash: "#projects", type: "hash" },
   { label: "Contact", hash: "#contact", type: "hash" },
-  { label: "Projects", to: "/projects", type: "route" },
   { label: "Photography", to: "/photography", type: "route" },
 ];
 
@@ -41,11 +41,19 @@ const Navbar = () => {
   };
 
   const renderNavItem = (item: NavItem, variant: "desktop" | "mobile") => {
-    const base = "text-textSecondary transition hover:text-accent"
+    const base = "text-textSecondary transition"
     const mobileClasses =
-      "block rounded-2xl border border-border/40 bg-surface/80 px-4 py-3 text-left"
-    const desktopClasses = ""
-    const commonClasses = `${base} ${variant === "mobile" ? mobileClasses : desktopClasses}`.trim()
+      "nav-underline-trigger block rounded-2xl border border-border/40 bg-surface/80 px-4 py-3 text-left"
+    const desktopClasses = "nav-underline"
+    const commonClasses = `${base} ${
+      variant === "mobile" ? mobileClasses : desktopClasses
+    }`.trim()
+    const label =
+      variant === "mobile" ? (
+        <span className="nav-underline">{item.label}</span>
+      ) : (
+        item.label
+      )
 
     if (item.type === "route") {
       return (
@@ -55,7 +63,7 @@ const Navbar = () => {
           className={commonClasses}
           onClick={closeMenu}
         >
-          {item.label}
+          {label}
         </Link>
       );
     }
@@ -66,7 +74,7 @@ const Navbar = () => {
         className={commonClasses + " text-left"}
         onClick={() => handleHashNav(item.hash)}
       >
-        {item.label}
+        {label}
       </button>
     );
   };
@@ -76,8 +84,11 @@ const Navbar = () => {
       <div className="relative mx-auto flex max-w-6xl items-center justify-between px-4 py-4 lg:px-0">
         <Link
           to="/"
-          className="text-lg font-semibold tracking-tight text-textPrimary transition hover:text-accent"
-          onClick={closeMenu}
+          className="nav-underline text-lg font-semibold tracking-tight text-textPrimary"
+          onClick={(event) => {
+            event.preventDefault();
+            handleHashNav("#home");
+          }}
         >
           Anthony Lu<span className="text-accent"></span>
         </Link>

@@ -55,6 +55,33 @@ html {
   }
 }
 
+@layer components {
+  .nav-underline {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
+  }
+
+  .nav-underline::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffffff;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+  }
+
+  .nav-underline:hover::after,
+  .nav-underline:focus-visible::after,
+  .nav-underline-trigger:hover .nav-underline::after,
+  .nav-underline-trigger:focus-visible .nav-underline::after {
+    width: 100%;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

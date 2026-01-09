@@ -22,7 +22,7 @@ export type Project = {
   title: string
   description: string
   stack: string[]
-  link: string
+  link?: string
 }
 
 export type GalleryItem = {
@@ -175,37 +175,51 @@ const buildGalleryItem = (project: PhotoProjectMetadata): GalleryItem | null => 
 
 export const projects: Project[] = [
   {
+    title: 'AdaHealth - Hackathon Winner',
+    description:
+      'AI voice companion for elder check-ins and caregiver safety insights.',
+    stack: ['React', 'Node.js', 'MongoDB', 'OpenAI'],
+    link: 'https://github.com/lljw9999/hackathon',
+  },
+  {
+    title: 'Vision Transformer for Genotype Classification',
+    description:
+      '3D ViT for genotype classification from LFP spectrograms.',
+    stack: ['Python', 'PyTorch', 'BigQuery', 'GCS', 'Vertex AI'],
+    link: 'https://github.com/anthonylu23/neural-vit',
+  },
+  {
     title: 'Openbook-CLI',
     description:
-      'Open-source, highly customizable CLI companion that lets you learn from and chat with your own notes, PDFs, and research archives.',
+      'CLI companion to chat with your notes, PDFs, and research.',
     stack: ['TypeScript', 'Python', 'LangChain', 'Ollama', 'ChromaDB'],
     link: 'https://github.com/anthonylu23/openbook',
   },
   {
     title: 'Scout',
     description:
-      'AI-powered field guide that pinpoints photo viewpoints by time, location, ideal camera settings, and expected weather conditions.',
+      'AI field guide for photo viewpoints, timing, and camera settings.',
     stack: ['React', 'JavaScript', 'Python', 'FastAPI', 'Google GenAI', 'Vercel'],
     link: 'https://github.com/anthonylu23/scout',
   },
   {
     title: 'Photo Search',
     description:
-      'Local-first, private querying tool for exploring your photography library with semantic search and intuitive filtering.',
+      'Local-first semantic search across your photography library.',
     stack: ['RAG', 'Python', 'ChromaDB', 'OpenCLIP', 'LangChain'],
     link: 'https://github.com/anthonylu23/photo_search',
   },
   {
     title: 'F1 Prediction Dashboard',
     description:
-      'Streamlit dashboard that models race outcomes, runs feature engineering, and even calculates prop-betting odds with custom ML models.',
+      'Streamlit dashboard modeling race outcomes and betting odds.',
     stack: ['Machine Learning', 'Python', 'XGBoost', 'NumPy/Pandas', 'Streamlit', 'AWS', 'Docker'],
     link: 'https://github.com/anthonylu23/f1_prediction_dashboard',
   },
   {
     title: 'Personal Website',
     description:
-      'This site! Built with Vite + React, Tailwind, Three.js flourishes, and performant content sections optimized for showcasing my skills and interests.',
+      'This site! Built with Vite, React, Tailwind, and Three.js.',
     stack: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'Three.js'],
     link: 'https://github.com/anthonylu23/personal-website',
   },
@@ -296,10 +310,10 @@ export const contactMethods: ContactMethod[] = [
     href: 'https://www.instagram.com/anthonyyy_lu/',
     icon: Instagram,
   },
-  {
-    label: 'X',
-    detail: '@anth0nyyy1_',
-    href: 'https://x.com/anth0nyyy1_',
-    icon: Twitter,
-  },
+  // {
+  //   label: 'X',
+  //   detail: '@anth0nyyy1_',
+  //   href: 'https://x.com/anth0nyyy1_',
+  //   icon: Twitter,
+  // },
 ]
