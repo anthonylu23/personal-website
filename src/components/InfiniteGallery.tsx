@@ -54,6 +54,8 @@ interface InfiniteGalleryProps {
   className?: string;
   /** Optional style for outer container */
   style?: React.CSSProperties;
+  /** Fired once when gallery assets are ready */
+  onReady?: () => void;
 }
 
 interface PlaneData {
@@ -172,6 +174,7 @@ function GalleryScene({
   images,
   speed = 1,
   visibleCount = 5,
+  onReady,
   fadeSettings = {
     fadeIn: { start: 0.05, end: 0.15 },
     fadeOut: { start: 0.85, end: 0.95 },
@@ -186,6 +189,7 @@ function GalleryScene({
   const [autoPlay, setAutoPlay] = useState(true);
   const lastInteraction = useRef(Date.now());
   const navGlassActive = useRef(false);
+  const readyNotified = useRef(false);
 
   const setNavGlass = useCallback((active: boolean) => {
     if (navGlassActive.current === active) {
@@ -246,7 +250,17 @@ function GalleryScene({
       texture.needsUpdate = true;
       resizedTextures.current.add(texture);
     });
-  }, [textures]);
+    if (onReady && !readyNotified.current) {
+      const allReady = textures.every((texture) => {
+        const image = texture?.image as { width: number; height: number } | undefined;
+        return Boolean(image && image.width && image.height);
+      });
+      if (allReady) {
+        readyNotified.current = true;
+        onReady();
+      }
+    }
+  }, [textures, onReady]);
 
   // Create materials pool
   const materials = useMemo(
@@ -563,6 +577,7 @@ export default function InfiniteGallery({
   images,
   className = "h-96 w-full",
   style,
+  onReady,
   fadeSettings = {
     fadeIn: { start: 0.05, end: 0.25 },
     fadeOut: { start: 0.4, end: 0.43 },
@@ -589,6 +604,12 @@ export default function InfiniteGallery({
     }
   }, []);
 
+  useEffect(() => {
+    if (!webglSupported) {
+      onReady?.();
+    }
+  }, [webglSupported, onReady]);
+
   if (!webglSupported) {
     return (
       <div className={className} style={style}>
@@ -605,6 +626,7 @@ export default function InfiniteGallery({
       >
         <GalleryScene
           images={images}
+          onReady={onReady}
           fadeSettings={fadeSettings}
           blurSettings={blurSettings}
         />

@@ -10,6 +10,7 @@ const Photography = () => {
   }));
   const [navOffset, setNavOffset] = useState(0);
   const [overlayOpacity, setOverlayOpacity] = useState(1);
+  const [galleryReady, setGalleryReady] = useState(false);
   const coversRef = useRef<HTMLElement | null>(null);
 
   const handleViewGallery = () => {
@@ -31,6 +32,19 @@ const Photography = () => {
     window.addEventListener("resize", updateOffset);
     return () => window.removeEventListener("resize", updateOffset);
   }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") {
+      return;
+    }
+    if (!galleryReady) {
+      const previous = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = previous;
+      };
+    }
+  }, [galleryReady]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,7 +80,23 @@ const Photography = () => {
         visibleCount={12}
         falloff={{ near: 6, far: 18 }}
         className="h-screen w-full overflow-hidden rounded-lg"
+        onReady={() => setGalleryReady(true)}
       />
+      <div
+        className="fixed inset-0 z-30 flex items-center justify-center bg-base/70 backdrop-blur-sm transition-opacity duration-500"
+        style={{
+          opacity: galleryReady ? 0 : 1,
+          pointerEvents: galleryReady ? "none" : "auto",
+        }}
+        aria-hidden={galleryReady}
+      >
+        <div className="flex flex-col items-center gap-4 text-textPrimary">
+          <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+          <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-textPrimary/80">
+            Loading gallery
+          </span>
+        </div>
+      </div>
       <div
         className="pointer-events-none fixed inset-0 z-20 flex items-center justify-center px-3 text-center text-white mix-blend-exclusion transition-opacity duration-200"
         style={{ opacity: overlayOpacity }}

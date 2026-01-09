@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { gallery } from "../data/content";
 
 const PhotographyProject = () => {
@@ -21,8 +22,20 @@ const PhotographyProject = () => {
     );
   }
 
+  const totalImages = project.galleryImages.length;
+  const [loadedCount, setLoadedCount] = useState(0);
+
+  useEffect(() => {
+    setLoadedCount(0);
+  }, [project.id]);
+
+  const handleImageDone = () => {
+    setLoadedCount((prev) => Math.min(prev + 1, totalImages));
+  };
+
   return (
     <main className="min-h-screen bg-base px-6 pb-20 pt-24 md:px-10">
+      <ProjectLoader total={totalImages} loaded={loadedCount} />
       <div
         className="fixed inset-x-0 top-0 z-50 px-6 pt-4 md:px-10"
         style={{
@@ -51,6 +64,8 @@ const PhotographyProject = () => {
                 alt={`${project.title} photo ${index + 1}`}
                 loading="lazy"
                 className="h-[88vh] w-full object-contain"
+                onLoad={handleImageDone}
+                onError={handleImageDone}
               />
             </figure>
           ))}
@@ -61,3 +76,25 @@ const PhotographyProject = () => {
 };
 
 export default PhotographyProject;
+
+const ProjectLoader = ({ total, loaded }: { total: number; loaded: number }) => {
+  const ready = total === 0 || loaded >= total;
+
+  return (
+    <div
+      className="fixed inset-0 z-40 flex items-center justify-center bg-base/70 backdrop-blur-sm transition-opacity duration-500"
+      style={{
+        opacity: ready ? 0 : 1,
+        pointerEvents: ready ? "none" : "auto",
+      }}
+      aria-hidden={ready}
+    >
+      <div className="flex flex-col items-center gap-4 text-textPrimary">
+        <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+        <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-textPrimary/80">
+          Loading photos
+        </span>
+      </div>
+    </div>
+  );
+};
