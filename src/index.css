@@ -8,6 +8,10 @@
   color-scheme: dark;
 }
 
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -28,16 +32,56 @@ html {
     --muted-foreground: 210 12% 70%;
     --accent: 176 100% 36%;
     --accent-foreground: 171 10% 8%;
+    --accent-hover: 175 100% 33%;
+    --glow: 175 100% 36%;
     --destructive: 3 73% 45%;
     --destructive-foreground: 0 0% 98%;
     --border: 220 12% 32%;
+    --border-neutral: 217 8% 32%;
     --input: 220 12% 32%;
     --ring: 176 100% 36%;
+    --base: 220 9% 19%;
+    --surface: 220 10% 24%;
+    --elevated: 219 10% 27%;
+    --text-primary: 206 18% 92%;
+    --text-secondary: 215 8% 71%;
+    --text-inverse: 220 12% 10%;
     --radius: 1.5rem;
     --safe-area-top: env(safe-area-inset-top, 0px);
     --safe-area-right: env(safe-area-inset-right, 0px);
     --safe-area-bottom: env(safe-area-inset-bottom, 0px);
     --safe-area-left: env(safe-area-inset-left, 0px);
+  }
+
+  :root[data-theme="light"] {
+    --background: 48 87% 88%;
+    --foreground: 20 5% 22%;
+    --card: 43 59% 81%;
+    --card-foreground: 20 5% 22%;
+    --popover: 43 59% 81%;
+    --popover-foreground: 20 5% 22%;
+    --primary: 40 73% 49%;
+    --primary-foreground: 20 5% 22%;
+    --secondary: 40 38% 73%;
+    --secondary-foreground: 20 5% 22%;
+    --muted: 39 24% 66%;
+    --muted-foreground: 27 10% 36%;
+    --accent: 40 73% 49%;
+    --accent-foreground: 20 5% 22%;
+    --accent-hover: 35 76% 43%;
+    --glow: 40 73% 49%;
+    --destructive: 2 75% 46%;
+    --destructive-foreground: 48 87% 88%;
+    --border: 40 38% 73%;
+    --border-neutral: 40 38% 73%;
+    --input: 40 38% 73%;
+    --ring: 40 73% 49%;
+    --base: 48 87% 88%;
+    --surface: 43 59% 81%;
+    --elevated: 40 38% 73%;
+    --text-primary: 20 5% 22%;
+    --text-secondary: 27 10% 36%;
+    --text-inverse: 48 87% 88%;
   }
 
   * {
@@ -69,7 +113,7 @@ html {
     bottom: 0;
     width: 0;
     height: 2px;
-    background-color: #ffffff;
+    background-color: currentColor;
     transform: translateX(-50%);
     transition: width 0.3s ease;
   }

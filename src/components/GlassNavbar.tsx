@@ -1,6 +1,7 @@
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useTheme } from "../hooks/useTheme";
 import GlassSurface from "./GlassSurface";
 import { navItems } from "./Navbar";
 
@@ -8,6 +9,7 @@ const GlassNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isForcedGlass, setIsForcedGlass] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -55,7 +57,7 @@ const GlassNavbar = () => {
         <Link
           key={item.label}
           to={item.to}
-          className="nav-underline text-sm font-medium text-white/80"
+          className="nav-underline text-sm font-medium text-textPrimary/80"
           onClick={closeMenu}
         >
           {item.label}
@@ -68,7 +70,7 @@ const GlassNavbar = () => {
         key={item.label}
         type="button"
         onClick={() => handleHashNav(item.hash)}
-        className="nav-underline text-sm font-medium text-white/80"
+        className="nav-underline text-sm font-medium text-textPrimary/80"
       >
         {item.label}
       </button>
@@ -99,13 +101,13 @@ const GlassNavbar = () => {
           }`}
         >
           <div
-            className={`flex w-full items-center justify-between py-3 transition-[padding] duration-300 ${
+            className={`flex w-full items-center gap-4 py-3 transition-[padding] duration-300 ${
               isScrolled || isForcedGlass ? "px-6" : "px-0"
             }`}
           >
             <Link
               to="/"
-              className="nav-underline text-base truncate font-semibold tracking-tight text-white"
+              className="nav-underline text-base truncate font-semibold tracking-tight text-textPrimary"
               onClick={(event) => {
                 event.preventDefault();
                 handleHashNav("#home");
@@ -113,13 +115,41 @@ const GlassNavbar = () => {
             >
               luanthony.xyz
             </Link>
-            <nav className="hidden items-center gap-6 md:flex">
-              {navItems.map(renderItem)}
-            </nav>
-            <div className="md:hidden">
+            <div className="ml-auto hidden items-center gap-3 md:flex">
+              <nav className="flex items-center gap-6">
+                {navItems.map(renderItem)}
+              </nav>
               <button
                 type="button"
-                className="inline-flex items-center justify-center rounded-full border border-white/50 bg-transparent p-2 text-white transition hover:text-accent hover:border-accent"
+                className="inline-flex items-center justify-center p-2 text-textPrimary transition hover:text-accent"
+                onClick={toggleTheme}
+                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                aria-pressed={theme === "dark"}
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+              </button>
+            </div>
+            <div className="ml-auto flex items-center gap-2 md:hidden">
+              <button
+                type="button"
+                className="inline-flex items-center justify-center p-2 text-textPrimary transition hover:text-accent"
+                onClick={toggleTheme}
+                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                aria-pressed={theme === "dark"}
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+              </button>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-full border border-border/60 bg-transparent p-2 text-textPrimary transition hover:text-accent hover:border-accent"
                 onClick={toggleMenu}
                 aria-label="Toggle navigation"
               >
@@ -155,7 +185,7 @@ const GlassNavbar = () => {
                     }
                     handleHashNav(item.hash);
                   }}
-                  className="nav-underline-trigger rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-left text-base font-medium text-white transition hover:bg-white/20"
+                  className="nav-underline-trigger rounded-2xl border border-border/40 bg-surface/40 px-4 py-3 text-left text-base font-medium text-textPrimary transition hover:bg-surface/60"
                 >
                   <span className="nav-underline">{item.label}</span>
                 </button>

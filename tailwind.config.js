@@ -5,15 +5,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        base: '#2B2E34',
-        surface: '#363A42',
-        elevated: '#3F444D',
-        accent: '#00B7A8',
-        accentHover: '#00A89A',
-        borderNeutral: '#4A4F57',
-        textPrimary: '#E8ECEF',
-        textSecondary: '#AEB3BA',
-        textInverse: '#17191D',
+        base: 'hsl(var(--base))',
+        surface: 'hsl(var(--surface))',
+        elevated: 'hsl(var(--elevated))',
+        accent: 'hsl(var(--accent))',
+        accentHover: 'hsl(var(--accent-hover))',
+        borderNeutral: 'hsl(var(--border-neutral))',
+        textPrimary: 'hsl(var(--text-primary))',
+        textSecondary: 'hsl(var(--text-secondary))',
+        textInverse: 'hsl(var(--text-inverse))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         border: 'hsl(var(--border))',
@@ -52,7 +52,7 @@ export default {
         sans: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       boxShadow: {
-        glow: '0 20px 45px rgba(0, 183, 168, 0.35)',
+        glow: '0 20px 45px hsl(var(--glow) / 0.35)',
       },
       backdropBlur: {
         xs: '2px',

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -26,6 +26,19 @@
     />
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=1200" />
     <meta name="theme-color" content="#030712" />
+    <script>
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const theme = stored === "light" || stored === "dark" ? stored : "dark";
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch {
+          document.documentElement.dataset.theme = "dark";
+          document.documentElement.style.colorScheme = "dark";
+        }
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>

@@ -32,9 +32,9 @@ const GlassFooter = () => {
         blur={16}
         className="pointer-events-auto w-full max-w-6xl"
       >
-        <div className="flex flex-col gap-4 px-6 py-3 text-white/80 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-4 px-6 py-3 text-textPrimary/80 md:flex-row md:items-center md:justify-between">
           <div className="hidden md:block">
-            <p className="text-base font-semibold text-white">
+            <p className="text-base font-semibold text-textPrimary">
               © {new Date().getFullYear()} Anthony Lu
             </p>
           </div>
@@ -46,7 +46,7 @@ const GlassFooter = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={label}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/40 bg-white/10 text-white transition hover:text-accent hover:border-accent hover:bg-white/20"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/40 bg-surface/40 text-textPrimary transition hover:text-accent hover:border-accent hover:bg-surface/60"
               >
                 <Icon className="h-4 w-4" />
               </a>
