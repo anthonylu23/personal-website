@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { BookOpen, Brain, Code2, Database, Github, Instagram, Layers, Linkedin, Mail, Phone, Server } from 'lucide-react'
+import { BookOpen, Brain, Code2, Database, Github, Instagram, Layers, Linkedin, Mail, Server } from 'lucide-react'
 import {
   austinCover,
   bigBendCover,
@@ -201,13 +201,13 @@ const buildGalleryItem = (project: PhotoProjectMetadata): GalleryItem | null => 
     : undefined
   const coverEntry = project.cover
     ? imageEntries.find(([path]) =>
-        path.toLowerCase().endsWith(project.cover!.toLowerCase())
-      )
+      path.toLowerCase().endsWith(project.cover!.toLowerCase())
+    )
     : undefined
   const coverWebpEntry = coverStem
     ? entries.find(([path]) =>
-        path.toLowerCase().endsWith(`${coverStem.toLowerCase()}.webp`)
-      )
+      path.toLowerCase().endsWith(`${coverStem.toLowerCase()}.webp`)
+    )
     : undefined
   const coverImage = (coverEntry ?? imageEntries[0])[1]
   const coverWebp = coverWebpEntry ? coverWebpEntry[1] : undefined

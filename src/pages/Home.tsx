@@ -1,7 +1,6 @@
 import { ArrowDownRight } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import { contactMethods, projects, skills } from "../data/content";
-import resumePdf from "../data/AnthonyLu_Resume_NYC.pdf";
 
 const Home = () => {
   const locationHighlights = [
@@ -54,7 +53,7 @@ const Home = () => {
         </div>
         <div className="flex flex-wrap gap-3">
           <a
-            href={resumePdf}
+            href={`${import.meta.env.BASE_URL}AnthonyLu_Resume_NYC.pdf`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-base font-semibold text-textInverse shadow-glow transition hover:bg-accentHover"
