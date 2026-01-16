@@ -1,7 +1,7 @@
 import { ArrowDownRight } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import { contactMethods, projects, skills } from "../data/content";
-import resumePdf from "../data/Resume-AnthonyLu-NYC.pdf";
+import resumePdf from "../data/AnthonyLu_Resume_NYC.pdf";
 
 const Home = () => {
   const locationHighlights = [

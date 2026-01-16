@@ -347,12 +347,12 @@ export const contactMethods: ContactMethod[] = [
     href: 'https://linkedin.com/in/ayl24',
     icon: Linkedin,
   },
-  {
-    label: 'Phone',
-    detail: '+1 737-484-6609',
-    href: 'tel:+17374846609',
-    icon: Phone,
-  },
+  // {
+  //   label: 'Phone',
+  //   detail: '+1 737-484-6609',
+  //   href: 'tel:+17374846609',
+  //   icon: Phone,
+  // },
   {
     label: 'Instagram',
     detail: '@anthonyyy_lu',
