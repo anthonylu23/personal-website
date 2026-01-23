@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { BookOpen, Brain, Code2, Database, Github, Instagram, Layers, Linkedin, Mail, Server } from 'lucide-react'
+import { BookOpen, Brain, Code2, Database, Github, Instagram, Layers, Linkedin, Mail, Server, Twitter } from 'lucide-react'
 import {
   austinCover,
   bigBendCover,
@@ -359,10 +359,10 @@ export const contactMethods: ContactMethod[] = [
     href: 'https://www.instagram.com/anthonyyy_lu/',
     icon: Instagram,
   },
-  // {
-  //   label: 'X',
-  //   detail: '@anth0nyyy1_',
-  //   href: 'https://x.com/anth0nyyy1_',
-  //   icon: Twitter,
-  // },
+  {
+    label: 'X',
+    detail: '@luanthony245',
+    href: 'https://x.com/luanthony245',
+    icon: Twitter,
+  },
 ]

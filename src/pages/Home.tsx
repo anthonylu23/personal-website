@@ -46,9 +46,7 @@ const Home = () => {
             Hi, I'm Anthony!
           </h1>
           <p className="text-lg text-textSecondary">
-            I'm currently a Computer and Data Science student at NYU with a
-            strong interest in software, AI/ML, and all things tech. I'm also an
-            avid photographer and violinist!
+            I'm currently a Computer and Data Science undergrad at NYU, and exploring software, data, and AI/ML. I'm also an avid photographer and violinist!
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
