@@ -98,7 +98,7 @@ const Photography = () => {
         </div>
       </div>
       <div
-        className="pointer-events-none fixed inset-0 z-20 flex items-center justify-center px-3 text-center text-white mix-blend-exclusion transition-opacity duration-200"
+        className="photography-hero-overlay pointer-events-none fixed inset-0 z-20 flex items-center justify-center px-3 text-center text-white mix-blend-exclusion transition-opacity duration-200"
         style={{ opacity: overlayOpacity }}
         aria-hidden={overlayOpacity <= 0.05}
       >
