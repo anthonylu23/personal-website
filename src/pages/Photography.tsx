@@ -91,7 +91,7 @@ const Photography = () => {
         aria-hidden={galleryReady}
       >
         <div className="flex flex-col items-center gap-4 text-textPrimary">
-          <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+          <div className="h-10 w-10 animate-spin rounded-full border-2 border-textPrimary/30 border-t-textPrimary" />
           <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-textPrimary/80">
             Loading gallery
           </span>

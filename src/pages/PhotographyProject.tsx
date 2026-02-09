@@ -32,12 +32,12 @@ const PhotographyProject = () => {
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between py-3">
           <Link
             to="/photography"
-            className="text-2xl font-medium text-white/80 hover:text-accent"
+            className="text-2xl font-medium text-textPrimary/80 hover:text-accent"
             aria-label="Back"
           >
             ←
           </Link>
-          <p className="text-right text-sm font-medium text-white/60">
+          <p className="text-right text-sm font-medium text-textPrimary/60">
             {project.title}
           </p>
         </div>
