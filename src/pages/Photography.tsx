@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import InfiniteGallery from "../components/InfiniteGallery";
-import { gallery } from "../data/content";
+import { gallery } from "../data/gallery";
 
 const Photography = () => {
   const images = gallery.map((item) => ({

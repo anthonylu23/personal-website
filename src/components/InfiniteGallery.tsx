@@ -268,6 +268,14 @@ function GalleryScene({
     [visibleCount]
   );
 
+  // Dispose WebGL resources on unmount to free VRAM
+  useEffect(() => {
+    return () => {
+      materials.forEach((m) => m.dispose());
+      textures.forEach((t) => t.dispose());
+    };
+  }, [materials, textures]);
+
   const spatialPositions = useMemo(() => {
     const positions: { x: number; y: number }[] = [];
     const maxHorizontalOffset = MAX_HORIZONTAL_OFFSET;

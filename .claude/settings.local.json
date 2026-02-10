@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(npm run build:*)",
+      "Bash(du -sh:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)",
+      "Bash(for dir in /Users/anthony/Documents/CS/Coding/personal-website/src/data/photos/*/)",
+      "Bash(ls:*)",
+      "Bash(npm run optimize:*)"
     ]
   }
 }
