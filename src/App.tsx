@@ -1,9 +1,17 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import GlassNavbar from './components/GlassNavbar'
 import Home from './pages/Home'
-import Photography from './pages/Photography'
-import PhotographyProject from './pages/PhotographyProject'
+
+const Photography = lazy(() => import('./pages/Photography'))
+const PhotographyProject = lazy(() => import('./pages/PhotographyProject'))
+
+const RouteFallback = () => (
+  <div className="flex min-h-screen items-center justify-center bg-base px-6 text-textPrimary/80">
+    <p className="text-xs font-semibold uppercase tracking-[0.28em]">Loading...</p>
+  </div>
+)
 
 const Layout = () => {
   const location = useLocation()
@@ -27,10 +35,17 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/photography" element={<Photography />} />
-          <Route path="/photography/:id" element={<PhotographyProject />} />
+          <Route
+            path="/photography"
+            element={<Suspense fallback={<RouteFallback />}><Photography /></Suspense>}
+          />
+          <Route
+            path="/photography/:id"
+            element={<Suspense fallback={<RouteFallback />}><PhotographyProject /></Suspense>}
+          />
         </Route>
       </Routes>
+      <SpeedInsights />
     </BrowserRouter>
   )
 }

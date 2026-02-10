@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { gallery } from "../data/content";
+import { gallery } from "../data/gallery";
 
 const PhotographyProject = () => {
   const { id } = useParams<{ id: string }>();

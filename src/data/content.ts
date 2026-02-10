@@ -1,41 +1,11 @@
 import type { LucideIcon } from 'lucide-react'
 import { BookOpen, Brain, Code2, Database, Github, Instagram, Layers, Linkedin, Mail, Server, Twitter } from 'lucide-react'
-import {
-  austinCover,
-  bigBendCover,
-  barcelonaCover,
-  coloradoSunCover,
-  granadaCover,
-  hangzhouCover,
-  hawaiiCover,
-  kyotoCover,
-  lisbonCover,
-  londonSummerCover,
-  losAngelesCover,
-  nycCover,
-  pacificCoastCover,
-  piCover,
-  sevilleCover,
-  switzerlandCover,
-  tokyoCover,
-  viewsFromTheBayCover,
-  yosemiteCover,
-} from './photos/covers'
 
 export type Project = {
   title: string
   description: string
   stack: string[]
   link?: string
-}
-
-export type GalleryItem = {
-  id: string
-  title: string
-  location: string
-  image: string
-  imageWebp?: string
-  galleryImages: string[]
 }
 
 export type SkillGroup = {
@@ -49,177 +19,6 @@ export type ContactMethod = {
   detail: string
   href: string
   icon: LucideIcon
-}
-
-const photoImports = import.meta.glob('./photos/**/*.{png,jpg,jpeg,webp,JPG,JPEG,PNG,WEBP}', {
-  eager: true,
-  import: 'default',
-}) as Record<string, string>
-
-type PhotoProjectMetadata = {
-  id: string
-  title: string
-  location: string
-  cover?: string
-}
-
-const galleryProjects: PhotoProjectMetadata[] = [
-  {
-    id: 'austin',
-    title: 'Austin',
-    location: 'Austin, TX',
-    cover: austinCover,
-  },
-  {
-    id: 'big_bend',
-    title: 'Big Bend',
-    location: 'Big Bend National Park, TX',
-    cover: bigBendCover,
-  },
-  {
-    id: 'colorado_sun',
-    title: 'Colorado',
-    location: 'Colorado, USA',
-    cover: coloradoSunCover,
-  },
-  {
-    id: 'hangzhou',
-    title: 'Hangzhou',
-    location: 'Hangzhou, China',
-    cover: hangzhouCover,
-  },
-  {
-    id: 'hawaii',
-    title: 'Hawaii',
-    location: 'Hawaii, USA',
-    cover: hawaiiCover,
-  },
-  {
-    id: 'kyoto',
-    title: 'Kyoto',
-    location: 'Kyoto, Japan',
-    cover: kyotoCover,
-  },
-  {
-    id: 'london_summer',
-    title: 'London',
-    location: 'London, UK',
-    cover: londonSummerCover,
-  },
-  {
-    id: 'los_angeles',
-    title: 'Los Angeles',
-    location: 'Los Angeles, CA',
-    cover: losAngelesCover,
-  },
-  {
-    id: 'barcelona',
-    title: 'Barcelona',
-    location: 'Barcelona, Spain',
-    cover: barcelonaCover,
-  },
-  {
-    id: 'seville',
-    title: 'Seville',
-    location: 'Seville, Spain',
-    cover: sevilleCover,
-  },
-  {
-    id: 'granada',
-    title: 'Granada',
-    location: 'Granada, Spain',
-    cover: granadaCover,
-  },
-  {
-    id: 'lisbon',
-    title: 'Lisbon',
-    location: 'Lisbon, Portugal',
-    cover: lisbonCover,
-  },
-  {
-    id: 'nyc',
-    title: 'NYC',
-    location: 'New York, NY',
-    cover: nycCover,
-  },
-  {
-    id: 'pacific_coast',
-    title: 'Pacific Coast Highway',
-    location: 'California Coast, USA',
-    cover: pacificCoastCover,
-  },
-  {
-    id: 'pi',
-    title: 'π',
-    location: 'Austin, TX',
-    cover: piCover,
-  },
-  {
-    id: 'switzerland',
-    title: 'Switzerland',
-    location: 'Switzerland',
-    cover: switzerlandCover,
-  },
-  {
-    id: 'tokyo',
-    title: 'Tokyo',
-    location: 'Tokyo, Japan',
-    cover: tokyoCover,
-  },
-  {
-    id: 'views_from_the_bay',
-    title: 'The Bay',
-    location: 'San Francisco Bay Area, CA',
-    cover: viewsFromTheBayCover,
-  },
-  {
-    id: 'yosemite',
-    title: 'Yosemite Valley',
-    location: 'Yosemite National Park, CA',
-    cover: yosemiteCover,
-  },
-]
-
-const buildGalleryItem = (project: PhotoProjectMetadata): GalleryItem | null => {
-  const projectFolder = project.id.toLowerCase()
-  const entries = Object.entries(photoImports)
-    .filter(([path]) =>
-      path.toLowerCase().includes(`/photos/${projectFolder}/`)
-    )
-    .sort(([pathA], [pathB]) => pathA.localeCompare(pathB, undefined, { numeric: true }))
-  const imageEntries = entries.filter(
-    ([path]) => !path.toLowerCase().endsWith('.webp')
-  )
-
-  if (imageEntries.length === 0) {
-    return null
-  }
-
-  const galleryImages = imageEntries.map(([, src]) => src)
-  const coverStem = project.cover
-    ? project.cover.replace(/\.[^/.]+$/, '')
-    : undefined
-  const coverEntry = project.cover
-    ? imageEntries.find(([path]) =>
-      path.toLowerCase().endsWith(project.cover!.toLowerCase())
-    )
-    : undefined
-  const coverWebpEntry = coverStem
-    ? entries.find(([path]) =>
-      path.toLowerCase().endsWith(`${coverStem.toLowerCase()}.webp`)
-    )
-    : undefined
-  const coverImage = (coverEntry ?? imageEntries[0])[1]
-  const coverWebp = coverWebpEntry ? coverWebpEntry[1] : undefined
-
-  return {
-    id: project.id,
-    title: project.title,
-    location: project.location,
-    image: coverImage,
-    imageWebp: coverWebp,
-    galleryImages,
-  }
 }
 
 export const projects: Project[] = [
@@ -273,10 +72,6 @@ export const projects: Project[] = [
     link: 'https://github.com/anthonylu23/personal-website',
   },
 ]
-
-export const gallery: GalleryItem[] = galleryProjects
-  .map((project) => buildGalleryItem(project))
-  .filter((item): item is GalleryItem => Boolean(item))
 
 export const skills: SkillGroup[] = [
   {
