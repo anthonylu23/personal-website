@@ -7,6 +7,12 @@ import Home from './pages/Home'
 const Photography = lazy(() => import('./pages/Photography'))
 const PhotographyProject = lazy(() => import('./pages/PhotographyProject'))
 
+const RouteFallback = () => (
+  <div className="flex min-h-screen items-center justify-center bg-base px-6 text-textPrimary/80">
+    <p className="text-xs font-semibold uppercase tracking-[0.28em]">Loading...</p>
+  </div>
+)
+
 const Layout = () => {
   const location = useLocation()
   const hideNavbar = location.pathname.startsWith('/photography/')
@@ -29,8 +35,14 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/photography" element={<Suspense fallback={null}><Photography /></Suspense>} />
-          <Route path="/photography/:id" element={<Suspense fallback={null}><PhotographyProject /></Suspense>} />
+          <Route
+            path="/photography"
+            element={<Suspense fallback={<RouteFallback />}><Photography /></Suspense>}
+          />
+          <Route
+            path="/photography/:id"
+            element={<Suspense fallback={<RouteFallback />}><PhotographyProject /></Suspense>}
+          />
         </Route>
       </Routes>
       <SpeedInsights />

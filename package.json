@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predev": "node scripts/optimize-images.js",
     "optimize": "node scripts/optimize-images.js",
     "prebuild": "node scripts/optimize-images.js",
     "build": "tsc && vite build",
