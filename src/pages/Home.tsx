@@ -46,12 +46,14 @@ const Home = () => {
             Hi, I'm Anthony!
           </h1>
           <p className="text-lg text-textSecondary">
-            I'm currently a Computer and Data Science undergrad at NYU, and exploring software, data, and AI/ML. I'm also an avid photographer and violinist!
+            I'm currently a Computer and Data Science undergrad at NYU, and
+            exploring software, data, and AI/ML. I'm also an avid photographer
+            and violinist!
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
           <a
-            href={`${import.meta.env.BASE_URL}AnthonyLu_Resume_NYC.pdf`}
+            href={`${import.meta.env.BASE_URL}Resume_AnthonyLu_NYC.pdf`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-base font-semibold text-textInverse shadow-glow transition hover:bg-accentHover"
