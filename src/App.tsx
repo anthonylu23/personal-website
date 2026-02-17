@@ -6,6 +6,8 @@ import Home from './pages/Home'
 
 const Photography = lazy(() => import('./pages/Photography'))
 const PhotographyProject = lazy(() => import('./pages/PhotographyProject'))
+const Blog = lazy(() => import('./pages/Blog'))
+const BlogPost = lazy(() => import('./pages/BlogPost'))
 
 const RouteFallback = () => (
   <div className="flex min-h-screen items-center justify-center bg-base px-6 text-textPrimary/80">
@@ -42,6 +44,14 @@ function App() {
           <Route
             path="/photography/:id"
             element={<Suspense fallback={<RouteFallback />}><PhotographyProject /></Suspense>}
+          />
+          <Route
+            path="/blog"
+            element={<Suspense fallback={<RouteFallback />}><Blog /></Suspense>}
+          />
+          <Route
+            path="/blog/:slug"
+            element={<Suspense fallback={<RouteFallback />}><BlogPost /></Suspense>}
           />
         </Route>
       </Routes>
