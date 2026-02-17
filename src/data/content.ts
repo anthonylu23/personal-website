@@ -23,11 +23,11 @@ export type ContactMethod = {
 
 export const projects: Project[] = [
   {
-    title: 'AdaHealth - Hackathon Winner',
+    title: 'Context Grabber',
     description:
-      'AI voice companion for elder check-ins and caregiver safety insights.',
-    stack: ['React', 'Node.js', 'MongoDB', 'OpenAI'],
-    link: 'https://github.com/lljw9999/hackathon',
+      'Menu bar app + CLI that captures browser tabs and desktop apps into structured markdown for LLM workflows.',
+    stack: ['Swift', 'Go', 'TypeScript', 'Bun'],
+    link: 'https://github.com/anthonylu23/context_grabber',
   },
   {
     title: 'Vision Transformer for Genotype Classification',
@@ -37,18 +37,18 @@ export const projects: Project[] = [
     link: 'https://github.com/anthonylu23/neural-vit',
   },
   {
+    title: 'AdaHealth - Hackathon Winner',
+    description:
+      'AI voice companion for elder check-ins and caregiver safety insights.',
+    stack: ['React', 'Node.js', 'MongoDB', 'OpenAI'],
+    link: 'https://github.com/lljw9999/hackathon',
+  },
+  {
     title: 'Openbook-CLI',
     description:
       'CLI companion to chat with your notes, PDFs, and research.',
     stack: ['TypeScript', 'Python', 'LangChain', 'Ollama', 'ChromaDB'],
     link: 'https://github.com/anthonylu23/openbook',
-  },
-  {
-    title: 'Context Grabber',
-    description:
-      'Menu bar app + CLI that captures browser tabs and desktop apps into structured markdown for LLM workflows.',
-    stack: ['Swift', 'Go', 'TypeScript', 'Bun'],
-    link: 'https://github.com/anthonylu23/context_grabber',
   },
   {
     title: 'Scout',
@@ -58,18 +58,18 @@ export const projects: Project[] = [
     link: 'https://github.com/anthonylu23/scout',
   },
   {
-    title: 'Photo Search',
-    description:
-      'Local-first semantic search across your photography library.',
-    stack: ['RAG', 'Python', 'ChromaDB', 'OpenCLIP', 'LangChain'],
-    link: 'https://github.com/anthonylu23/photo_search',
-  },
-  {
     title: 'F1 Prediction Dashboard',
     description:
       'Streamlit dashboard modeling race outcomes and betting odds.',
     stack: ['Machine Learning', 'Python', 'XGBoost', 'NumPy/Pandas', 'Streamlit', 'AWS', 'Docker'],
     link: 'https://github.com/anthonylu23/f1_prediction_dashboard',
+  },
+  {
+    title: 'Photo Search',
+    description:
+      'Local-first semantic search across your photography library.',
+    stack: ['RAG', 'Python', 'ChromaDB', 'OpenCLIP', 'LangChain'],
+    link: 'https://github.com/anthonylu23/photo_search',
   },
   {
     title: 'Personal Website',
