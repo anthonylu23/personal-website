@@ -12,6 +12,7 @@ export const navItems: NavItem[] = [
   { label: "Projects", hash: "#projects", type: "hash" },
   { label: "Contact", hash: "#contact", type: "hash" },
   { label: "Photography", to: "/photography", type: "route" },
+  { label: "Blog", to: "/blog", type: "route" },
 ];
 
 const Navbar = () => {
