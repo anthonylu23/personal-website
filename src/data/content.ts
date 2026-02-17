@@ -44,6 +44,13 @@ export const projects: Project[] = [
     link: 'https://github.com/anthonylu23/openbook',
   },
   {
+    title: 'Context Grabber',
+    description:
+      'Menu bar app + CLI that captures browser tabs and desktop apps into structured markdown for LLM workflows.',
+    stack: ['Swift', 'Go', 'TypeScript', 'Bun'],
+    link: 'https://github.com/anthonylu23/context_grabber',
+  },
+  {
     title: 'Scout',
     description:
       'AI field guide for photo viewpoints, timing, and camera settings.',
