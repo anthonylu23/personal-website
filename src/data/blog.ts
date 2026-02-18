@@ -6,6 +6,7 @@ type BlogFrontmatter = {
   date?: string
   description?: string
   tags?: string[]
+  draft?: boolean
 }
 
 const modules = import.meta.glob<string>('../content/blog/*.md', {
@@ -21,6 +22,8 @@ function parsePosts(): BlogPost[] {
     const filename = path.split('/').pop() ?? ''
     const slug = filename.replace(/\.md$/, '')
     const { attributes, body } = fm<BlogFrontmatter>(raw)
+
+    if (attributes.draft) continue
 
     posts.push({
       title: attributes.title ?? 'Untitled',

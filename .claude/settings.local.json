@@ -8,7 +8,11 @@
       "Bash(wc:*)",
       "Bash(for dir in /Users/anthony/Documents/CS/Coding/personal-website/src/data/photos/*/)",
       "Bash(ls:*)",
-      "Bash(npm run optimize:*)"
+      "Bash(npm run optimize:*)",
+      "Bash(git checkout:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx vite build:*)"
     ]
   }
 }
