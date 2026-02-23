@@ -1,6 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { BLOG_ENABLED } from "@/config/features";
 
 type NavItem =
   | { label: string; to: string; type: "route" }
@@ -12,7 +13,7 @@ export const navItems: NavItem[] = [
   { label: "Projects", hash: "#projects", type: "hash" },
   { label: "Contact", hash: "#contact", type: "hash" },
   { label: "Photography", to: "/photography", type: "route" },
-  { label: "Blog", to: "/blog", type: "route" },
+  ...(BLOG_ENABLED ? [{ label: "Blog", to: "/blog", type: "route" as const }] : []),
 ];
 
 const Navbar = () => {

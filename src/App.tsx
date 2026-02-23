@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import GlassNavbar from './components/GlassNavbar'
+import { BLOG_ENABLED } from './config/features'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 
@@ -48,11 +49,19 @@ function App() {
           />
           <Route
             path="/blog"
-            element={<Suspense fallback={<RouteFallback />}><Blog /></Suspense>}
+            element={
+              BLOG_ENABLED
+                ? <Suspense fallback={<RouteFallback />}><Blog /></Suspense>
+                : <NotFound />
+            }
           />
           <Route
             path="/blog/:slug"
-            element={<Suspense fallback={<RouteFallback />}><BlogPost /></Suspense>}
+            element={
+              BLOG_ENABLED
+                ? <Suspense fallback={<RouteFallback />}><BlogPost /></Suspense>
+                : <NotFound />
+            }
           />
           <Route path="*" element={<NotFound />} />
         </Route>
