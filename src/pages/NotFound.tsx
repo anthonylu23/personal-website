@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { BLOG_ENABLED } from "@/config/features";
 
 const NotFound = () => {
   return (
@@ -19,12 +20,14 @@ const NotFound = () => {
         >
           Home
         </Link>
-        <Link
-          to="/blog"
-          className="rounded-full border border-border bg-surface px-5 py-2 text-sm font-semibold text-textPrimary transition hover:border-accent/60"
-        >
-          Blog
-        </Link>
+        {BLOG_ENABLED && (
+          <Link
+            to="/blog"
+            className="rounded-full border border-border bg-surface px-5 py-2 text-sm font-semibold text-textPrimary transition hover:border-accent/60"
+          >
+            Blog
+          </Link>
+        )}
         <Link
           to="/photography"
           className="rounded-full border border-border bg-surface px-5 py-2 text-sm font-semibold text-textPrimary transition hover:border-accent/60"
