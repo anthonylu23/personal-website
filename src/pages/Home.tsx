@@ -1,4 +1,4 @@
-import { ArrowDownRight } from "lucide-react";
+import { ArrowDownRight, Github } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import { contactMethods, projects, skills } from "../data/content";
 
@@ -41,7 +41,7 @@ const Home = () => {
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-28 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
       <section id="home" className="scroll-mt-24 space-y-8">
-        <div className="space-y-6">
+        <div className="animate-fade-up-1 space-y-6">
           <h1 className="text-4xl font-semibold text-textPrimary text-balance md:text-5xl">
             Hi, I'm Anthony!
           </h1>
@@ -51,7 +51,7 @@ const Home = () => {
             and violinist!
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="animate-fade-up-2 flex flex-wrap gap-3">
           <a
             href={`${import.meta.env.BASE_URL}Resume_AnthonyLu_NYC.pdf`}
             target="_blank"
@@ -62,17 +62,18 @@ const Home = () => {
             <ArrowDownRight className="h-4 w-4" />
           </a>
           <a
-            href="#projects"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-3 text-base font-semibold text-textPrimary transition hover:border-accent/60"
-          >
-            View projects
-            <ArrowDownRight className="h-4 w-4" />
-          </a>
-          <a
             href="#contact"
             className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-3 text-base font-semibold text-textPrimary transition hover:border-accent/60"
           >
             Let&apos;s talk
+          </a>
+          <a
+            href="https://github.com/anthonylu23"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface text-textPrimary transition hover:border-accent/60"
+          >
+            <Github className="h-5 w-5" />
           </a>
         </div>
       </section>
@@ -101,11 +102,6 @@ const Home = () => {
               </div>
             ))}
           </div>
-          <div className="flex items-center justify-center gap-4 py-4">
-            <span className="h-px w-32 bg-border/60 sm:w-56 md:w-80" />
-            <span className="h-1 w-1 rounded-full bg-border/60" />
-            <span className="h-px w-32 bg-border/60 sm:w-56 md:w-80" />
-          </div>
         </div>
         <div className="mt-10 border-t border-border/40">
           <div className="flex items-center gap-3 py-4 text-xs font-semibold uppercase tracking-[0.35em] text-textSecondary/70">
@@ -128,11 +124,6 @@ const Home = () => {
                 </p>
               </div>
             ))}
-          </div>
-          <div className="flex items-center justify-center gap-4 py-4">
-            <span className="h-px w-32 bg-border/60 sm:w-56 md:w-80" />
-            <span className="h-1 w-1 rounded-full bg-border/60" />
-            <span className="h-px w-32 bg-border/60 sm:w-56 md:w-80" />
           </div>
         </div>
       </section>
@@ -179,11 +170,6 @@ const Home = () => {
               );
             })}
           </div>
-          <div className="flex items-center justify-center gap-4 py-4">
-            <span className="h-px w-32 bg-border/60 sm:w-56 md:w-80" />
-            <span className="h-1 w-1 rounded-full bg-border/60" />
-            <span className="h-px w-32 bg-border/60 sm:w-56 md:w-80" />
-          </div>
         </div>
       </section>
 
@@ -200,12 +186,14 @@ const Home = () => {
             <div className="divide-y divide-border/30">
               {contactMethods.map((method) => {
                 const isExternal = method.href.startsWith("http");
+                const Icon = method.icon;
                 return (
                   <div
                     key={method.label}
                     className="flex flex-col gap-2 py-4 md:flex-row md:items-center md:justify-between"
                   >
-                    <div className="text-base font-medium text-textPrimary/90">
+                    <div className="flex items-center gap-2 text-base font-medium text-textPrimary/90">
+                      <Icon className="h-4 w-4 text-textSecondary/70" />
                       {method.label}
                     </div>
                     <a
@@ -219,11 +207,6 @@ const Home = () => {
                   </div>
                 );
               })}
-            </div>
-            <div className="flex items-center justify-center gap-4 py-4">
-              <span className="h-px w-32 bg-border/60 sm:w-56 md:w-80" />
-              <span className="h-1 w-1 rounded-full bg-border/60" />
-              <span className="h-px w-32 bg-border/60 sm:w-56 md:w-80" />
             </div>
           </div>
         </div>
