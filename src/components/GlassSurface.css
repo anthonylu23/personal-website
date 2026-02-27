@@ -29,10 +29,19 @@
 }
 
 .glass-surface--svg {
-  background: light-dark(hsl(0 0% 100% / var(--glass-frost, 0.1)), hsl(0 0% 0% / var(--glass-frost, 0.1)));
+  background: hsl(0 0% 0% / var(--glass-frost, 0.1));
   backdrop-filter: var(--filter-id, url(#glass-filter)) saturate(var(--glass-saturation, 1));
+  -webkit-backdrop-filter: var(--filter-id, url(#glass-filter)) saturate(var(--glass-saturation, 1));
   box-shadow:
-    0 0 2px 1px light-dark(color-mix(in oklch, black, transparent 85%), color-mix(in oklch, white, transparent 70%)) inset,
+    0 0 2px 1px rgba(255, 255, 255, 0.3) inset,
+    0px 4px 24px rgba(17, 17, 26, 0.12),
+    0px 25px 65px rgba(17, 17, 26, 0.15);
+}
+
+:root[data-theme="light"] .glass-surface--svg {
+  background: hsl(0 0% 100% / var(--glass-frost, 0.1));
+  box-shadow:
+    0 0 2px 1px rgba(0, 0, 0, 0.15) inset,
     0px 4px 24px rgba(17, 17, 26, 0.12),
     0px 25px 65px rgba(17, 17, 26, 0.15);
 }
@@ -76,7 +85,7 @@
   opacity: 0.4;
 }
 
-@supports not (backdrop-filter: blur(10px)) {
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
   .glass-surface--fallback {
     background: rgba(255, 255, 255, 0.4);
     box-shadow:
@@ -94,7 +103,7 @@
   }
 }
 
-@supports not (backdrop-filter: blur(10px)) {
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
   :root[data-theme="dark"] .glass-surface--fallback {
     background: rgba(0, 0, 0, 0.4);
   }
@@ -105,8 +114,12 @@
 }
 
 .glass-surface:focus-visible {
-  outline: 2px solid light-dark(#007aff, #0a84ff);
+  outline: 2px solid #0a84ff;
   outline-offset: 2px;
+}
+
+:root[data-theme="light"] .glass-surface:focus-visible {
+  outline-color: #007aff;
 }
 
 .glass-navbar {
@@ -133,5 +146,37 @@
 
 .glass-navbar.glass-navbar--transparent::after,
 .glass-navbar.glass-navbar--transparent::before {
+  opacity: 0;
+}
+
+.glass-surface--fallback.glass-navbar {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    0 4px 12px rgba(15, 23, 42, 0.12),
+    0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme="dark"] .glass-surface--fallback.glass-navbar {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+    0 4px 12px rgba(3, 7, 18, 0.3),
+    0 8px 24px rgba(3, 7, 18, 0.2);
+}
+
+.glass-surface--fallback.glass-navbar--transparent,
+:root[data-theme="dark"] .glass-surface--fallback.glass-navbar--transparent,
+:root[data-theme="light"] .glass-surface--fallback.glass-navbar--transparent {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.glass-surface--fallback.glass-navbar--transparent::after,
+:root[data-theme="dark"] .glass-surface--fallback.glass-navbar--transparent::after,
+:root[data-theme="light"] .glass-surface--fallback.glass-navbar--transparent::after {
   opacity: 0;
 }
