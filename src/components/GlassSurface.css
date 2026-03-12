@@ -180,3 +180,12 @@
 :root[data-theme="light"] .glass-surface--fallback.glass-navbar--transparent::after {
   opacity: 0;
 }
+
+/* Chromium uses SVG filters; override the higher-specificity light-theme rule
+   so the navbar fully disappears when at the top of the page. */
+:root[data-theme="light"] .glass-surface--svg.glass-navbar--transparent {
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}

@@ -11,7 +11,6 @@ export const navItems: NavItem[] = [
   { label: "Home", hash: "#home", type: "hash" },
   { label: "About", hash: "#about", type: "hash" },
   { label: "Projects", hash: "#projects", type: "hash" },
-  { label: "Contact", hash: "#contact", type: "hash" },
   { label: "Photography", to: "/photography", type: "route" },
   ...(BLOG_ENABLED ? [{ label: "Blog", to: "/blog", type: "route" as const }] : []),
 ];

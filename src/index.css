@@ -52,39 +52,39 @@ html {
   }
 
   :root[data-theme="light"] {
-    --background: 43 59% 81%;
-    --foreground: 20 5% 22%;
-    --card: 48 87% 88%;
-    --card-foreground: 20 5% 22%;
-    --popover: 48 87% 88%;
-    --popover-foreground: 20 5% 22%;
-    --primary: 40 73% 49%;
-    --primary-foreground: 20 5% 22%;
-    --secondary: 40 38% 73%;
-    --secondary-foreground: 20 5% 22%;
-    --muted: 39 24% 66%;
-    --muted-foreground: 27 10% 36%;
-    --accent: 40 73% 49%;
-    --accent-foreground: 20 5% 22%;
-    --accent-hover: 37 80% 39%;
-    --glow: 40 73% 49%;
+    --background: 40 30% 88%;
+    --foreground: 24 15% 16%;
+    --card: 38 20% 94%;
+    --card-foreground: 24 15% 16%;
+    --popover: 38 20% 94%;
+    --popover-foreground: 24 15% 16%;
+    --primary: 35 82% 50%;
+    --primary-foreground: 24 15% 16%;
+    --secondary: 36 18% 80%;
+    --secondary-foreground: 24 15% 16%;
+    --muted: 35 14% 72%;
+    --muted-foreground: 24 8% 42%;
+    --accent: 35 82% 50%;
+    --accent-foreground: 24 15% 16%;
+    --accent-hover: 32 88% 42%;
+    --glow: 35 82% 50%;
     --destructive: 2 75% 46%;
-    --destructive-foreground: 48 87% 88%;
-    --border: 40 38% 73%;
-    --border-neutral: 40 38% 73%;
-    --input: 40 38% 73%;
-    --ring: 40 73% 49%;
-    --base: 43 59% 81%;
-    --surface: 48 87% 88%;
-    --elevated: 48 87% 88%;
-    --text-primary: 20 5% 22%;
-    --text-secondary: 27 10% 36%;
-    --text-inverse: 43 59% 81%;
+    --destructive-foreground: 38 20% 94%;
+    --border: 35 18% 78%;
+    --border-neutral: 35 18% 78%;
+    --input: 35 18% 78%;
+    --ring: 35 82% 50%;
+    --base: 40 30% 88%;
+    --surface: 38 20% 94%;
+    --elevated: 36 14% 96%;
+    --text-primary: 24 15% 16%;
+    --text-secondary: 24 8% 40%;
+    --text-inverse: 38 20% 94%;
   }
 
   :root[data-theme="light"] h1,
   :root[data-theme="light"] h2 {
-    color: hsl(0 0% 16%);
+    color: hsl(24 15% 14%);
   }
 
   :root[data-theme="light"] .photography-hero-overlay {
@@ -212,6 +212,15 @@ html {
 
   .animate-fade-up-2 {
     animation: fade-up 500ms ease-out 100ms both;
+  }
+
+  @keyframes bounce-gentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  .animate-bounce-gentle {
+    animation: bounce-gentle 2s ease-in-out infinite;
   }
 }
 

@@ -1,6 +1,5 @@
 import { ArrowDownRight, Github } from "lucide-react";
-import SectionHeading from "../components/SectionHeading";
-import { contactMethods, projects, skills } from "../data/content";
+import { contactMethods, projects } from "../data/content";
 
 const Home = () => {
   const locationHighlights = [
@@ -17,200 +16,116 @@ const Home = () => {
   const locationSummary = locationHighlights
     .map((entry) => entry.value)
     .join(" / ");
-  const aboutRows = [
-    {
-      title: "New York University",
-      detail: "B.A. Computer and Data Science. Jan 2024 - May 2027.",
-    },
-    // {
-    //   title: "Liberal Arts and Science Academy",
-    //   detail: "High School Diploma. Aug 2020 - May 2023.",
-    // },
-    {
-      title: "Location",
-      detail: `${locationSummary}`,
-    },
-  ];
-  const skillRows = skills
-    .filter((group) => group.label !== "Relevant Coursework")
-    .map((group) => ({
-      title: group.label,
-      detail: group.items.join(", "),
-    }));
-
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-28 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
-      <section id="home" className="scroll-mt-24 space-y-8">
-        <div className="animate-fade-up-1 space-y-6">
-          <h1 className="text-4xl font-semibold text-textPrimary text-balance md:text-5xl">
-            Hi, I'm Anthony!
-          </h1>
-          <p className="text-lg text-textSecondary">
-            I'm currently a Computer and Data Science undergrad at NYU, and
-            exploring software, data, and AI/ML. I'm also an avid photographer
-            and violinist!
-          </p>
-        </div>
-        <div className="animate-fade-up-2 flex flex-wrap gap-3">
-          <a
-            href={`${import.meta.env.BASE_URL}Resume_AnthonyLu_NYC.pdf`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-base font-semibold text-textInverse shadow-glow transition hover:bg-accentHover"
-          >
-            Resume
-            <ArrowDownRight className="h-4 w-4" />
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-3 text-base font-semibold text-textPrimary transition hover:border-accent/60"
-          >
-            Let&apos;s talk
-          </a>
-          <a
-            href="https://github.com/anthonylu23"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface text-textPrimary transition hover:border-accent/60"
-          >
-            <Github className="h-5 w-5" />
-          </a>
-        </div>
-      </section>
-
-      <section id="about" className="scroll-mt-24">
-        <SectionHeading title="About" />
-        <div className="border-t border-border/40">
-          <div className="flex items-center gap-3 py-4 text-xs font-semibold uppercase tracking-[0.35em] text-textSecondary/70">
-            <span className="h-px w-8 bg-border/60" />
-            <span>Background</span>
-            <span className="ml-auto h-1 w-1 rounded-full bg-border/60" />
-            <span className="h-px w-8 bg-border/60" />
+    <main className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
+      <section id="home" className="scroll-mt-24 flex flex-col justify-center">
+        <div className="space-y-8">
+          <div className="animate-fade-up-1 space-y-6">
+            <h1 className="text-4xl font-semibold text-textPrimary text-balance md:text-5xl">
+              Anthony Lu
+            </h1>
+            <p className="text-lg text-textSecondary">
+              I like to build software and train neural nets. I also take
+              pictures and play the violin!
+            </p>
           </div>
-          <div className="divide-y divide-border/30">
-            {aboutRows.map((row) => (
-              <div
-                key={row.title}
-                className="flex flex-col gap-2 py-4 md:flex-row md:items-baseline md:justify-between"
-              >
-                <div className="flex items-center gap-3 text-base font-medium text-textPrimary/90">
-                  <span>{row.title}</span>
-                </div>
-                <p className="text-sm leading-relaxed text-textSecondary md:max-w-[60%] md:text-right">
-                  {row.detail}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="mt-10 border-t border-border/40">
-          <div className="flex items-center gap-3 py-4 text-xs font-semibold uppercase tracking-[0.35em] text-textSecondary/70">
-            <span className="h-px w-8 bg-border/60" />
-            <span>Tools & Skills</span>
-            <span className="ml-auto h-1 w-1 rounded-full bg-border/60" />
-            <span className="h-px w-8 bg-border/60" />
-          </div>
-          <div className="divide-y divide-border/30">
-            {skillRows.map((row) => (
-              <div
-                key={row.title}
-                className="flex flex-col gap-2 py-4 md:flex-row md:items-center md:justify-between"
-              >
-                <div className="flex items-center gap-3 text-base font-medium text-textPrimary/90">
-                  <span>{row.title}</span>
-                </div>
-                <p className="text-sm leading-relaxed text-textSecondary md:max-w-[60%] md:text-right">
-                  {row.detail}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="projects" className="scroll-mt-24">
-        <SectionHeading title="Projects" />
-        <div className="border-t border-border/40">
-          <div className="flex items-center gap-3 py-4 text-xs font-semibold uppercase tracking-[0.35em] text-textSecondary/70">
-            <span className="h-px w-8 bg-border/60" />
-            <span>Selected Work</span>
-            <span className="ml-auto h-1 w-1 rounded-full bg-border/60" />
-            <span className="h-px w-8 bg-border/60" />
-          </div>
-          <div className="divide-y divide-border/30">
-            {projects.map((project) => {
-              const href = project.link;
-              const isExternal = Boolean(href && href.startsWith("http"));
+          <div className="animate-fade-up-2 flex flex-wrap items-center gap-5">
+            <a
+              href={`${import.meta.env.BASE_URL}Resume_AnthonyLu_NYC.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-base font-semibold text-textInverse shadow-glow transition hover:bg-accentHover"
+            >
+              Resume
+              <ArrowDownRight className="h-4 w-4" />
+            </a>
+            <a
+              href="https://github.com/anthonylu23"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-textSecondary transition hover:text-accent"
+              aria-label="GitHub"
+            >
+              <Github className="h-6 w-6" />
+            </a>
+            {contactMethods.map((method) => {
+              const isExternal = method.href.startsWith("http");
+              const Icon = method.icon;
               return (
-                <div
-                  key={project.title}
-                  className="flex flex-col gap-2 py-4 md:flex-row md:items-center md:justify-between"
+                <a
+                  key={method.label}
+                  href={method.href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noreferrer" : undefined}
+                  className="text-textSecondary transition hover:text-accent"
+                  aria-label={method.label}
                 >
-                  {href ? (
-                    <a
-                      href={href}
-                      target={isExternal ? "_blank" : undefined}
-                      rel={isExternal ? "noreferrer" : undefined}
-                      className="text-base font-medium text-textPrimary/90 transition hover:text-accent"
-                    >
-                      {project.title}
-                    </a>
-                  ) : (
-                    <span className="text-base font-medium text-textPrimary/90">
-                      {project.title}
-                    </span>
-                  )}
-                  <div className="text-sm leading-relaxed text-textSecondary md:flex md:max-w-[60%] md:flex-col md:items-end md:text-right">
-                    <p>{project.description}</p>
-                    <p className="mt-2 text-xs text-textSecondary/70">
-                      {project.stack.join(" · ")}
-                    </p>
-                  </div>
-                </div>
+                  <Icon className="h-6 w-6" />
+                </a>
               );
             })}
           </div>
         </div>
       </section>
 
-      <section id="contact" className="scroll-mt-24">
-        <SectionHeading title="Contact" />
-        <div className="grid gap-6">
-          <div className="border-t border-border/40">
-            <div className="flex items-center gap-3 py-4 text-xs font-semibold uppercase tracking-[0.35em] text-textSecondary/70">
-              <span className="h-px w-8 bg-border/60" />
-              <span>Elsewhere</span>
-              <span className="ml-auto h-1 w-1 rounded-full bg-border/60" />
-              <span className="h-px w-8 bg-border/60" />
-            </div>
-            <div className="divide-y divide-border/30">
-              {contactMethods.map((method) => {
-                const isExternal = method.href.startsWith("http");
-                const Icon = method.icon;
-                return (
-                  <div
-                    key={method.label}
-                    className="flex flex-col gap-2 py-4 md:flex-row md:items-center md:justify-between"
-                  >
-                    <div className="flex items-center gap-2 text-base font-medium text-textPrimary/90">
-                      <Icon className="h-4 w-4 text-textSecondary/70" />
-                      {method.label}
-                    </div>
-                    <a
-                      href={method.href}
-                      target={isExternal ? "_blank" : undefined}
-                      rel={isExternal ? "noreferrer" : undefined}
-                      className="text-sm leading-relaxed text-textSecondary transition hover:text-accent md:max-w-[60%] md:text-right"
-                    >
-                      {method.detail}
-                    </a>
-                  </div>
-                );
-              })}
-            </div>
+      <section id="about" className="scroll-mt-24 mt-16">
+        <div className="flex flex-col gap-6 md:flex-row md:gap-24">
+          <h2 className="text-lg font-semibold text-textPrimary md:w-40 md:shrink-0">
+            About
+          </h2>
+          <div className="space-y-6 text-base leading-relaxed text-textSecondary">
+            <p>
+              Undergrad at New York University studying Computer Science, Data
+              Science, and Math.
+            </p>
+            <p>
+              Part of the team building Pulse NYC. Building data infra for
+              non-profits at Biokind. Incoming summer intern at InterSystems.
+            </p>
           </div>
         </div>
       </section>
+
+      <hr className="mx-auto w-[45%] border-textSecondary/30" />
+
+      <section id="projects" className="scroll-mt-24">
+        <div className="flex flex-col gap-6 md:flex-row md:gap-24">
+          <h2 className="text-lg font-semibold text-textPrimary md:w-40 md:shrink-0">
+            Projects
+          </h2>
+          <div className="w-full space-y-4">
+            {projects.map((project) => {
+              const href = project.link;
+              const isExternal = Boolean(href && href.startsWith("http"));
+              return (
+                <p key={project.title} className="text-base leading-relaxed text-textSecondary">
+                  {href ? (
+                    <a
+                      href={href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noreferrer" : undefined}
+                      className="font-medium text-textPrimary/90 transition hover:text-accent"
+                    >
+                      {project.title}
+                    </a>
+                  ) : (
+                    <span className="font-medium text-textPrimary/90">
+                      {project.title}
+                    </span>
+                  )}
+                  {" "}&ndash;{" "}
+                  <span className="text-sm">{project.description}</span>
+                  <span className="block mt-1 text-xs text-textSecondary/70">
+                    {project.stack.join(" · ")}
+                  </span>
+                </p>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <hr className="mx-auto w-[45%] border-textSecondary/30" />
     </main>
   );
 };

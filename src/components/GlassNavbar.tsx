@@ -149,7 +149,7 @@ const GlassNavbar = () => {
               </button>
               <button
                 type="button"
-                className="inline-flex items-center justify-center rounded-full border border-border/60 bg-transparent p-2 text-textPrimary transition hover:text-accent hover:border-accent"
+                className="inline-flex items-center justify-center p-2 text-textPrimary transition hover:text-accent"
                 onClick={toggleMenu}
                 aria-label="Toggle navigation"
               >
@@ -163,16 +163,10 @@ const GlassNavbar = () => {
           </div>
         </GlassSurface>
         {isOpen && (
-          <GlassSurface
-            width="100%"
-            height="auto"
-            borderRadius={40}
-            backgroundOpacity={0.2}
-            opacity={0.65}
-            blur={18}
-            className="absolute right-0 top-[calc(100%+12px)] z-10 w-[min(80vw,260px)] px-4 py-4 md:hidden"
+          <div
+            className="absolute right-0 top-[calc(100%+8px)] z-10 w-fit rounded-2xl border border-border/20 bg-surface/80 px-1 py-1 backdrop-blur-lg md:hidden"
           >
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-col">
               {navItems.map((item) => (
                 <button
                   key={item.label}
@@ -185,13 +179,13 @@ const GlassNavbar = () => {
                     }
                     handleHashNav(item.hash);
                   }}
-                  className="nav-underline-trigger rounded-2xl border border-border/40 bg-surface/40 px-4 py-3 text-left text-base font-medium text-textPrimary transition hover:bg-surface/60"
+                  className="rounded-xl px-4 py-2.5 text-left text-sm font-medium text-textPrimary/80 transition hover:text-accent hover:bg-surface/60"
                 >
-                  <span className="nav-underline">{item.label}</span>
+                  {item.label}
                 </button>
               ))}
             </nav>
-          </GlassSurface>
+          </div>
         )}
       </div>
     </header>

@@ -29,6 +29,11 @@ const Layout = () => {
     <div className="min-h-screen bg-base">
       {!hideNavbar && <GlassNavbar />}
       <Outlet />
+      <footer className="px-4 pb-6 pt-4 lg:px-0">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-xs text-textSecondary/50">&copy; {new Date().getFullYear()} Anthony Lu</p>
+        </div>
+      </footer>
     </div>
   )
 }
