@@ -15,7 +15,9 @@
       "Bash(npx vite build:*)",
       "Bash(gh auth:*)",
       "Bash(gh pr create:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git stash:*)",
+      "Bash(git push:*)"
     ]
   }
 }

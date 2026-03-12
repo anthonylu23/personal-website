@@ -34,16 +34,16 @@ export const projects: Project[] = [
   {
     title: 'Neural ViT',
     description:
-      'Vision Transforms for classifying mouse genotypes from LFP spectrograms.',
+      'Vision Transformers for classifying mouse genotypes from local field potential spectrograms.',
     stack: ['Python', 'PyTorch', 'BigQuery', 'GCS', 'Vertex AI'],
     link: 'https://github.com/anthonylu23/neural-vit',
   },
   {
     title: 'AdaHealth - Hackathon Winner',
     description:
-      'AI voice companion for patient check-ins and afety insights.',
+      'AI voice companion for patient check-ins and safety insights.',
     stack: ['React', 'Node.js', 'MongoDB', 'OpenAI'],
-    link: 'https://github.com/lljw9999/hackathon',
+    link: 'https://github.com/David-Wu1119/hackathon',
   },
   {
     title: 'Openbook-CLI',
