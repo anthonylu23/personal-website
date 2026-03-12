@@ -2,20 +2,6 @@ import { ArrowDownRight, Github } from "lucide-react";
 import { contactMethods, projects } from "../data/content";
 
 const Home = () => {
-  const locationHighlights = [
-    {
-      label: "Primary Base",
-      value: "Austin, TX",
-    },
-    {
-      label: "Campus",
-      value: "NYC",
-    },
-  ];
-
-  const locationSummary = locationHighlights
-    .map((entry) => entry.value)
-    .join(" / ");
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
       <section id="home" className="scroll-mt-24 flex flex-col justify-center">
