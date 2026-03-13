@@ -133,7 +133,7 @@ const Photography = () => {
         className="relative z-10 bg-base px-4 pb-24 pt-16 md:px-8"
         style={navOffset ? { paddingTop: navOffset } : undefined}
       >
-        <div className="mx-auto flex max-w-6xl flex-col gap-16">
+        <div className="mx-auto flex max-w-4xl flex-col gap-16">
           {gallery.map((item, index) => (
             <article
               key={item.title}

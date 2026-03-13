@@ -2,7 +2,7 @@ import SectionHeading from "../components/SectionHeading";
 import { projects } from "../data/content";
 
 const Projects = () => (
-  <main className="mx-auto flex max-w-6xl flex-col gap-12 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
+  <main className="mx-auto flex max-w-4xl flex-col gap-12 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
     <SectionHeading
       title="Projects"
       description="Personal projects spanning AI-native and dev tools, and realtime data applications."

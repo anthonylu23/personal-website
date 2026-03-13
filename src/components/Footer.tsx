@@ -9,7 +9,7 @@ const socialLinks = contactMethods.filter(({ label }) =>
 const Footer = () => {
   return (
     <footer className="border-t border-border bg-surface/90">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 text-sm text-textSecondary lg:px-0 md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto flex max-w-4xl flex-col gap-6 px-4 py-8 text-sm text-textSecondary lg:px-0 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-base font-semibold text-textPrimary">
             Let&apos;s build something beautiful together.

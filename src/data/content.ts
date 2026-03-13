@@ -1,6 +1,7 @@
 import type { ComponentType, SVGProps } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import { BookOpen, Brain, Code2, Database, Instagram, Layers, Linkedin, Mail, Server } from 'lucide-react'
+import SpotifyIcon from '../components/SpotifyIcon'
 import XIcon from '../components/XIcon'
 
 export type Project = {
@@ -162,5 +163,11 @@ export const contactMethods: ContactMethod[] = [
     detail: '@luanthony245',
     href: 'https://x.com/luanthony245',
     icon: XIcon,
+  },
+  {
+    label: 'Spotify',
+    detail: 'Spotify profile',
+    href: 'https://open.spotify.com/user/31r3dqo5busdm5pmkfwrpwpew6tm?si=13345562248243a4',
+    icon: SpotifyIcon,
   },
 ]

@@ -6,7 +6,7 @@ const Blog = () => {
   const posts = getAllPostMeta()
 
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-28 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
+    <main className="mx-auto flex max-w-4xl flex-col gap-28 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
       <section className="scroll-mt-24">
         <SectionHeading title="Blog" />
         <div className="border-t border-border/40">

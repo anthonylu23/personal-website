@@ -86,7 +86,7 @@ const GlassNavbar = () => {
         paddingRight: "calc(1rem + env(safe-area-inset-right, 0px))",
       }}
     >
-      <div className="relative mx-auto w-full max-w-6xl">
+      <div className="relative mx-auto w-full max-w-4xl">
         <GlassSurface
           width="100%"
           height="auto"

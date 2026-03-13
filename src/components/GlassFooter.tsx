@@ -23,6 +23,7 @@ const GlassFooter = () => {
         paddingRight: "calc(1rem + env(safe-area-inset-right, 0px))",
       }}
     >
+      <div className="relative mx-auto w-full max-w-4xl">
       <GlassSurface
         width="100%"
         height="auto"
@@ -30,7 +31,7 @@ const GlassFooter = () => {
         backgroundOpacity={0.15}
         opacity={0.55}
         blur={16}
-        className="pointer-events-auto w-full max-w-6xl"
+        className="pointer-events-auto w-full"
       >
         <div className="flex flex-col gap-4 px-6 py-3 text-textPrimary/80 md:flex-row md:items-center md:justify-between">
           <div className="hidden md:block">
@@ -54,6 +55,7 @@ const GlassFooter = () => {
           </div>
         </div>
       </GlassSurface>
+      </div>
     </footer>
   );
 };

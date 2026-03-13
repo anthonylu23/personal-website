@@ -3,7 +3,7 @@ import { contactMethods, projects } from "../data/content";
 
 const Home = () => {
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
+    <main className="mx-auto flex max-w-4xl flex-col gap-10 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
       <section id="home" className="scroll-mt-24 flex flex-col justify-center">
         <div className="space-y-8">
           <div className="animate-fade-up-1 space-y-6">
@@ -68,6 +68,10 @@ const Home = () => {
               Part of the team building Pulse NYC. Building data infra for
               non-profits at Biokind. Incoming summer intern at InterSystems.
             </p>
+            <p>
+              Experimenting with developer tools and applied AI. Exploring the
+              application of modern deep learning to neural datasets.
+            </p>
           </div>
         </div>
       </section>
@@ -84,7 +88,10 @@ const Home = () => {
               const href = project.link;
               const isExternal = Boolean(href && href.startsWith("http"));
               return (
-                <p key={project.title} className="text-base leading-relaxed text-textSecondary">
+                <p
+                  key={project.title}
+                  className="text-base leading-relaxed text-textSecondary"
+                >
                   {href ? (
                     <a
                       href={href}
@@ -98,9 +105,8 @@ const Home = () => {
                     <span className="font-medium text-textPrimary/90">
                       {project.title}
                     </span>
-                  )}
-                  {" "}&ndash;{" "}
-                  <span className="text-sm">{project.description}</span>
+                  )}{" "}
+                  &ndash; <span className="text-sm">{project.description}</span>
                   <span className="block mt-1 text-xs text-textSecondary/70">
                     {project.stack.join(" · ")}
                   </span>
