@@ -40,7 +40,14 @@ export const useTheme = () => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    const update = () =>
+      setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+
+    if (document.startViewTransition) {
+      document.startViewTransition(update);
+    } else {
+      update();
+    }
   };
 
   return { theme, setTheme, toggleTheme };
