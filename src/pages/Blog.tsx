@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom'
 import SectionHeading from '@/components/SectionHeading'
 import { getAllPostMeta } from '@/data/blog'
+import { formatCalendarDate } from '@/lib/dates'
 
 const Blog = () => {
-  const posts = getAllPostMeta()
+  const posts = getAllPostMeta().filter((post) => post.slug !== 'current-stack')
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col gap-28 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0">
       <section className="scroll-mt-24">
-        <SectionHeading title="Blog" />
+        <SectionHeading title="Writing" />
         <div className="border-t border-border/40">
           <div className="divide-y divide-border/30">
             {posts.map((post) => (
@@ -22,14 +23,9 @@ const Blog = () => {
                 >
                   {post.title}
                 </Link>
-                <div className="text-sm leading-relaxed text-textSecondary md:flex md:max-w-[60%] md:flex-col md:items-end md:text-right">
-                  <p>{post.description}</p>
-                  <p className="mt-2 text-xs text-textSecondary/70">
-                    {new Date(post.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
+                <div className="text-sm leading-relaxed text-textSecondary md:text-right">
+                  <p className="text-xs text-textSecondary/70">
+                    {formatCalendarDate(post.date)}
 
                   </p>
                 </div>

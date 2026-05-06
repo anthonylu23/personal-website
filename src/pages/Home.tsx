@@ -1,5 +1,10 @@
 import { useRef, useState, useEffect, useCallback } from "react";
-import { ArrowDownRight, ChevronLeft, ChevronRight, Github } from "lucide-react";
+import {
+  ArrowDownRight,
+  ChevronLeft,
+  ChevronRight,
+  Github,
+} from "lucide-react";
 import { contactMethods, projects } from "../data/content";
 
 const Home = () => {
@@ -28,7 +33,10 @@ const Home = () => {
   }, [checkScroll]);
 
   const scroll = (dir: "left" | "right") => {
-    scrollRef.current?.scrollBy({ left: dir === "left" ? -80 : 80, behavior: "smooth" });
+    scrollRef.current?.scrollBy({
+      left: dir === "left" ? -80 : 80,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -40,8 +48,8 @@ const Home = () => {
               Anthony Lu
             </h1>
             <p className="text-lg text-textSecondary">
-              I like to build software and train neural nets. I also take
-              pictures and play the violin!
+              I like building software systems and training neural nets.
+              I&apos;m also an avid photographer and classical violinist!
             </p>
           </div>
           <div className="animate-fade-up-2 flex items-center gap-5">
@@ -118,15 +126,12 @@ const Home = () => {
           <div className="space-y-6 text-base leading-relaxed text-textSecondary">
             <p>
               Undergrad at New York University studying Computer Science, Data
-              Science, and Math.
+              Science, and Math. Incoming summer intern at InterSystems.
             </p>
             <p>
-              Part of the team building Pulse NYC. Building data infra for
-              non-profits at Biokind. Incoming summer intern at InterSystems.
-            </p>
-            <p>
-              Experimenting with developer tools and applied AI. Exploring the
-              application of modern deep learning to neural datasets.
+              I&apos;m interested in reinforcement learning, Linux systems,
+              self-hosted infrastructure, and applying deep learning to neural
+              data.
             </p>
           </div>
         </div>

@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { getPostBySlug } from '@/data/blog'
+import { formatCalendarDate } from '@/lib/dates'
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -36,11 +37,7 @@ const BlogPost = () => {
           {post.title}
         </h1>
         <p className="mt-3 text-sm text-textSecondary/70">
-          {new Date(post.date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
+          {formatCalendarDate(post.date)}
         </p>
       </header>
       <article className="prose-custom">
