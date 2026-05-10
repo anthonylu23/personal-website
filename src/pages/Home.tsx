@@ -9,6 +9,7 @@ import { contactMethods, projects } from "../data/content";
 
 const Home = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const projectRowsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
@@ -31,6 +32,27 @@ const Home = () => {
       el.removeEventListener("scroll", checkScroll);
     };
   }, [checkScroll]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("opacity-100", "translate-y-0");
+            entry.target.classList.remove("opacity-0", "translate-y-4");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    projectRowsRef.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const scroll = (dir: "left" | "right") => {
     scrollRef.current?.scrollBy({
@@ -139,39 +161,44 @@ const Home = () => {
 
       <hr className="mx-auto w-[45%] border-textSecondary/30" />
 
-      <section id="projects" className="animate-fade-up-4 scroll-mt-24">
+      <section id="projects" className="scroll-mt-24">
         <div className="flex flex-col gap-6 md:flex-row md:gap-24">
-          <h2 className="text-lg font-semibold text-textPrimary md:w-40 md:shrink-0">
+          <h2 className="animate-fade-up-4 text-lg font-semibold text-textPrimary md:w-40 md:shrink-0">
             Projects
           </h2>
-          <div className="w-full space-y-4">
-            {projects.map((project) => {
+          <div className="w-full divide-y divide-border/30">
+            {projects.map((project, i) => {
               const href = project.link;
               const isExternal = Boolean(href && href.startsWith("http"));
               return (
-                <p
+                <div
                   key={project.title}
-                  className="text-base leading-relaxed text-textSecondary"
+                  ref={(el) => { projectRowsRef.current[i] = el; }}
+                  className="flex flex-col gap-1 py-4 opacity-0 translate-y-4 transition-all duration-500 ease-out"
+                  style={{ transitionDelay: `${i * 80}ms` }}
                 >
                   {href ? (
                     <a
                       href={href}
                       target={isExternal ? "_blank" : undefined}
                       rel={isExternal ? "noreferrer" : undefined}
-                      className="font-medium text-textPrimary/90 transition hover:text-accent"
+                      className="group inline-flex w-fit items-baseline gap-1.5 font-medium text-textPrimary/90 transition hover:text-accent"
                     >
-                      {project.title}
+                      <span>{project.title}</span>
+                      <Github className="h-3.5 w-3.5 translate-y-[2px] opacity-60 transition group-hover:opacity-100" />
                     </a>
                   ) : (
                     <span className="font-medium text-textPrimary/90">
                       {project.title}
                     </span>
-                  )}{" "}
-                  &ndash; <span className="text-sm">{project.description}</span>
-                  <span className="block mt-1 text-xs text-textSecondary/70">
+                  )}
+                  <p className="text-sm leading-relaxed text-textSecondary">
+                    {project.description}
+                  </p>
+                  <p className="text-xs text-textSecondary/70">
                     {project.stack.join(" · ")}
-                  </span>
-                </p>
+                  </p>
+                </div>
               );
             })}
           </div>
