@@ -26,6 +26,27 @@ export type ContactMethod = {
 
 export const projects: Project[] = [
   {
+    title: 'HyperZero',
+    description:
+      'AlphaZero-style self-play system for N-dimensional Connect-K research.',
+    stack: ['Python', 'PyTorch', 'CUDA'],
+    link: 'https://github.com/anthonylu23/hyperzero',
+  },
+  {
+    title: 'Switchboard CLI',
+    description:
+      'Fault-tolerant ML job orchestrator with provider adapters, durable state, and telemetry.',
+    stack: ['Go', 'SQLite', 'Docker'],
+    link: 'https://github.com/anthonylu23/switchboard-cli',
+  },
+  {
+    title: 'Neural Decision Transformers',
+    description:
+      'Reward-conditioned sequence modeling pipeline for IBL brain-wide Neuropixels recordings.',
+    stack: ['Python', 'PyTorch', 'Jupyter'],
+    link: 'https://github.com/anthonylu23/ibl-neural-decision-transformers',
+  },
+  {
     title: 'Context Grabber',
     description:
       'Menu bar app + CLI that captures your applications into structured context for LLMs.',
@@ -46,13 +67,6 @@ export const projects: Project[] = [
     stack: ['React', 'Node.js', 'MongoDB', 'OpenAI'],
     link: 'https://github.com/David-Wu1119/hackathon',
   },
-  {
-    title: 'Openbook-CLI',
-    description:
-      'CLI tool to chat with your notes, PDFs, and research.',
-    stack: ['TypeScript', 'Python', 'LangChain', 'Ollama', 'ChromaDB'],
-    link: 'https://github.com/anthonylu23/openbook',
-  },
   // {
   //   title: 'Scout',
   //   description:
@@ -60,13 +74,6 @@ export const projects: Project[] = [
   //   stack: ['React', 'JavaScript', 'Python', 'FastAPI', 'Google GenAI', 'Vercel'],
   //   link: 'https://github.com/anthonylu23/scout',
   // },
-  {
-    title: 'F1 Prediction Dashboard',
-    description:
-      'Streamlit dashboard modeling race outcomes and betting odds.',
-    stack: ['Python', 'XGBoost', 'NumPy', 'Pandas', 'Streamlit', 'AWS', 'Docker'],
-    link: 'https://github.com/anthonylu23/f1_prediction_dashboard',
-  },
   // {
   //   title: 'Photo Search',
   //   description:

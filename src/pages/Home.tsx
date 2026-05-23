@@ -151,9 +151,8 @@ const Home = () => {
               Science, and Math. Incoming summer intern at InterSystems.
             </p>
             <p>
-              I&apos;m interested in reinforcement learning, Linux systems,
-              self-hosted infrastructure, and applying deep learning to neural
-              data.
+              I&apos;m interested in reinforcement learning, deep learning for
+              computational neuroscience, and data engineering.
             </p>
           </div>
         </div>

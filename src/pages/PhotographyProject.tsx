@@ -1,9 +1,17 @@
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { gallery } from "../data/gallery";
 
 const PhotographyProject = () => {
   const { id } = useParams<{ id: string }>();
   const project = gallery.find((item) => item.id === id);
+  const [pageReady, setPageReady] = useState(false);
+
+  useEffect(() => {
+    setPageReady(false);
+    const frame = window.requestAnimationFrame(() => setPageReady(true));
+    return () => window.cancelAnimationFrame(frame);
+  }, [id]);
 
   if (!project) {
     return (
@@ -45,12 +53,20 @@ const PhotographyProject = () => {
       <section className="mx-auto flex max-w-6xl flex-col gap-10">
         <div className="grid grid-cols-1 gap-10">
           {project.galleryImages.map((src, index) => (
-            <figure key={`${project.id}-${index}`} className="w-full">
+            <figure
+              key={`${project.id}-${index}`}
+              className={`w-full transition-all duration-700 ease-out ${
+                pageReady ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+              }`}
+              style={{ transitionDelay: `${Math.min(index * 60, 180)}ms` }}
+            >
               <img
                 src={src}
                 alt={`${project.title} photo ${index + 1}`}
                 loading="lazy"
-                className="h-[88vh] w-full object-contain"
+                className={`mx-auto h-[88vh] w-auto max-w-full object-contain transition-all duration-1000 ease-out ${
+                  pageReady ? "scale-100 opacity-100" : "scale-[1.02] opacity-0"
+                }`}
               />
             </figure>
           ))}
