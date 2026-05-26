@@ -44,7 +44,7 @@ const Home = () => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     projectRowsRef.current.forEach((el) => {
@@ -148,11 +148,12 @@ const Home = () => {
           <div className="space-y-6 text-base leading-relaxed text-textSecondary">
             <p>
               Undergrad at New York University studying Computer Science, Data
-              Science, and Math. Incoming summer intern at InterSystems.
+              Science, and Math. Currently interning at InterSystems.
             </p>
             <p>
               I&apos;m interested in reinforcement learning, deep learning for
-              computational neuroscience, and data engineering.
+              computational neuroscience, and data engineering. I'm currently
+              exploring and studying GPU kernels.
             </p>
           </div>
         </div>
@@ -172,7 +173,9 @@ const Home = () => {
               return (
                 <div
                   key={project.title}
-                  ref={(el) => { projectRowsRef.current[i] = el; }}
+                  ref={(el) => {
+                    projectRowsRef.current[i] = el;
+                  }}
                   className="flex flex-col gap-1 py-4 opacity-0 translate-y-4 transition-all duration-500 ease-out"
                   style={{ transitionDelay: `${i * 80}ms` }}
                 >

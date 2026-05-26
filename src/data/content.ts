@@ -35,7 +35,7 @@ export const projects: Project[] = [
   {
     title: 'Switchboard CLI',
     description:
-      'Fault-tolerant ML job orchestrator with provider adapters, durable state, and telemetry.',
+      'ML job orchestrator with provider adapters, durable state, telemetry, and checkpoint management.',
     stack: ['Go', 'SQLite', 'Docker'],
     link: 'https://github.com/anthonylu23/switchboard-cli',
   },
@@ -167,7 +167,7 @@ export const contactMethods: ContactMethod[] = [
   },
   {
     label: 'X',
-    detail: '@luanthony245',
+    detail: '@anthxny245',
     href: 'https://x.com/luanthony245',
     icon: XIcon,
   },
