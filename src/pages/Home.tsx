@@ -213,7 +213,7 @@ const Home = () => {
                 <>
                   {/* Peek item: clipped to show company + role only */}
                   <div
-                    className="relative overflow-hidden"
+                    className="relative -ml-8 overflow-hidden pl-8"
                     style={{ maxHeight: expExpanded ? "300px" : "44px", transition: "max-height 500ms ease-out" }}
                   >
                     <div
@@ -244,7 +244,7 @@ const Home = () => {
                   {/* Remaining hidden items */}
                   {experiences.length > COLLAPSED_EXP + 1 && (
                     <div className="grid" style={{ gridTemplateRows: expExpanded ? "1fr" : "0fr", transition: "grid-template-rows 500ms ease-out" }}>
-                      <div className="overflow-hidden min-h-0">
+                      <div className="-ml-8 min-h-0 overflow-hidden pl-8">
                         {experiences.slice(COLLAPSED_EXP + 1).map((exp, i) => {
                           const href = exp.link;
                           const isExternal = Boolean(href && href.startsWith("http"));
