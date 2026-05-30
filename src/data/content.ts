@@ -17,6 +17,15 @@ export type SkillGroup = {
   items: string[]
 }
 
+export type Experience = {
+  company: string
+  role: string
+  period: string
+  location: string
+  description: string
+  link?: string
+}
+
 export type ContactMethod = {
   label: string
   detail: string
@@ -87,6 +96,44 @@ export const projects: Project[] = [
       'This site! Built with Vite, React, Tailwind, and Three.js.',
     stack: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'Three.js'],
     link: 'https://github.com/anthonylu23/personal-website',
+  },
+]
+
+export const experiences: Experience[] = [
+  {
+    company: 'InterSystems',
+    role: 'Data Platforms Intern',
+    period: 'May 2026 – Aug 2026',
+    location: 'Boston, MA',
+    description:
+      'Developing data infrastructure and developer tooling for InterSystems IRIS.',
+    link: 'https://www.intersystems.com',
+  },
+  {
+    company: 'DermImpact',
+    role: 'Founding Engineer',
+    period: 'Feb 2026 – May 2026',
+    location: 'New York, NY',
+    description:
+      'Built a full-stack platform for dermatologic note generation and image analysis. Surveyed a 40+ person derm clinic to shape product direction and drive clinical adoption.',
+  },
+  {
+    company: 'Biokind — Reproductive Health Access Project',
+    role: 'Data Engineer',
+    period: 'Jan 2026 – May 2026',
+    location: 'New York, NY',
+    description:
+      'Built ETL pipelines normalizing 35k+ donor and health records. Reduced manual data processing time by 60% with a FastAPI orchestration system.',
+    link: 'https://www.biokind.org/',
+  },
+  {
+    company: 'Pulse Foundry',
+    role: 'Software Engineer',
+    period: 'Dec 2025 – May 2026',
+    location: 'New York, NY',
+    description:
+      'Built an automated newsletter pipeline with semantic ranking and scheduled workers, serving 3,000+ subscribers. Developed a React dashboard for editors to review and tune the pipeline in real time.',
+    link: 'https://pulsefoundry.ai/about',
   },
 ]
 

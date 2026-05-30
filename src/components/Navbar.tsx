@@ -10,6 +10,7 @@ type NavItem =
 export const navItems: NavItem[] = [
   { label: "Home", hash: "#home", type: "hash" },
   { label: "About", hash: "#about", type: "hash" },
+  { label: "Experience", hash: "#experience", type: "hash" },
   { label: "Projects", hash: "#projects", type: "hash" },
   ...(BLOG_ENABLED && WRITING_NAV_VISIBLE
     ? [{ label: "Writing", to: "/blog", type: "route" as const }]
