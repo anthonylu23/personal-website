@@ -8,7 +8,6 @@ type NavItem =
   | { label: string; hash: string; type: "hash" };
 
 export const navItems: NavItem[] = [
-  { label: "Home", hash: "#home", type: "hash" },
   { label: "About", hash: "#about", type: "hash" },
   { label: "Experience", hash: "#experience", type: "hash" },
   { label: "Projects", hash: "#projects", type: "hash" },
