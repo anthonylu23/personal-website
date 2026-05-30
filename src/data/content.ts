@@ -102,11 +102,10 @@ export const projects: Project[] = [
 export const experiences: Experience[] = [
   {
     company: 'InterSystems',
-    role: 'Data Platforms Intern',
-    period: 'May 2026 – Aug 2026',
+    role: 'Software Engineer Intern',
+    period: 'May 2026 – Present',
     location: 'Boston, MA',
-    description:
-      'Developing data infrastructure and developer tooling for InterSystems IRIS.',
+    description: 'Developing agentic data tooling.',
     link: 'https://www.intersystems.com',
   },
   {
@@ -115,7 +114,7 @@ export const experiences: Experience[] = [
     period: 'Feb 2026 – May 2026',
     location: 'New York, NY',
     description:
-      'Built a full-stack platform for dermatologic note generation and image analysis. Surveyed a 40+ person derm clinic to shape product direction and drive clinical adoption.',
+      'Full-stack platform for dermatologic note generation and image analysis. Surveyed a 40+ person derm clinic to shape product direction and drive clinical adoption.',
   },
   {
     company: 'Biokind — Reproductive Health Access Project',
@@ -123,7 +122,7 @@ export const experiences: Experience[] = [
     period: 'Jan 2026 – May 2026',
     location: 'New York, NY',
     description:
-      'Built ETL pipelines normalizing 35k+ donor and health records. Reduced manual data processing time by 60% with a FastAPI orchestration system.',
+      'ETL pipelines for normalizing 35k+ donor records with FastAPI orchestration. In depth data analysis for business insights.',
     link: 'https://www.biokind.org/',
   },
   {
@@ -132,7 +131,7 @@ export const experiences: Experience[] = [
     period: 'Dec 2025 – May 2026',
     location: 'New York, NY',
     description:
-      'Built an automated newsletter pipeline with semantic ranking and scheduled workers, serving 3,000+ subscribers. Developed a React dashboard for editors to review and tune the pipeline in real time.',
+      'Automated newsletter pipeline with semantic ranking, scheduled workers and web scraping, serving 3k+ subscribers. React dashboard for review and pipeline configuration.',
     link: 'https://pulsefoundry.ai/about',
   },
 ]
