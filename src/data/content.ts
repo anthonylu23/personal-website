@@ -131,7 +131,7 @@ export const experiences: Experience[] = [
     period: 'Dec 2025 – May 2026',
     location: 'New York, NY',
     description:
-      'Automated newsletter pipeline with semantic ranking, scheduled workers and web scraping, serving 3k+ subscribers. React dashboard for review and pipeline configuration.',
+      'Automated newsletter pipeline with semantic ranking, scheduled workers, and web scraping, serving 3k+ subscribers. React dashboard for review and pipeline configuration.',
     link: 'https://pulsefoundry.ai/about',
   },
 ]
