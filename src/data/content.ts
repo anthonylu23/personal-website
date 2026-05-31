@@ -4,11 +4,20 @@ import { BookOpen, Brain, Code2, Database, Instagram, Layers, Linkedin, Mail, Se
 import SpotifyIcon from '../components/SpotifyIcon'
 import XIcon from '../components/XIcon'
 
+export type ProjectLinkType = 'github' | 'demo' | 'paper'
+
+export type ProjectLink = {
+  type: ProjectLinkType
+  href: string
+  label?: string // optional override; defaults derived from type
+}
+
 export type Project = {
   title: string
   description: string
   stack: string[]
-  link?: string
+  links?: ProjectLink[]
+  featured?: boolean // reserved; unused for now
 }
 
 export type SkillGroup = {
@@ -23,6 +32,7 @@ export type Experience = {
   period: string
   location: string
   description: string
+  descriptionLinks?: Array<{ text: string; href: string }>
   link?: string
 }
 
@@ -39,42 +49,67 @@ export const projects: Project[] = [
     description:
       'AlphaZero-style self-play system for N-dimensional Connect-K research.',
     stack: ['Python', 'PyTorch', 'CUDA'],
-    link: 'https://github.com/anthonylu23/hyperzero',
+    links: [
+      { type: 'github', href: 'https://github.com/anthonylu23/hyperzero' },
+      { type: 'demo', href: 'https://hyperzero-web-demo.vercel.app' },
+    ],
   },
   {
     title: 'Switchboard CLI',
     description:
       'ML job orchestrator with provider adapters, durable state, telemetry, and checkpoint management.',
     stack: ['Go', 'SQLite', 'Docker'],
-    link: 'https://github.com/anthonylu23/switchboard-cli',
+    links: [
+      { type: 'github', href: 'https://github.com/anthonylu23/switchboard-cli' },
+    ],
   },
   {
     title: 'Neural Decision Transformers',
     description:
       'Reward-conditioned sequence modeling pipeline for IBL brain-wide Neuropixels recordings.',
     stack: ['Python', 'PyTorch', 'Jupyter'],
-    link: 'https://github.com/anthonylu23/ibl-neural-decision-transformers',
+    links: [
+      { type: 'github', href: 'https://github.com/anthonylu23/ibl-neural-decision-transformers' },
+      // { type: 'paper', href: 'https://...' }, // TODO: add paper/writeup URL
+    ],
+  },
+  {
+    title: 'Sweat Streaks',
+    description:
+      'macOS menu bar app tracking daily coding streaks across GitHub, LeetCode, and local AI tools.',
+    stack: ['Swift', 'SwiftPM', 'SQLite'],
+    links: [
+      { type: 'github', href: 'https://github.com/anthonylu23/sweat-streaks' },
+    ],
   },
   {
     title: 'Context Grabber',
     description:
       'Menu bar app + CLI that captures your applications into structured context for LLMs.',
     stack: ['Swift', 'Go', 'TypeScript', 'Bun'],
-    link: 'https://github.com/anthonylu23/context_grabber',
+    links: [
+      { type: 'github', href: 'https://github.com/anthonylu23/context_grabber' },
+    ],
   },
   {
     title: 'Neural ViT',
     description:
       'Vision Transformers for classifying mouse genotypes from local field potential spectrograms.',
     stack: ['Python', 'PyTorch', 'BigQuery', 'GCS', 'Vertex AI'],
-    link: 'https://github.com/anthonylu23/neural-vit',
+    links: [
+      { type: 'github', href: 'https://github.com/anthonylu23/neural-vit' },
+      // { type: 'paper', href: 'https://...' }, // TODO: add paper/writeup URL
+    ],
   },
   {
-    title: 'AdaHealth - Hackathon Winner',
+    title: 'AdaHealth',
     description:
-      'AI voice companion for patient check-ins and safety insights.',
+      'AI voice companion for patient check-ins and safety insights. Winner of the Pulse Foundry Agentic AI Hackathon.',
     stack: ['React', 'Node.js', 'MongoDB', 'OpenAI'],
-    link: 'https://github.com/David-Wu1119/hackathon',
+    links: [
+      { type: 'github', href: 'https://github.com/David-Wu1119/hackathon' },
+      // { type: 'demo', href: 'https://...' }, // TODO: add live demo / Devpost URL
+    ],
   },
   // {
   //   title: 'Scout',
@@ -95,7 +130,9 @@ export const projects: Project[] = [
     description:
       'This site! Built with Vite, React, Tailwind, and Three.js.',
     stack: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'Three.js'],
-    link: 'https://github.com/anthonylu23/personal-website',
+    links: [
+      { type: 'github', href: 'https://github.com/anthonylu23/personal-website' },
+    ],
   },
 ]
 
@@ -105,7 +142,7 @@ export const experiences: Experience[] = [
     role: 'Software Engineer Intern',
     period: 'May 2026 – Present',
     location: 'Boston, MA',
-    description: 'Developing agentic data tooling.',
+    description: 'Developing agentic data tooling on the Data Platforms team.',
     link: 'https://www.intersystems.com',
   },
   {
@@ -117,12 +154,15 @@ export const experiences: Experience[] = [
       'Full-stack platform for dermatologic note generation and image analysis. Surveyed a 40+ person derm clinic to shape product direction and drive clinical adoption.',
   },
   {
-    company: 'Biokind — Reproductive Health Access Project',
+    company: 'Biokind Analytics',
     role: 'Data Engineer',
     period: 'Jan 2026 – May 2026',
     location: 'New York, NY',
     description:
-      'ETL pipelines for normalizing 35k+ donor records with FastAPI orchestration. In depth data analysis for business insights.',
+      'ETL pipelines normalizing 35k+ donor records with FastAPI orchestration for the Reproductive Health Access Project. Data analysis delivering business insights.',
+    descriptionLinks: [
+      { text: 'Reproductive Health Access Project', href: 'https://www.reproductiveaccess.org/' },
+    ],
     link: 'https://www.biokind.org/',
   },
   {

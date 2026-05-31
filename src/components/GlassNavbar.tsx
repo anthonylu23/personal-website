@@ -57,7 +57,7 @@ const GlassNavbar = () => {
         <Link
           key={item.label}
           to={item.to}
-          className="nav-underline text-sm font-medium text-textPrimary/80"
+          className="focus-ring nav-underline rounded text-sm font-medium text-textPrimary/80"
           onClick={closeMenu}
         >
           {item.label}
@@ -107,7 +107,7 @@ const GlassNavbar = () => {
           >
             <Link
               to="/"
-              className="nav-underline text-base truncate font-semibold tracking-tight text-textPrimary"
+              className="focus-ring nav-underline truncate rounded text-base font-semibold tracking-tight text-textPrimary"
               onClick={(event) => {
                 event.preventDefault();
                 handleHashNav("#home");
@@ -121,7 +121,7 @@ const GlassNavbar = () => {
               </nav>
               <button
                 type="button"
-                className="inline-flex items-center justify-center p-2 text-textPrimary transition hover:text-accent"
+                className="focus-ring inline-flex items-center justify-center rounded-full p-2 text-textPrimary transition hover:text-accent"
                 onClick={toggleTheme}
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 aria-pressed={theme === "dark"}
@@ -136,7 +136,7 @@ const GlassNavbar = () => {
             <div className="ml-auto flex items-center gap-2 md:hidden">
               <button
                 type="button"
-                className="inline-flex items-center justify-center p-2 text-textPrimary transition hover:text-accent"
+                className="focus-ring inline-flex items-center justify-center rounded-full p-2 text-textPrimary transition hover:text-accent"
                 onClick={toggleTheme}
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 aria-pressed={theme === "dark"}
@@ -149,7 +149,7 @@ const GlassNavbar = () => {
               </button>
               <button
                 type="button"
-                className="inline-flex items-center justify-center p-2 text-textPrimary transition hover:text-accent"
+                className="focus-ring inline-flex items-center justify-center rounded-full p-2 text-textPrimary transition hover:text-accent"
                 onClick={toggleMenu}
                 aria-label="Toggle navigation"
               >
@@ -179,7 +179,7 @@ const GlassNavbar = () => {
                     }
                     handleHashNav(item.hash);
                   }}
-                  className="rounded-xl px-4 py-2.5 text-left text-sm font-medium text-textPrimary/80 transition hover:text-accent hover:bg-surface/60"
+                  className="focus-ring rounded-xl px-4 py-2.5 text-left text-sm font-medium text-textPrimary/80 transition hover:text-accent hover:bg-surface/60"
                 >
                   {item.label}
                 </button>

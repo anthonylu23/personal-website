@@ -134,6 +134,10 @@ html {
     width: 100%;
   }
 
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-base;
+  }
+
   .prose-custom {
     @apply text-base leading-relaxed text-textPrimary/90;
   }

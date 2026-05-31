@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import SectionHeading from "../components/SectionHeading";
+import ProjectRow from "../components/ProjectRow";
 import { projects } from "../data/content";
 
 const Projects = () => {
@@ -40,39 +41,16 @@ const Projects = () => {
           <span className="h-px w-8 bg-border/60" />
         </div>
         <div className="divide-y divide-border/30">
-          {projects.map((project, i) => {
-            const href = project.link;
-            const isExternal = Boolean(href && href.startsWith("http"));
-            return (
-              <div
-                key={project.title}
-                ref={(el) => { rowsRef.current[i] = el; }}
-                className="flex flex-col gap-2 py-4 opacity-0 translate-y-4 transition-all duration-500 ease-out md:flex-row md:items-baseline md:justify-between"
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                {href ? (
-                  <a
-                    href={href}
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noreferrer" : undefined}
-                    className="text-base font-medium text-textPrimary/90 transition hover:text-accent"
-                  >
-                    {project.title}
-                  </a>
-                ) : (
-                  <span className="text-base font-medium text-textPrimary/90">
-                    {project.title}
-                  </span>
-                )}
-                <div className="text-sm leading-relaxed text-textSecondary md:flex md:max-w-[60%] md:flex-col md:items-end md:text-right">
-                  <p>{project.description}</p>
-                  <p className="mt-2 text-xs text-textSecondary/70">
-                    {project.stack.join(" · ")}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+          {projects.map((project, i) => (
+            <div
+              key={project.title}
+              ref={(el) => { rowsRef.current[i] = el; }}
+              className="flex flex-col gap-2 py-4 opacity-0 translate-y-4 transition-all duration-500 ease-out"
+              style={{ transitionDelay: `${i * 80}ms` }}
+            >
+              <ProjectRow project={project} />
+            </div>
+          ))}
         </div>
       </div>
     </main>
