@@ -47,7 +47,7 @@ export const projects: Project[] = [
   {
     title: 'HyperZero',
     description:
-      'AlphaZero-style self-play system for N-dimensional Connect-K research.',
+      'AlphaZero-style RL agent for N-dimensional Connect-K gameplay. Trained with consumer-grade hardware.',
     stack: ['Python', 'PyTorch', 'CUDA'],
     links: [
       { type: 'github', href: 'https://github.com/anthonylu23/hyperzero' },
@@ -57,7 +57,7 @@ export const projects: Project[] = [
   {
     title: 'Switchboard CLI',
     description:
-      'ML job orchestrator with provider adapters, durable state, telemetry, and checkpoint management.',
+      'ML job orchestrator with provider adapters, auto-routing, telemetry, and checkpoint management.',
     stack: ['Go', 'SQLite', 'Docker'],
     links: [
       { type: 'github', href: 'https://github.com/anthonylu23/switchboard-cli' },
@@ -67,7 +67,7 @@ export const projects: Project[] = [
     title: 'Neural Decision Transformers',
     description:
       'Reward-conditioned sequence modeling pipeline for IBL brain-wide Neuropixels recordings.',
-    stack: ['Python', 'PyTorch', 'Jupyter'],
+    stack: ['Python', 'PyTorch'],
     links: [
       { type: 'github', href: 'https://github.com/anthonylu23/ibl-neural-decision-transformers' },
       // { type: 'paper', href: 'https://...' }, // TODO: add paper/writeup URL
@@ -76,7 +76,7 @@ export const projects: Project[] = [
   {
     title: 'Sweat Streaks',
     description:
-      'macOS menu bar app tracking daily coding streaks across GitHub, LeetCode, and local AI tools.',
+      'macOS menu bar app tracking daily coding streaks across GitHub, LeetCode, and agentic coding tools.',
     stack: ['Swift', 'SwiftPM', 'SQLite'],
     links: [
       { type: 'github', href: 'https://github.com/anthonylu23/sweat-streaks' },
@@ -85,7 +85,7 @@ export const projects: Project[] = [
   {
     title: 'Context Grabber',
     description:
-      'Menu bar app + CLI that captures your applications into structured context for LLMs.',
+      'macOS menu bar app + CLI that captures your applications into structured context for LLMs.',
     stack: ['Swift', 'Go', 'TypeScript', 'Bun'],
     links: [
       { type: 'github', href: 'https://github.com/anthonylu23/context_grabber' },
@@ -111,20 +111,6 @@ export const projects: Project[] = [
       // { type: 'demo', href: 'https://...' }, // TODO: add live demo / Devpost URL
     ],
   },
-  // {
-  //   title: 'Scout',
-  //   description:
-  //     'AI field guide for photo viewpoints, timing, and camera settings.',
-  //   stack: ['React', 'JavaScript', 'Python', 'FastAPI', 'Google GenAI', 'Vercel'],
-  //   link: 'https://github.com/anthonylu23/scout',
-  // },
-  // {
-  //   title: 'Photo Search',
-  //   description:
-  //     'Local-first semantic search across your photography library.',
-  //   stack: ['RAG', 'Python', 'ChromaDB', 'OpenCLIP', 'LangChain'],
-  //   link: 'https://github.com/anthonylu23/photo_search',
-  // },
   {
     title: 'Personal Website',
     description:
@@ -142,7 +128,7 @@ export const experiences: Experience[] = [
     role: 'Software Engineer Intern',
     period: 'May 2026 – Present',
     location: 'Boston, MA',
-    description: 'Developing agentic data tooling on the Data Platforms team.',
+    description: 'Developing agentic data tooling.',
     link: 'https://www.intersystems.com',
   },
   {
@@ -159,7 +145,7 @@ export const experiences: Experience[] = [
     period: 'Jan 2026 – May 2026',
     location: 'New York, NY',
     description:
-      'ETL pipelines normalizing 35k+ donor records with FastAPI orchestration for the Reproductive Health Access Project. Data analysis delivering business insights.',
+      'ETL pipelines processing donor records at scale with FastAPI orchestration for the Reproductive Health Access Project.',
     descriptionLinks: [
       { text: 'Reproductive Health Access Project', href: 'https://www.reproductiveaccess.org/' },
     ],
