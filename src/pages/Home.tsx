@@ -114,8 +114,9 @@ const Home = () => {
               Anthony Lu
             </h1>
             <p className="text-lg text-textSecondary">
-              I like building software and training neural nets. Feel free to
-              reach out anytime!
+              Undergrad at New York University studying Computer Science, Data
+              Science, and Math. Currently building agents for low-resource
+              domains at InterSystems.
             </p>
           </div>
           <div className="animate-fade-up-2 flex items-center gap-5">
@@ -191,20 +192,21 @@ const Home = () => {
           </h2>
           <div className="space-y-6 text-base leading-relaxed text-textSecondary">
             <p>
-              Undergrad at New York University studying Computer Science, Data
-              Science, and Math. Currently interning on the Data Platforms team
-              at InterSystems.
+              I&apos;m always looking to learn new things and explore different
+              ideas. These days, I've been exploring reinforcement learning, AI
+              benchmarking, synthetic data techniques, and CUDA.
             </p>
             <p>
-              I&apos;m interested in deep learning and building tools for data
-              tasks. In my free time, I like to take{" "}
+              I'm originally from Austin, and currently based in New York City.
+              In my free time, I take{" "}
               <Link
                 to="/photography"
                 className="underline underline-offset-2 transition hover:text-accent"
               >
                 pictures
               </Link>{" "}
-              (mostly analog), and play classical violin.
+              (mostly analog), play classical violin, and watch racing and
+              basketball.
             </p>
           </div>
         </div>
@@ -261,7 +263,7 @@ const Home = () => {
                   </div>
                   <div className="mt-0.5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
                     <p className="text-sm text-textSecondary">{exp.role}</p>
-                    <p className="text-xs uppercase tracking-wide text-textSecondary/70">
+                    <p className="text-xs tracking-wide text-textSecondary/70">
                       {exp.period}
                     </p>
                   </div>
@@ -319,7 +321,7 @@ const Home = () => {
                           <p className="text-sm text-textSecondary">
                             {peekExp.role}
                           </p>
-                          <p className="text-xs uppercase tracking-wide text-textSecondary/70">
+                          <p className="text-xs tracking-wide text-textSecondary/70">
                             {peekExp.period}
                           </p>
                         </div>
@@ -387,7 +389,7 @@ const Home = () => {
                                     <p className="text-sm text-textSecondary">
                                       {exp.role}
                                     </p>
-                                    <p className="text-xs uppercase tracking-wide text-textSecondary/70">
+                                    <p className="text-xs tracking-wide text-textSecondary/70">
                                       {exp.period}
                                     </p>
                                   </div>
@@ -437,7 +439,7 @@ const Home = () => {
                 ref={(el) => {
                   projectRowsRef.current[i] = el;
                 }}
-                className={`relative flex flex-col gap-2 py-4 opacity-0 translate-y-4 transition-all duration-500 ease-out${i > 0 ? " border-t border-border/30" : ""}`}
+                className={`relative flex flex-col gap-2 opacity-0 translate-y-4 transition-all duration-500 ease-out ${i > 0 ? "py-4 border-t border-border/30" : "pb-4"}`}
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 <ProjectRow project={project} />

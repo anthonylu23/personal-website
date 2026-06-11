@@ -39,16 +39,6 @@ const ProjectRow = ({ project }: { project: Project }) => {
       <p className="text-sm leading-relaxed text-textSecondary">
         {project.description}
       </p>
-      <div className="flex flex-wrap gap-1.5">
-        {project.stack.map((tech) => (
-          <span
-            key={tech}
-            className="inline-flex rounded-md border border-border/30 px-2 py-0.5 text-xs text-textSecondary/70"
-          >
-            {tech}
-          </span>
-        ))}
-      </div>
     </>
   );
 };
