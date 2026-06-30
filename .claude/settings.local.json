@@ -17,7 +17,8 @@
       "Bash(gh pr create:*)",
       "Bash(git add:*)",
       "Bash(git stash:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(pdftotext -layout \"/Users/anthony/Documents/Resumes-Latest/SWE/AnthonyLu-Resume.pdf\" -)"
     ]
   }
 }

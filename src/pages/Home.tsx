@@ -114,9 +114,8 @@ const Home = () => {
               Anthony Lu
             </h1>
             <p className="text-lg text-textSecondary">
-              Undergrad at New York University studying Computer Science, Data
-              Science, and Math. Currently building agents for low-resource
-              domains at InterSystems.
+              Undergrad at NYU studying Computer Science, Data Science, and
+              Math. Aspiring engineer and developer.
             </p>
           </div>
           <div className="animate-fade-up-2 flex items-center gap-5">
