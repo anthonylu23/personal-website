@@ -126,9 +126,9 @@ export const experiences: Experience[] = [
   {
     company: 'InterSystems',
     role: 'Software Engineer Intern',
-    period: 'May 2026 – Present',
+    period: 'May 2026 – August 2026',
     location: 'Boston, MA',
-    description: 'Developing agentic data tooling.',
+    description: 'Developed agent harnesses and eval pipelines for data transformation tooling. Data Platforms and Dev Tools Team',
     link: 'https://www.intersystems.com',
   },
   {

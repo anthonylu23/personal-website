@@ -192,8 +192,7 @@ const Home = () => {
           <div className="space-y-6 text-base leading-relaxed text-textSecondary">
             <p>
               I&apos;m always looking to learn new things and explore different
-              ideas. These days, I've been exploring reinforcement learning, AI
-              benchmarking, synthetic data techniques, and CUDA.
+              ideas. These days, I've been exploring reinforcement learning, systems programmming, and CUDA.
             </p>
             <p>
               I'm originally from Austin, and currently based in New York City.
