@@ -45,6 +45,15 @@ export type ContactMethod = {
 
 export const projects: Project[] = [
   {
+    title: 'hLLM',
+    description:
+      'Distributed LLM inference runtime that splits models across Apple Silicon and NVIDIA GPUs.',
+    stack: ['C++', 'Python', 'MLX', 'CUDA', 'gRPC'],
+    links: [
+      { type: 'github', href: 'https://github.com/anthonylu23/hLLM' },
+    ],
+  },
+  {
     title: 'HyperZero',
     description:
       'AlphaZero-style RL agent for N-dimensional Connect-K gameplay. Trained with consumer-grade hardware.',
@@ -124,6 +133,14 @@ export const projects: Project[] = [
 
 export const experiences: Experience[] = [
   {
+    company: 'NYU',
+    role: 'Undergraduate Researcher',
+    period: 'September 2026 – Present',
+    location: 'New York, NY',
+    description:
+      'Post-training multi-agent systems and exploring simulation-based RL environments. Advised by Prof. Sai Qian Zhang and Prof. Yuzhang Lin.',
+  },
+  {
     company: 'InterSystems',
     role: 'Software Engineer Intern',
     period: 'May 2026 – August 2026',
@@ -151,15 +168,16 @@ export const experiences: Experience[] = [
     ],
     link: 'https://www.biokind.org/',
   },
-  {
-    company: 'Pulse Foundry',
-    role: 'Software Engineer',
-    period: 'Dec 2025 – May 2026',
-    location: 'New York, NY',
-    description:
-      'Automated newsletter pipeline with semantic ranking, scheduled workers, and web scraping, serving 3k+ subscribers. React dashboard for review and pipeline configuration.',
-    link: 'https://pulsefoundry.ai/about',
-  },
+  // Hidden from the experience section; retained for easy restoration.
+  // {
+  //   company: 'Pulse Foundry',
+  //   role: 'Software Engineer',
+  //   period: 'Dec 2025 – May 2026',
+  //   location: 'New York, NY',
+  //   description:
+  //     'Automated newsletter pipeline with semantic ranking, scheduled workers, and web scraping, serving 3k+ subscribers. React dashboard for review and pipeline configuration.',
+  //   link: 'https://pulsefoundry.ai/about',
+  // },
 ]
 
 export const skills: SkillGroup[] = [
