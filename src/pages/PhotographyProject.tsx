@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { gallery } from "../data/gallery";
+import NotFound from "./NotFound";
 
 const PhotographyProject = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,19 +15,7 @@ const PhotographyProject = () => {
   }, [id]);
 
   if (!project) {
-    return (
-      <main className="min-h-screen bg-base px-6 py-20">
-        <Link
-          to="/photography"
-          className="text-xs uppercase tracking-[0.3em] text-textPrimary/80 hover:text-accent"
-        >
-          Back
-        </Link>
-        <p className="mt-10 text-lg text-textPrimary/80">
-          Project not found.
-        </p>
-      </main>
-    );
+    return <NotFound />;
   }
 
   return (

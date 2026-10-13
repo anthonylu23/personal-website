@@ -1,8 +1,10 @@
 import { lazy, Suspense, useEffect } from 'react'
-import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom'
+import { BrowserRouter, matchPath, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import { SpeedInsights } from '@vercel/speed-insights/react'
+import ErrorBoundary from './components/ErrorBoundary'
 import GlassNavbar from './components/GlassNavbar'
 import { BLOG_ENABLED } from './config/features'
+import { gallery } from './data/gallery'
 import About from './pages/About'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
@@ -21,7 +23,10 @@ const RouteFallback = () => (
 
 const Layout = () => {
   const location = useLocation()
-  const hideNavbar = location.pathname.startsWith('/photography/')
+  // Photo project pages have their own back nav; unknown ids fall through to
+  // the not-found view, which keeps the navbar so visitors aren't stranded.
+  const photoProjectId = matchPath('/photography/:id', location.pathname)?.params.id
+  const hideNavbar = gallery.some((item) => item.id === photoProjectId)
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -30,12 +35,9 @@ const Layout = () => {
   return (
     <div className="min-h-screen bg-base">
       {!hideNavbar && <GlassNavbar />}
-      <Outlet />
-      <footer className="px-4 pb-6 pt-4 lg:px-0">
-        <div className="mx-auto max-w-4xl">
-          <p className="text-xs text-textSecondary/50">&copy; {new Date().getFullYear()} Anthony Lu</p>
-        </div>
-      </footer>
+      <ErrorBoundary resetKey={location.pathname}>
+        <Outlet />
+      </ErrorBoundary>
     </div>
   )
 }
