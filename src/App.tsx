@@ -12,6 +12,7 @@ import Projects from './pages/Projects'
 
 const Photography = lazy(() => import('./pages/Photography'))
 const PhotographyProject = lazy(() => import('./pages/PhotographyProject'))
+const Stack = lazy(() => import('./pages/Stack'))
 const Blog = lazy(() => import('./pages/Blog'))
 const BlogPost = lazy(() => import('./pages/BlogPost'))
 
@@ -50,6 +51,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
+          <Route
+            path="/stack"
+            element={<Suspense fallback={<RouteFallback />}><Stack /></Suspense>}
+          />
           <Route
             path="/photography"
             element={<Suspense fallback={<RouteFallback />}><Photography /></Suspense>}

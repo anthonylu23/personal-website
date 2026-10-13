@@ -5,7 +5,8 @@ The site navbar is `src/components/GlassNavbar.tsx`. It is rendered by the share
 (`/photography/:id`), which have their own back navigation.
 
 Nav items are defined in `navItems` in `src/components/Navbar.tsx`:
-About (`/about`), Projects (`/projects`), and Photography (`/photography`).
+About (`/about`), Projects (`/projects`), Stack (`/stack`), and Photography
+(`/photography`).
 Writing (`/blog`) appears only when `BLOG_ENABLED` and `WRITING_NAV_VISIBLE`
 are both true in `src/config/features.ts`.
 
