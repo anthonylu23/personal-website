@@ -1,0 +1,56 @@
+---
+import type { Experience } from '../data/content'
+import { splitDescription } from '../lib/description'
+
+type Props = {
+  exp: Experience
+  /** Fills the timeline dot (the current role). */
+  current?: boolean
+}
+
+const { exp, current = false } = Astro.props
+const href = exp.link
+const isExternal = Boolean(href?.startsWith('http'))
+const parts = splitDescription(exp.description, exp.descriptionLinks)
+---
+
+<span
+  class:list={[
+    'absolute -left-[29px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-accent',
+    current ? 'bg-accent' : 'bg-base',
+  ]}
+></span>
+<div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+  {
+    href ? (
+      <a
+        href={href}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noreferrer' : undefined}
+        class="font-medium text-textPrimary/90 transition hover:text-accent"
+      >
+        {exp.company}
+      </a>
+    ) : (
+      <p class="font-medium text-textPrimary/90">{exp.company}</p>
+    )
+  }
+  <p class="text-xs text-textSecondary/70">{exp.location}</p>
+</div>
+<div class="mt-0.5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+  <p class="text-sm text-textSecondary">{exp.role}</p>
+  <p class="text-xs tracking-wide text-textSecondary/70">{exp.period}</p>
+</div>
+<p class="mt-1.5 text-sm leading-relaxed text-textSecondary">
+  {
+    parts.map((part) =>
+      part.href ? (
+        // Keep the text flush against the tags: this link sits inside running
+        // text, and any whitespace here would be underlined.
+        <a href={part.href} target="_blank" rel="noreferrer" class="underline underline-offset-2 transition hover:text-accent">{part.text}</a>
+      ) : (
+        part.text
+      ),
+    )
+  }
+</p>

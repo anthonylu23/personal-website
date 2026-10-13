@@ -1,0 +1,51 @@
+---
+// The blog index (`/blog`). It's a rest route rather than `index.astro` so
+// that BLOG_ENABLED can drop the page from the build entirely; with the flag
+// off, `/blog` falls through to the 404 page.
+import type { GetStaticPaths } from 'astro'
+import SectionHeading from '../../components/SectionHeading.astro'
+import { BLOG_ENABLED } from '../../config/features'
+import { getPublishedPosts } from '../../lib/blog'
+import { formatCalendarDate } from '../../lib/dates'
+import Base from '../../layouts/Base.astro'
+
+export const getStaticPaths = (() =>
+  BLOG_ENABLED ? [{ params: { index: undefined } }] : []) satisfies GetStaticPaths
+
+const posts = (await getPublishedPosts()).filter((post) => post.id !== 'current-stack')
+---
+
+<Base>
+  <main
+    class="mx-auto flex max-w-4xl flex-col gap-28 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0"
+  >
+    <section class="scroll-mt-24">
+      <SectionHeading title="Writing" />
+      <div class="border-t border-border/40">
+        <div class="divide-y divide-border/30">
+          {
+            posts.map((post) => (
+              <div class="flex flex-col gap-2 py-4 md:flex-row md:items-center md:justify-between">
+                <a
+                  href={`/blog/${post.id}`}
+                  class="text-base font-medium text-textPrimary/90 transition hover:text-accent"
+                >
+                  {post.data.title}
+                </a>
+                <div class="text-sm leading-relaxed text-textSecondary md:text-right">
+                  <p class="text-xs text-textSecondary/70">{formatCalendarDate(post.data.date)}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        {posts.length === 0 && <p class="py-8 text-center text-sm text-textSecondary/60">No posts yet. Check back soon!</p>}
+        <div class="flex items-center justify-center gap-4 py-4">
+          <span class="h-px w-32 bg-border/60 sm:w-56 md:w-80"></span>
+          <span class="h-1 w-1 rounded-full bg-border/60"></span>
+          <span class="h-px w-32 bg-border/60 sm:w-56 md:w-80"></span>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>

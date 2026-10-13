@@ -1,0 +1,44 @@
+---
+import { gallery } from '../../data/gallery'
+import Base from '../../layouts/Base.astro'
+---
+
+<Base>
+  <main class="min-h-screen">
+    <section class="relative z-10 bg-base px-4 pb-24 pt-[var(--nav-height)] md:px-8">
+      <div class="mx-auto flex max-w-4xl flex-col gap-16">
+        {
+          gallery.map((item, index) => (
+            <article
+              class:list={[
+                'animate-rise-in flex w-full items-center',
+                index === 0 ? 'min-h-[calc(100vh-var(--nav-height))]' : 'min-h-[70vh] md:min-h-[85vh]',
+              ]}
+              style={`animation-delay: ${Math.min(index * 80, 240)}ms`}
+            >
+              <div class="relative flex w-full items-center justify-center">
+                <div class="group relative inline-flex max-w-full overflow-hidden bg-border/20">
+                  <img
+                    src={item.image}
+                    alt={`${item.title} cover`}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    class="animate-settle-in max-h-[85vh] w-auto max-w-full object-contain"
+                  />
+                  <div class="pointer-events-none absolute inset-0 z-10 bg-black/55 opacity-0 transition-opacity duration-500 group-focus-within:opacity-100 group-hover:opacity-100" />
+                  <a
+                    href={`/photography/${item.id}`}
+                    class="nav-underline pointer-events-auto absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer font-serif text-2xl tracking-tight text-white opacity-0 mix-blend-exclusion drop-shadow-[0_10px_30px_rgba(0,0,0,0.85)] transition-opacity duration-500 group-focus-within:opacity-100 group-hover:opacity-100 md:text-4xl"
+                    aria-label={`${item.title} gallery`}
+                  >
+                    {item.title}
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Base>

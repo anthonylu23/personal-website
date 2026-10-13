@@ -1,0 +1,144 @@
+---
+import { ArrowDownRight, ChevronLeft, ChevronRight } from '@lucide/astro'
+import GitHubActivity from '../components/GitHubActivity.astro'
+import { Github } from '../components/icons/brand'
+import { contactMethods } from '../data/content'
+import Base from '../layouts/Base.astro'
+
+const GITHUB_USERNAME = 'anthonylu23'
+---
+
+<Base>
+  <main
+    class="mx-auto flex max-w-4xl flex-col gap-10 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0"
+  >
+    <section id="home" class="flex scroll-mt-24 flex-col justify-center">
+      <div class="space-y-8">
+        <div class="animate-fade-up-1 space-y-6">
+          <h1 class="text-3xl font-semibold text-textPrimary text-balance md:text-4xl">Hi, I'm Anthony</h1>
+          <p class="text-base text-textSecondary">
+            Undergrad at NYU studying Computer Science, Data Science, and Math. Aspiring engineer and developer.
+          </p>
+          <GitHubActivity username={GITHUB_USERNAME} />
+          <div class="space-y-3 text-base text-textSecondary">
+            <p>Right now, I'm focused on:</p>
+            <ul class="list-disc space-y-1 pl-6 marker:text-textSecondary/50">
+              <li>
+                <span class="text-textPrimary/90">MLSys:</span> Inference projects, CUDA, GPUs.
+              </li>
+              <li>
+                <span class="text-textPrimary/90">Post-training:</span> RL methods, environments, evals.
+              </li>
+              <li>Reading about AI safety, alignment, and scaling.</li>
+            </ul>
+          </div>
+        </div>
+        <div data-scroller class="animate-fade-up-2 flex items-center gap-5">
+          <a
+            href={`${import.meta.env.BASE_URL}Resume_AnthonyLu_NYC.pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="focus-ring group inline-flex shrink-0 items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-textInverse shadow-glow transition hover:bg-accentHover"
+          >
+            Resume
+            <ArrowDownRight
+              class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:translate-y-0.5"
+            />
+          </a>
+          <button
+            type="button"
+            data-scroll-left
+            class="focus-ring pointer-events-none shrink-0 rounded text-textSecondary/50 opacity-0 transition-opacity duration-300 hover:text-accent"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft class="h-4 w-4" />
+          </button>
+          <div class="relative min-w-0">
+            <div
+              data-fade-left
+              class="pointer-events-none absolute inset-y-0 left-0 z-10 w-6 bg-gradient-to-r from-base to-transparent opacity-0 transition-opacity duration-300"
+            >
+            </div>
+            <div
+              data-fade-right
+              class="pointer-events-none absolute inset-y-0 right-0 z-10 w-6 bg-gradient-to-l from-base to-transparent opacity-0 transition-opacity duration-300"
+            >
+            </div>
+            <div data-scroll-track class="flex items-center gap-5 overflow-x-auto scrollbar-hide">
+              <a
+                href={`https://github.com/${GITHUB_USERNAME}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="focus-ring shrink-0 rounded-full text-textSecondary transition hover:text-accent"
+                aria-label="GitHub"
+              >
+                <Github class="h-6 w-6" />
+              </a>
+              {
+                contactMethods.map((method) => {
+                  const isExternal = method.href.startsWith('http')
+                  const Icon = method.icon
+                  return (
+                    <a
+                      href={method.href}
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noreferrer' : undefined}
+                      class="focus-ring shrink-0 rounded-full text-textSecondary transition hover:text-accent"
+                      aria-label={method.label}
+                    >
+                      <Icon class="h-6 w-6" />
+                    </a>
+                  )
+                })
+              }
+            </div>
+          </div>
+          <button
+            type="button"
+            data-scroll-right
+            class="focus-ring pointer-events-none shrink-0 rounded text-textSecondary/50 opacity-0 transition-opacity duration-300 hover:text-accent"
+            aria-label="Scroll right"
+          >
+            <ChevronRight class="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<script>
+  // Contact icons scroll horizontally on narrow screens; arrows and edge fades
+  // appear only in the directions that have more to show.
+  const root = document.querySelector<HTMLElement>('[data-scroller]')
+  const track = root?.querySelector<HTMLElement>('[data-scroll-track]')
+
+  if (root && track) {
+    const left = root.querySelector<HTMLElement>('[data-scroll-left]')
+    const right = root.querySelector<HTMLElement>('[data-scroll-right]')
+    const fadeLeft = root.querySelector<HTMLElement>('[data-fade-left]')
+    const fadeRight = root.querySelector<HTMLElement>('[data-fade-right]')
+
+    const show = (el: HTMLElement | null, visible: boolean, interactive = false) => {
+      if (!el) return
+      el.classList.toggle('opacity-100', visible)
+      el.classList.toggle('opacity-0', !visible)
+      if (interactive) el.classList.toggle('pointer-events-none', !visible)
+    }
+
+    const update = () => {
+      const canLeft = track.scrollLeft > 0
+      const canRight = track.scrollLeft + track.clientWidth < track.scrollWidth - 1
+      show(left, canLeft, true)
+      show(right, canRight, true)
+      show(fadeLeft, canLeft)
+      show(fadeRight, canRight)
+    }
+
+    update()
+    new ResizeObserver(update).observe(track)
+    track.addEventListener('scroll', update, { passive: true })
+    left?.addEventListener('click', () => track.scrollBy({ left: -80, behavior: 'smooth' }))
+    right?.addEventListener('click', () => track.scrollBy({ left: 80, behavior: 'smooth' }))
+  }
+</script>

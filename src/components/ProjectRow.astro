@@ -1,0 +1,42 @@
+---
+import { ExternalLink, FileText } from '@lucide/astro'
+import type { IconComponent, Project, ProjectLinkType } from '../data/content'
+import { Github } from './icons/brand'
+
+type Props = { project: Project }
+
+const LINK_META: Record<ProjectLinkType, { icon: IconComponent; label: string }> = {
+  github: { icon: Github, label: 'GitHub' },
+  demo: { icon: ExternalLink, label: 'Demo' },
+  paper: { icon: FileText, label: 'Paper' },
+}
+
+const { project } = Astro.props
+const links = project.links ?? []
+---
+
+<div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+  <span class="font-medium text-textPrimary/90">{project.title}</span>
+  {
+    links.length > 0 && (
+      <div class="flex flex-wrap gap-2">
+        {links.map((link) => {
+          const meta = LINK_META[link.type]
+          const Icon = meta.icon
+          return (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+              class="focus-ring group inline-flex items-center gap-1.5 rounded-full border border-border/40 px-2.5 py-1 text-xs text-textSecondary transition hover:border-accent/40 hover:text-accent"
+            >
+              <Icon class="h-3.5 w-3.5 opacity-70 transition group-hover:opacity-100" />
+              {link.label ?? meta.label}
+            </a>
+          )
+        })}
+      </div>
+    )
+  }
+</div>
+<p class="text-sm leading-relaxed text-textSecondary">{project.description}</p>

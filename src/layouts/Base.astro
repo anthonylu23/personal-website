@@ -1,0 +1,85 @@
+---
+import SpeedInsights from '@vercel/speed-insights/astro'
+import Navbar from '../components/Navbar.astro'
+import '../styles/global.css'
+
+type Props = {
+  title?: string
+  description?: string
+  /** Photo project pages have their own back link instead of the navbar. */
+  showNav?: boolean
+}
+
+const {
+  title = 'luanthony.xyz',
+  description = 'Portfolio of Anthony, a product-minded software engineer and photographer building fast, elegant digital experiences.',
+  showNav = true,
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Anthony, software engineer, photographer, portfolio, astro, tailwind" />
+    <meta name="author" content="Anthony" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://anthony.dev" />
+    <meta property="og:title" content="Anthony — Personal Website" />
+    <meta
+      property="og:description"
+      content="Crafting performant web products and cinematic visuals. Explore featured projects, photography, and ways to collaborate."
+    />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=1200" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Anthony — Product Engineer & Photographer" />
+    <meta
+      name="twitter:description"
+      content="Product-minded engineer focused on fast, elegant web experiences and photography."
+    />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=1200" />
+    <meta name="theme-color" content="#030712" />
+    <script is:inline>
+      // Runs before first paint so the stored theme never flashes.
+      (() => {
+        try {
+          const stored = localStorage.getItem('theme')
+          const theme = stored === 'light' || stored === 'dark' ? stored : 'dark'
+          document.documentElement.dataset.theme = theme
+          document.documentElement.style.colorScheme = theme
+        } catch {
+          document.documentElement.dataset.theme = 'dark'
+          document.documentElement.style.colorScheme = 'dark'
+        }
+      })()
+    </script>
+    <noscript>
+      <style>
+        [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        [data-github-activity] {
+          display: none !important;
+        }
+      </style>
+    </noscript>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div class="min-h-screen bg-base">
+      {showNav && <Navbar />}
+      <slot />
+    </div>
+    <SpeedInsights />
+  </body>
+</html>

@@ -8,8 +8,8 @@ each with a small monochrome icon.
 | File | Purpose |
 | --- | --- |
 | `src/data/stack.ts` | Groups, items, and each item's icon |
-| `src/components/StackIcon.tsx` | Renders an item's icon in `currentColor` |
-| `src/pages/Stack.tsx` | Page layout (group label left, two-column list right) |
+| `src/components/StackIcon.astro` | Renders an item's icon in `currentColor` |
+| `src/pages/stack.astro` | Page layout (group label left, two-column list right) |
 | `src/data/stack.test.ts` | Checks labels/items are unique and every item has an icon |
 
 ## Icons
@@ -38,19 +38,17 @@ is copied from `simple-icons@13.21.0` (CC0) into `openaiIcon` in
 Icons are `text-textSecondary/60` and turn the accent color on row hover; the item
 name brightens to `text-textPrimary`.
 
-## Bundle size
+## Page size
 
-The logos used total about 57 kB (25 kB gzipped). Each Simple Icons object also
-includes its full SVG string and metadata. To keep that out of the main bundle,
-the stack data lives in its own module and the Stack page is lazy-loaded in
-`src/App.tsx`, so the logos download only when someone opens `/stack`.
+Icons render to inline SVG at build time, so no icon data or JavaScript ships to
+the browser. Only the paths for the icons in use end up in `stack.html`.
 
 ## Adding an item
 
 1. Find the icon at simpleicons.org; the export is `si` + the slug, e.g. `siKubernetes`.
 2. Import it in `src/data/stack.ts` and add `{ name, icon }` to the group.
 3. If there's no brand logo, add a custom `PathIcon` (e.g. from an older Simple
-   Icons release) or use a Lucide icon from `lucide-react`.
+   Icons release) or use a Lucide icon from `@lucide/astro`.
 
 ## Next steps
 

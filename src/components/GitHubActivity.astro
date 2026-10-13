@@ -1,0 +1,71 @@
+---
+// Past-year GitHub contribution grid. The page ships a same-sized pulsing
+// placeholder; the script below fetches the data in the browser and swaps the
+// cells in. If the request fails, the whole card is removed.
+type Props = { username: string }
+
+const { username } = Astro.props
+
+// Placeholder grid sized like a year so nothing shifts when data arrives.
+const PLACEHOLDER_WEEKS = 53
+const placeholderCells = Array.from({ length: PLACEHOLDER_WEEKS * 7 })
+---
+
+<div data-github-activity data-username={username} class="rounded-xl border border-textSecondary/35 p-3">
+  <div data-scroll class="overflow-x-auto scrollbar-hide">
+    <div
+      data-grid
+      role="img"
+      aria-label="Loading GitHub contributions"
+      class="grid grid-flow-col gap-[3px]"
+      style={`grid-template-rows: repeat(7, auto); grid-template-columns: repeat(${PLACEHOLDER_WEEKS}, minmax(10px, 1fr));`}
+    >
+      {placeholderCells.map(() => <div class="aspect-square animate-pulse rounded-[2px] bg-textSecondary/10" />)}
+    </div>
+  </div>
+</div>
+
+<script>
+  import { describeDay, fetchContributions, toWeeks } from '../lib/contributions'
+  import type { ContributionLevel } from '../lib/contributions'
+
+  const LEVEL_CLASSES: Record<ContributionLevel, string> = {
+    0: 'bg-textSecondary/10',
+    1: 'bg-accent/30',
+    2: 'bg-accent/55',
+    3: 'bg-accent/80',
+    4: 'bg-accent',
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-github-activity]').forEach((card) => {
+    const username = card.dataset.username
+    const scroll = card.querySelector<HTMLElement>('[data-scroll]')
+    const grid = card.querySelector<HTMLElement>('[data-grid]')
+    if (!username || !scroll || !grid) return
+
+    fetchContributions(username)
+      .then((calendar) => {
+        const weeks = toWeeks(calendar.days)
+        const cells = weeks.flatMap((week) =>
+          week.map((day) => {
+            const cell = document.createElement('div')
+            cell.className = 'aspect-square rounded-[2px]'
+            if (day) {
+              cell.classList.add(LEVEL_CLASSES[day.level])
+              cell.title = describeDay(day)
+            }
+            return cell
+          }),
+        )
+        grid.style.gridTemplateColumns = `repeat(${weeks.length}, minmax(10px, 1fr))`
+        grid.replaceChildren(...cells)
+        grid.setAttribute(
+          'aria-label',
+          `${calendar.total.toLocaleString('en-US')} GitHub contributions in the last year`,
+        )
+        // On narrow screens the grid scrolls horizontally; start at the most recent week.
+        scroll.scrollLeft = scroll.scrollWidth
+      })
+      .catch(() => card.remove())
+  })
+</script>

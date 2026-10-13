@@ -1,0 +1,24 @@
+---
+// Monochrome (currentColor) icon for a stack item: a brand logo path or a
+// Lucide fallback.
+import type { PathIcon, StackIcon } from '../data/stack'
+
+type Props = {
+  icon: StackIcon
+  class?: string
+}
+
+const { icon, class: className } = Astro.props
+const isPathIcon = (value: StackIcon): value is PathIcon => 'path' in value
+const Icon = isPathIcon(icon) ? null : icon
+---
+
+{
+  isPathIcon(icon) ? (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" class={className}>
+      <path d={icon.path} />
+    </svg>
+  ) : (
+    Icon && <Icon aria-hidden="true" stroke-width={1.75} class={className} />
+  )
+}

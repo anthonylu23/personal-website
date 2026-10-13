@@ -1,0 +1,119 @@
+---
+import { ChevronDown, ChevronUp } from '@lucide/astro'
+import ExperienceRow from '../components/ExperienceRow.astro'
+import { experiences } from '../data/content'
+import Base from '../layouts/Base.astro'
+
+const COLLAPSED_EXP = 2
+const visible = experiences.slice(0, COLLAPSED_EXP)
+const peek = experiences[COLLAPSED_EXP]
+const hidden = experiences.slice(COLLAPSED_EXP + 1)
+---
+
+<Base>
+  <main
+    class="mx-auto flex max-w-4xl flex-col gap-10 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0"
+  >
+    <section id="about" class="animate-fade-up-1 scroll-mt-24">
+      <div class="flex flex-col gap-6 md:flex-row md:gap-24">
+        <h2 class="text-lg font-semibold text-textPrimary md:w-40 md:shrink-0">About</h2>
+        <div class="space-y-6 text-base leading-relaxed text-textSecondary">
+          <p>
+            I'm originally from Austin, and currently based in New York City. In my free time, I take{' '}
+            <a href="/photography" class="underline underline-offset-2 transition hover:text-accent">pictures</a>{' '}
+            (mostly analog), play classical violin, and watch racing and basketball.
+          </p>
+          <p>
+            I'm always looking to learn new things and explore different ideas. These days, I've been exploring
+            systems programming and researching multi-agent post-training methods.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="mx-auto w-[45%] border-textSecondary/30" />
+
+    <section id="experience" class="scroll-mt-24">
+      <div class="flex flex-col gap-6 md:flex-row md:gap-24">
+        <h2
+          data-reveal
+          class="translate-y-4 text-lg font-semibold text-textPrimary opacity-0 transition-all duration-500 ease-out md:w-40 md:shrink-0"
+        >
+          Experience
+        </h2>
+        <div data-expandable data-expanded="false" class="group relative w-full pl-6">
+          <span
+            data-reveal
+            class="pointer-events-none absolute bottom-0 left-0 top-[11px] w-px bg-gradient-to-b from-border/40 via-border/40 to-transparent opacity-0 transition-opacity duration-500 ease-out"
+          ></span>
+          {
+            visible.map((exp, i) => (
+              <div
+                data-reveal
+                class="relative translate-y-4 pb-8 opacity-0 transition-all duration-500 ease-out"
+                style={`transition-delay: ${i * 80}ms`}
+              >
+                <ExperienceRow exp={exp} current={i === 0} />
+              </div>
+            ))
+          }
+          {
+            peek && (
+              <>
+                {/* Peek item: clipped to show company + role only */}
+                <div class="relative -ml-8 max-h-[44px] overflow-hidden pl-8 transition-[max-height] duration-500 ease-out group-data-[expanded=true]:max-h-[300px]">
+                  <div
+                    data-reveal
+                    class="relative translate-y-4 pb-8 opacity-0 transition-all duration-500 ease-out"
+                    style={`transition-delay: ${COLLAPSED_EXP * 80}ms`}
+                  >
+                    <ExperienceRow exp={peek} />
+                  </div>
+                  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-b from-transparent to-base opacity-100 transition-opacity duration-300 group-data-[expanded=true]:opacity-0" />
+                </div>
+
+                {/* Remaining hidden items */}
+                {hidden.length > 0 && (
+                  <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out group-data-[expanded=true]:grid-rows-[1fr]">
+                    <div data-expand-hidden inert class="-ml-8 min-h-0 overflow-hidden pl-8">
+                      {hidden.map((exp, i) => (
+                        <div
+                          class="relative translate-y-4 pb-8 opacity-0 transition-all duration-500 ease-out last:pb-0 group-data-[expanded=true]:translate-y-0 group-data-[expanded=true]:opacity-100 group-data-[expanded=true]:[transition-delay:var(--delay)]"
+                          style={`--delay: ${(i + 1) * 80}ms`}
+                        >
+                          <ExperienceRow exp={exp} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <button
+                  type="button"
+                  data-expand-toggle
+                  aria-expanded="false"
+                  class="focus-ring mt-2 flex items-center gap-1 rounded text-sm text-textSecondary/60 transition hover:text-accent"
+                >
+                  <span class="inline-flex items-center gap-1 group-data-[expanded=true]:hidden">
+                    {experiences.length - COLLAPSED_EXP} more <ChevronDown class="h-3.5 w-3.5" />
+                  </span>
+                  <span class="hidden items-center gap-1 group-data-[expanded=true]:inline-flex">
+                    Show less <ChevronUp class="h-3.5 w-3.5" />
+                  </span>
+                </button>
+              </>
+            )
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<script>
+  import { initExpandables } from '../scripts/expand'
+  import { initReveal } from '../scripts/reveal'
+
+  initReveal()
+  initExpandables()
+</script>

@@ -6,10 +6,10 @@ A past-year GitHub contribution grid on the home page, below the heading and int
 
 | File | Purpose |
 | --- | --- |
-| `src/components/GitHubActivity.tsx` | The grid UI (card, cells, loading and error states) |
+| `src/components/GitHubActivity.astro` | The card and placeholder grid, plus the script that fetches data and fills in the cells |
 | `src/lib/contributions.ts` | Fetching, response validation, week grouping, tooltip text |
 | `src/lib/contributions.test.ts` | Vitest tests for the logic above |
-| `src/pages/Home.tsx` | Renders `<GitHubActivity username={GITHUB_USERNAME} />` |
+| `src/pages/index.astro` | Renders `<GitHubActivity username={GITHUB_USERNAME} />` |
 
 ## Data source
 
@@ -19,8 +19,8 @@ It's a free, public third-party service that scrapes GitHub's contribution graph
 so no token or server code is needed. The response is validated in
 `parseContributionsResponse`; anything unexpected is treated as an error.
 
-The request is cached in memory per username, so navigating away from and back to
-Home doesn't refetch. A failed request isn't cached, so the next mount retries.
+The site is a multi-page app, so each visit to Home fetches once. The in-memory
+cache in `fetchContributions` only dedupes requests within a single page load.
 
 ## Behavior
 
@@ -35,14 +35,16 @@ Home doesn't refetch. A failed request isn't cached, so the next mount retries.
   colors follow the light/dark theme.
 - **Tooltips:** each cell has a native `title`, e.g. "3 contributions on Oct 12, 2025".
   The grid has an `aria-label` with the yearly total.
-- **Loading:** a pulsing placeholder grid of the same size, to avoid layout shift.
-- **Errors:** if the request fails or the response is malformed, the component
-  renders nothing.
+- **Loading:** the HTML ships a pulsing placeholder grid of the same size, to
+  avoid layout shift.
+- **Errors:** if the request fails or the response is malformed, the script
+  removes the card.
+- **No JavaScript:** the card is hidden by a `<noscript>` style in `Base.astro`.
 
 ## Changing it
 
-- **Username:** `GITHUB_USERNAME` in `src/pages/Home.tsx` (also used for the GitHub icon link).
-- **Colors:** `LEVEL_CLASSES` in `src/components/GitHubActivity.tsx`.
+- **Username:** `GITHUB_USERNAME` in `src/pages/index.astro` (also used for the GitHub icon link).
+- **Colors:** `LEVEL_CLASSES` in the script in `src/components/GitHubActivity.astro`.
 - **Card border:** `border-textSecondary/35` (the `border` token is too low-contrast against the light-mode background).
 
 ## Next steps
@@ -51,4 +53,6 @@ Home doesn't refetch. A failed request isn't cached, so the next mount retries.
   Vercel function (`/api/github-contributions`) that queries GitHub's GraphQL
   `contributionsCollection` with a `GITHUB_TOKEN` and caches the result. The
   component and `toWeeks` wouldn't need to change.
+- Alternatively, fetch at build time and render the grid as static HTML. That
+  removes the client request but freezes the data until the next deploy.
 - Optional: month labels above the grid, or a caption with the yearly total.

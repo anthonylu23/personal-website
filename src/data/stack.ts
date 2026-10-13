@@ -1,5 +1,5 @@
-import type { LucideIcon } from 'lucide-react'
-import { Braces, Cloud, Database, Film } from 'lucide-react'
+import { Braces, Cloud, Database, Film } from '@lucide/astro'
+import type { IconComponent } from './content'
 import type { SimpleIcon } from 'simple-icons'
 import {
   siAngular,
@@ -43,7 +43,7 @@ import {
 export type PathIcon = Pick<SimpleIcon, 'title' | 'path'>
 
 /** Brand logo (Simple Icons or a custom path), or a Lucide icon where no logo exists. */
-export type StackIcon = PathIcon | LucideIcon
+export type StackIcon = PathIcon | IconComponent
 
 // Removed from current Simple Icons; path from simple-icons@13.21.0 (CC0-1.0).
 const openaiIcon: PathIcon = {
