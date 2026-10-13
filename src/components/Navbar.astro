@@ -1,0 +1,98 @@
+---
+import { Menu, Moon, Sun, X } from '@lucide/astro'
+import { BLOG_ENABLED, WRITING_NAV_VISIBLE } from '../config/features'
+
+type NavItem = { label: string; href: string }
+
+const navItems: NavItem[] = [
+  { label: 'About', href: '/about' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Stack', href: '/stack' },
+  ...(BLOG_ENABLED && WRITING_NAV_VISIBLE ? [{ label: 'Writing', href: '/blog' }] : []),
+  { label: 'Photography', href: '/photography' },
+]
+
+// No focus ring: keyboard focus is shown by the accent color on icon buttons
+// and the underline on text links.
+const iconButtonClass =
+  'inline-flex items-center justify-center rounded-full p-2 text-textPrimary transition hover:text-accent focus-visible:text-accent focus-visible:outline-none'
+---
+
+<header
+  data-navbar
+  class="fixed inset-x-0 top-0 z-50 bg-base"
+  style="padding-top: calc(1rem + env(safe-area-inset-top, 0px)); padding-left: calc(1rem + env(safe-area-inset-left, 0px)); padding-right: calc(1rem + env(safe-area-inset-right, 0px));"
+>
+  <div class="relative mx-auto w-full max-w-4xl">
+    <div class="flex h-14 w-full items-center gap-4">
+      <a
+        href="/"
+        class="nav-underline truncate rounded text-base font-semibold tracking-tight text-textPrimary focus-visible:outline-none"
+      >
+        luanthony.xyz
+      </a>
+      <div class="ml-auto hidden items-center gap-3 md:flex">
+        <nav class="flex items-center gap-6" aria-label="Main">
+          {
+            navItems.map((item) => (
+              <a
+                href={item.href}
+                class="nav-underline rounded text-sm font-medium text-textPrimary/80 focus-visible:outline-none"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+        <button type="button" class={iconButtonClass} data-theme-toggle aria-label="Toggle theme">
+          <Sun class="theme-icon-sun h-4 w-4" />
+          <Moon class="theme-icon-moon h-4 w-4" />
+        </button>
+      </div>
+      <div class="ml-auto flex items-center gap-2 md:hidden">
+        <button type="button" class={iconButtonClass} data-theme-toggle aria-label="Toggle theme">
+          <Sun class="theme-icon-sun h-4 w-4" />
+          <Moon class="theme-icon-moon h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          class:list={[iconButtonClass, 'group']}
+          data-menu-toggle
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          aria-label="Open navigation"
+        >
+          <Menu class="h-5 w-5 group-aria-expanded:hidden" />
+          <X class="hidden h-5 w-5 group-aria-expanded:block" />
+        </button>
+      </div>
+    </div>
+    <div
+      id="mobile-menu"
+      data-menu
+      hidden
+      class="absolute right-0 top-[calc(100%+8px)] z-10 w-fit rounded-2xl border border-border/20 bg-surface/80 px-1 py-1 backdrop-blur-lg md:hidden"
+    >
+      <nav class="flex flex-col" aria-label="Main">
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class="rounded-xl px-4 py-2.5 text-left text-sm font-medium text-textPrimary/80 transition hover:bg-surface/60 hover:text-accent focus-visible:bg-surface/60 focus-visible:text-accent focus-visible:outline-none"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  import { initNav } from '../scripts/nav'
+  import { initTheme } from '../scripts/theme'
+
+  initNav()
+  initTheme()
+</script>

@@ -1,0 +1,94 @@
+---
+import { ChevronDown, ChevronUp } from '@lucide/astro'
+import ProjectRow from '../components/ProjectRow.astro'
+import { projects } from '../data/content'
+import Base from '../layouts/Base.astro'
+
+const COLLAPSED_PROJ = 3
+const visible = projects.slice(0, COLLAPSED_PROJ)
+const peek = projects[COLLAPSED_PROJ]
+const hidden = projects.slice(COLLAPSED_PROJ + 1)
+---
+
+<Base>
+  <main
+    class="mx-auto flex max-w-4xl flex-col gap-10 px-4 pb-[calc(6rem+var(--safe-area-bottom,0px))] pt-[calc(8rem+var(--safe-area-top,0px))] lg:px-0"
+  >
+    <section id="projects" class="scroll-mt-24">
+      <div class="flex flex-col gap-6 md:flex-row md:gap-24">
+        <h2 class="animate-fade-up-1 text-lg font-semibold text-textPrimary md:w-40 md:shrink-0">Projects</h2>
+        <div data-expandable data-expanded="false" class="group w-full">
+          {
+            visible.map((project, i) => (
+              <div
+                data-reveal
+                class:list={[
+                  'relative flex translate-y-4 flex-col gap-2 opacity-0 transition-all duration-500 ease-out',
+                  i > 0 ? 'border-t border-border/30 py-4' : 'pb-4',
+                ]}
+                style={`transition-delay: ${i * 80}ms`}
+              >
+                <ProjectRow project={project} />
+              </div>
+            ))
+          }
+          {
+            peek && (
+              <>
+                {/* Peek item: clipped to show title only */}
+                <div class="relative max-h-[52px] overflow-hidden border-t border-border/30 transition-[max-height] duration-500 ease-out group-data-[expanded=true]:max-h-[360px]">
+                  <div
+                    data-reveal
+                    class="relative flex translate-y-4 flex-col gap-2 py-4 opacity-0 transition-all duration-500 ease-out"
+                    style={`transition-delay: ${COLLAPSED_PROJ * 80}ms`}
+                  >
+                    <ProjectRow project={peek} />
+                  </div>
+                  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-b from-transparent to-base opacity-100 transition-opacity duration-300 group-data-[expanded=true]:opacity-0" />
+                </div>
+
+                {/* Remaining hidden items */}
+                {hidden.length > 0 && (
+                  <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out group-data-[expanded=true]:grid-rows-[1fr]">
+                    <div data-expand-hidden inert class="min-h-0 overflow-hidden">
+                      {hidden.map((project, i) => (
+                        <div
+                          class="flex translate-y-4 flex-col gap-2 border-t border-border/30 py-4 opacity-0 transition-all duration-500 ease-out group-data-[expanded=true]:translate-y-0 group-data-[expanded=true]:opacity-100 group-data-[expanded=true]:[transition-delay:var(--delay)]"
+                          style={`--delay: ${(i + 1) * 80}ms`}
+                        >
+                          <ProjectRow project={project} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <button
+                  type="button"
+                  data-expand-toggle
+                  aria-expanded="false"
+                  class="focus-ring mt-2 flex items-center gap-1 rounded text-sm text-textSecondary/60 transition hover:text-accent"
+                >
+                  <span class="inline-flex items-center gap-1 group-data-[expanded=true]:hidden">
+                    {projects.length - COLLAPSED_PROJ} more <ChevronDown class="h-3.5 w-3.5" />
+                  </span>
+                  <span class="hidden items-center gap-1 group-data-[expanded=true]:inline-flex">
+                    Show less <ChevronUp class="h-3.5 w-3.5" />
+                  </span>
+                </button>
+              </>
+            )
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<script>
+  import { initExpandables } from '../scripts/expand'
+  import { initReveal } from '../scripts/reveal'
+
+  initReveal()
+  initExpandables()
+</script>

@@ -1,8 +1,10 @@
-import type { ComponentType, SVGProps } from 'react'
-import type { LucideIcon } from 'lucide-react'
-import { BookOpen, Brain, Code2, Database, Instagram, Layers, Linkedin, Mail, Server } from 'lucide-react'
-import SpotifyIcon from '../components/SpotifyIcon'
-import XIcon from '../components/XIcon'
+import { BookOpen, Brain, CodeXml, Database, Layers, Mail, Server } from '@lucide/astro'
+import { Instagram, Linkedin } from '../components/icons/brand'
+import SpotifyIcon from '../components/icons/SpotifyIcon.astro'
+import XIcon from '../components/icons/XIcon.astro'
+
+/** Any Astro component that renders an SVG icon and accepts a `class`. */
+export type IconComponent = (props: any) => unknown
 
 export type ProjectLinkType = 'github' | 'demo' | 'paper'
 
@@ -22,7 +24,7 @@ export type Project = {
 
 export type SkillGroup = {
   label: string
-  icon: LucideIcon
+  icon: IconComponent
   items: string[]
 }
 
@@ -40,7 +42,7 @@ export type ContactMethod = {
   label: string
   detail: string
   href: string
-  icon: LucideIcon | ComponentType<SVGProps<SVGSVGElement>>
+  icon: IconComponent
 }
 
 export const projects: Project[] = [
@@ -123,8 +125,8 @@ export const projects: Project[] = [
   {
     title: 'Personal Website',
     description:
-      'This site! Built with Vite, React, Tailwind, and Three.js.',
-    stack: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'Three.js'],
+      'This site! Built with Astro and Tailwind.',
+    stack: ['Astro', 'TypeScript', 'TailwindCSS'],
     links: [
       { type: 'github', href: 'https://github.com/anthonylu23/personal-website' },
     ],
@@ -183,7 +185,7 @@ export const experiences: Experience[] = [
 export const skills: SkillGroup[] = [
   {
     label: 'Languages',
-    icon: Code2,
+    icon: CodeXml,
     items: ['TypeScript', 'Python', 'JavaScript', 'SQL', 'C/C++', 'Java', 'HTML/CSS', 'LaTeX', 'Assembly'],
   },
   {
