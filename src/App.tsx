@@ -3,8 +3,10 @@ import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import GlassNavbar from './components/GlassNavbar'
 import { BLOG_ENABLED } from './config/features'
+import About from './pages/About'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
+import Projects from './pages/Projects'
 
 const Photography = lazy(() => import('./pages/Photography'))
 const PhotographyProject = lazy(() => import('./pages/PhotographyProject'))
@@ -44,6 +46,8 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
           <Route
             path="/photography"
             element={<Suspense fallback={<RouteFallback />}><Photography /></Suspense>}

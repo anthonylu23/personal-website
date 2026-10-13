@@ -8,9 +8,8 @@ type NavItem =
   | { label: string; hash: string; type: "hash" };
 
 export const navItems: NavItem[] = [
-  { label: "About", hash: "#about", type: "hash" },
-  { label: "Experience", hash: "#experience", type: "hash" },
-  { label: "Projects", hash: "#projects", type: "hash" },
+  { label: "About", to: "/about", type: "route" },
+  { label: "Projects", to: "/projects", type: "route" },
   ...(BLOG_ENABLED && WRITING_NAV_VISIBLE
     ? [{ label: "Writing", to: "/blog", type: "route" as const }]
     : []),
