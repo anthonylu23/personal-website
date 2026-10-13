@@ -5,7 +5,10 @@ import {
   ChevronRight,
   Github,
 } from "lucide-react";
+import GitHubActivity from "../components/GitHubActivity";
 import { contactMethods } from "../data/content";
+
+const GITHUB_USERNAME = "anthonylu23";
 
 const Home = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -44,20 +47,35 @@ const Home = () => {
       <section id="home" className="scroll-mt-24 flex flex-col justify-center">
         <div className="space-y-8">
           <div className="animate-fade-up-1 space-y-6">
-            <h1 className="text-4xl font-semibold text-textPrimary text-balance md:text-5xl">
-              Anthony Lu
+            <h1 className="text-3xl font-semibold text-textPrimary text-balance md:text-4xl">
+              Hi, I&apos;m Anthony
             </h1>
-            <p className="text-lg text-textSecondary">
+            <p className="text-base text-textSecondary">
               Undergrad at NYU studying Computer Science, Data Science, and
               Math. Aspiring engineer and developer.
             </p>
+            <GitHubActivity username={GITHUB_USERNAME} />
+            <div className="space-y-3 text-base text-textSecondary">
+              <p>Right now, I&apos;m focused on:</p>
+              <ul className="list-disc space-y-1 pl-6 marker:text-textSecondary/50">
+                <li>
+                  <span className="text-textPrimary/90">MLSys:</span> Inference
+                  projects, CUDA, GPUs.
+                </li>
+                <li>
+                  <span className="text-textPrimary/90">Post-training:</span> RL
+                  methods, environments, evals.
+                </li>
+                <li>Reading about AI safety, alignment, and scaling.</li>
+              </ul>
+            </div>
           </div>
           <div className="animate-fade-up-2 flex items-center gap-5">
             <a
               href={`${import.meta.env.BASE_URL}Resume_AnthonyLu_NYC.pdf`}
               target="_blank"
               rel="noopener noreferrer"
-              className="focus-ring group inline-flex shrink-0 items-center gap-2 rounded-full bg-accent px-6 py-3 text-base font-semibold text-textInverse shadow-glow transition hover:bg-accentHover"
+              className="focus-ring group inline-flex shrink-0 items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-textInverse shadow-glow transition hover:bg-accentHover"
             >
               Resume
               <ArrowDownRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
@@ -81,7 +99,7 @@ const Home = () => {
                 className="flex items-center gap-5 overflow-x-auto scrollbar-hide"
               >
                 <a
-                  href="https://github.com/anthonylu23"
+                  href={`https://github.com/${GITHUB_USERNAME}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="focus-ring shrink-0 rounded-full text-textSecondary transition hover:text-accent"
