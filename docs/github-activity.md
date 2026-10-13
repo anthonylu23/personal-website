@@ -6,14 +6,15 @@ A past-year GitHub contribution grid on the home page, below the heading and int
 
 | File | Purpose |
 | --- | --- |
-| `src/components/GitHubActivity.tsx` | The grid UI (card, cells, loading and error states) |
+| `src/lib/components/GitHubActivity.svelte` | The grid UI (card, cells, loading and error states) |
 | `src/lib/contributions.ts` | Fetching, response validation, week grouping, tooltip text |
 | `src/lib/contributions.test.ts` | Vitest tests for the logic above |
-| `src/pages/Home.tsx` | Renders `<GitHubActivity username={GITHUB_USERNAME} />` |
+| `src/routes/+page.svelte` | Renders `<GitHubActivity username={GITHUB_USERNAME} />` |
 
 ## Data source
 
-The browser fetches
+The grid is fetched client-side after the page mounts, so the prerendered HTML
+shows the loading placeholder. The browser fetches
 `https://github-contributions-api.jogruber.de/v4/<username>?y=last` on page load.
 It's a free, public third-party service that scrapes GitHub's contribution graph,
 so no token or server code is needed. The response is validated in
@@ -41,14 +42,14 @@ Home doesn't refetch. A failed request isn't cached, so the next mount retries.
 
 ## Changing it
 
-- **Username:** `GITHUB_USERNAME` in `src/pages/Home.tsx` (also used for the GitHub icon link).
-- **Colors:** `LEVEL_CLASSES` in `src/components/GitHubActivity.tsx`.
+- **Username:** `GITHUB_USERNAME` in `src/routes/+page.svelte` (also used for the GitHub icon link).
+- **Colors:** `LEVEL_CLASSES` in `src/lib/components/GitHubActivity.svelte`.
 - **Card border:** `border-textSecondary/35` (the `border` token is too low-contrast against the light-mode background).
 
 ## Next steps
 
 - If the third-party API proves unreliable, replace `fetchContributions` with a
-  Vercel function (`/api/github-contributions`) that queries GitHub's GraphQL
+  SvelteKit endpoint (`src/routes/api/github-contributions/+server.ts`) that queries GitHub's GraphQL
   `contributionsCollection` with a `GITHUB_TOKEN` and caches the result. The
   component and `toWeeks` wouldn't need to change.
 - Optional: month labels above the grid, or a caption with the yearly total.

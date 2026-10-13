@@ -1,18 +1,19 @@
-import { defineConfig, loadEnv } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import adapter from '@sveltejs/adapter-vercel'
+import { sveltekit } from '@sveltejs/kit/vite'
+import { defineConfig } from 'vitest/config'
 
-// https://vite.dev/config/
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
-
-  return {
-    base: env.VITE_BASE_URL || '/',
-    plugins: [react()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src'),
+export default defineConfig({
+  plugins: [
+    sveltekit({
+      compilerOptions: {
+        // Force runes mode for the project, except for libraries. Can be removed in svelte 6.
+        runes: ({ filename }) =>
+          filename.split(/[/\\]/).includes('node_modules') ? undefined : true,
       },
-    },
-  }
+      adapter: adapter(),
+    }),
+  ],
+  test: {
+    include: ['src/**/*.test.ts'],
+  },
 })

@@ -29,3 +29,10 @@ coverage/
 *.njsproj
 *.sln
 *.sw?
+
+# SvelteKit
+static/photos
+/.svelte-kit
+/build
+.vercel
+vite.config.ts.timestamp-*

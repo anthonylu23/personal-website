@@ -3,7 +3,7 @@ import path from 'node:path'
 import sharp from 'sharp'
 
 const PHOTOS_SRC = path.resolve('src/data/photos')
-const PHOTOS_OUT = path.resolve('public/photos')
+const PHOTOS_OUT = path.resolve('static/photos')
 
 const GALLERY_MAX = 2400
 const GALLERY_QUALITY = 80
@@ -94,7 +94,7 @@ async function main() {
     }
   }
 
-  const manifestPath = path.resolve('src/data/photo-manifest.json')
+  const manifestPath = path.resolve('src/lib/data/photo-manifest.json')
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n')
   console.log(`\nManifest written to ${manifestPath}`)
   console.log(`Done. Processed: ${totalProcessed}, Skipped (up-to-date): ${totalSkipped}`)

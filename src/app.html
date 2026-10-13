@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>luanthony.xyz</title>
+    <meta
+      name="description"
+      content="Portfolio of Anthony, a product-minded software engineer and photographer building fast, elegant digital experiences."
+    />
+    <meta name="keywords" content="Anthony, software engineer, photographer, portfolio, svelte, tailwind" />
+    <meta name="author" content="Anthony" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://anthony.dev" />
+    <meta property="og:title" content="Anthony — Personal Website" />
+    <meta
+      property="og:description"
+      content="Crafting performant web products and cinematic visuals. Explore featured projects, photography, and ways to collaborate."
+    />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=1200" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Anthony — Product Engineer & Photographer" />
+    <meta
+      name="twitter:description"
+      content="Product-minded engineer focused on fast, elegant web experiences and photography."
+    />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=1200" />
+    <meta name="theme-color" content="#030712" />
+    <script>
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const theme = stored === "light" || stored === "dark" ? stored : "dark";
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch {
+          document.documentElement.dataset.theme = "dark";
+          document.documentElement.style.colorScheme = "dark";
+        }
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" />
+    <link rel="icon" type="image/svg+xml" href="%sveltekit.assets%/favicon.svg" />
+    %sveltekit.head%
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents">%sveltekit.body%</div>
+  </body>
+</html>
