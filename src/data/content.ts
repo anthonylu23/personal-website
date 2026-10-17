@@ -75,15 +75,34 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: 'Neural Decision Transformers',
+    title: 'distr-hnsw',
     description:
-      'Reward-conditioned sequence modeling pipeline for IBL brain-wide Neuropixels recordings.',
-    stack: ['Python', 'PyTorch'],
+      'Distributed semantic storage with a replicated blob store and distributed HNSW vector indexes, self-hosted over Tailscale.',
+    stack: ['Rust', 'Tokio', 'SQLite', 'Tailscale'],
     links: [
-      { type: 'github', href: 'https://github.com/anthonylu23/ibl-neural-decision-transformers' },
-      // { type: 'paper', href: 'https://...' }, // TODO: add paper/writeup URL
+      { type: 'github', href: 'https://github.com/anthonylu23/distr-hnsw' },
     ],
   },
+  {
+    title: 'Token-Efficient Reasoning',
+    description:
+      'Post-training small language models to fit more verified reasoning steps into fixed token budgets.',
+    stack: ['Python', 'PyTorch', 'Transformers', 'QLoRA'],
+    links: [
+      { type: 'github', href: 'https://github.com/anthonylu23/token-efficient-reasoning' },
+    ],
+  },
+  // Hidden from the projects section; retained for easy restoration.
+  // {
+  //   title: 'Neural Decision Transformers',
+  //   description:
+  //     'Reward-conditioned sequence modeling pipeline for IBL brain-wide Neuropixels recordings.',
+  //   stack: ['Python', 'PyTorch'],
+  //   links: [
+  //     { type: 'github', href: 'https://github.com/anthonylu23/ibl-neural-decision-transformers' },
+  //     // { type: 'paper', href: 'https://...' }, // TODO: add paper/writeup URL
+  //   ],
+  // },
   {
     title: 'Sweat Streaks',
     description:
@@ -93,15 +112,16 @@ export const projects: Project[] = [
       { type: 'github', href: 'https://github.com/anthonylu23/sweat-streaks' },
     ],
   },
-  {
-    title: 'Context Grabber',
-    description:
-      'macOS menu bar app + CLI that captures your applications into structured context for LLMs.',
-    stack: ['Swift', 'Go', 'TypeScript', 'Bun'],
-    links: [
-      { type: 'github', href: 'https://github.com/anthonylu23/context_grabber' },
-    ],
-  },
+  // Hidden from the projects section; retained for easy restoration.
+  // {
+  //   title: 'Context Grabber',
+  //   description:
+  //     'macOS menu bar app + CLI that captures your applications into structured context for LLMs.',
+  //   stack: ['Swift', 'Go', 'TypeScript', 'Bun'],
+  //   links: [
+  //     { type: 'github', href: 'https://github.com/anthonylu23/context_grabber' },
+  //   ],
+  // },
   {
     title: 'Neural ViT',
     description:
