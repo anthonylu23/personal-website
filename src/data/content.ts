@@ -155,7 +155,7 @@ export const projects: Project[] = [
 
 export const experiences: Experience[] = [
   {
-    company: 'NYU',
+    company: 'New York University',
     role: 'Undergraduate Researcher',
     period: 'September 2026 – Present',
     location: 'New York, NY',
